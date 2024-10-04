@@ -16,7 +16,7 @@ export default function IndexPage() {
           <p
             className={`${subtitle()} max-w-[90%] text-sm sm:text-md text-gray-500`}
           >
-            Anyone is cool. We're here to serve you the best deals 😎
+            Anyone is cool. We&apos;re here to serve you the best deals 😎
           </p>
         </div>
 
