@@ -6,4 +6,8 @@ export const siteConfig = {
   siteColors: {
     primary: "#0E14A2",
   },
+  paths: {
+    signin: "/auth/signin",
+    signup: "/auth/signup",
+  },
 };

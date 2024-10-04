@@ -1,6 +1,7 @@
 import DefaultLayout from "@/layouts/default";
 import { subtitle } from "@/components/primitives";
-import { ThemeSwitch } from "@/components/theme-switch";
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 export default function IndexPage() {
   return (
@@ -14,20 +15,20 @@ export default function IndexPage() {
             How would you like to use Radius Data?
           </h1>
           <p
-            className={`${subtitle()} max-w-[90%] text-sm sm:text-md text-gray-500`}
+            className={`${subtitle()} max-w-[90%] text-[15px] sm:text-md text-gray-500`}
           >
-            Anyone is cool. We&apos;re here to serve you the best deals 😎
+            Anyone is cool. We&apos;re here to serve you with the best 😎
           </p>
         </div>
 
         {/* Bottom */}
         <div className="">
-          <button className="h-[43px] px-6 text-[14px] font-semibold text-white rounded-full bg-primary">
-            Let&apos;s start
-          </button>
+          <Link href={siteConfig.paths.signin}>
+            <button className="h-[43px] px-6 text-[14px] font-semibold text-white rounded-full bg-primary">
+              Let&apos;s start
+            </button>
+          </Link>
         </div>
-
-        <ThemeSwitch />
       </section>
     </DefaultLayout>
   );

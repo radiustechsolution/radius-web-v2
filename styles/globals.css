@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  outline: 0;
+  outline: none;
+}
+
 .bebas-neue-font {
   font-family: "Bebas Neue", sans-serif;
 }
