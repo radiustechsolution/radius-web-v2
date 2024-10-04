@@ -23,7 +23,7 @@ export default function IndexPage() {
         {/* Bottom */}
         <div className="">
           <button className="h-[43px] px-6 text-[14px] font-semibold text-white rounded-full bg-primary">
-            Let's start
+            Let&apos;s start
           </button>
         </div>
 
