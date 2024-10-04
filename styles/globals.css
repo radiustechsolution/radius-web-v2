@@ -9,6 +9,18 @@
   outline: none;
 }
 
+/* Hide scrollbar but allow scrolling */
+html,
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 .bebas-neue-font {
   font-family: "Bebas Neue", sans-serif;
 }

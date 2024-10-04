@@ -3,9 +3,11 @@ import type { AppProps } from "next/app";
 import { NextUIProvider } from "@nextui-org/system";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { useRouter } from "next/router";
-
+import "react-toastify/dist/ReactToastify.css";
 import { fontSans, fontMono } from "@/config/fonts";
 import "@/styles/globals.css";
+import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -13,7 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider defaultTheme="light">
-        <Component {...pageProps} />
+        <SessionProvider>
+          <Component {...pageProps} />
+        </SessionProvider>
+        <ToastContainer />
       </NextThemesProvider>
     </NextUIProvider>
   );

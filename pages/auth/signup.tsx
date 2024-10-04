@@ -5,14 +5,67 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
+import { signIn } from "next-auth/react";
 import { IoEyeOffOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
   // Hook
   const router = useRouter();
 
+  // State
   const [loading, setLoading] = useState(false);
   const [eye, setEye] = useState(false);
+
+  const register = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const first_name = formData.get("first_name");
+    const last_name = formData.get("last_name");
+    const email = formData.get("email");
+    const phone_number = formData.get("phone_number");
+    const password = formData.get("password");
+    const username = formData.get("username");
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        password,
+        username,
+      }),
+    });
+
+    const response = await res.json();
+
+    if (res.ok) {
+      // Step 2: Automatically log the user in after registration
+      const signInRes = await signIn("credentials", {
+        redirect: false, // Step 3: Log the user in, which will create the session
+        email,
+        password,
+      });
+
+      if (signInRes && !signInRes.error) {
+        router.push(siteConfig.paths.dashboard);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        toast("Login failed after registration");
+      }
+    } else {
+      setLoading(false);
+      toast(response?.error || "Error during registration");
+    }
+  };
 
   return (
     <OnboardLayout>
@@ -21,7 +74,7 @@ const SignUpPage = () => {
           Create an account
         </p>
 
-        <form className="w-full flex flex-col gap-3">
+        <form onSubmit={register} className="w-full flex flex-col gap-3">
           <div className="flex justify-between items-center">
             <input
               type="text"
@@ -29,6 +82,7 @@ const SignUpPage = () => {
               placeholder="First Name"
               name="first_name"
               required
+              disabled={loading}
             />
             <input
               type="text"
@@ -36,6 +90,7 @@ const SignUpPage = () => {
               placeholder="Last Name"
               name="last_name"
               required
+              disabled={loading}
             />
           </div>
           <input
@@ -44,6 +99,7 @@ const SignUpPage = () => {
             placeholder="Email address"
             name="email"
             required
+            disabled={loading}
           />
           <div className="flex justify-between items-center">
             <input
@@ -54,6 +110,7 @@ const SignUpPage = () => {
               placeholder="Username"
               name="username"
               required
+              disabled={loading}
             />
             <input
               type="tel"
@@ -63,6 +120,7 @@ const SignUpPage = () => {
               placeholder="Phone Number"
               name="phone_number"
               required
+              disabled={loading}
             />
           </div>
 
@@ -73,6 +131,7 @@ const SignUpPage = () => {
               placeholder="Password"
               name="password"
               required
+              disabled={loading}
             />
             {!eye ? (
               <IoEyeOffOutline
