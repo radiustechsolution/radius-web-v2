@@ -6,12 +6,13 @@ import { RxCaretRight } from "react-icons/rx";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { IoMdAdd } from "react-icons/io";
 import { siteConfig } from "@/config/site";
+import { ServicesCard } from "@/components/dashboard/service-card";
 const DashboardPage = () => {
   return (
     <DashboardLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
-        <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
+        <div className="flex-1 flex flex-col gap-4 overflow-auto scrollbar-hide">
           {/* Dashboard Details Card */}
           <div className="rounded-xl flex flex-col gap-[10px] bg-primary p-4">
             {/* Card Top */}
@@ -42,6 +43,9 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
+
+          {/* Services Card */}
+          <ServicesCard />
         </div>
       </section>
     </DashboardLayout>

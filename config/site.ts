@@ -17,6 +17,8 @@ export const siteConfig = {
     dashboard: "/dashboard",
     databundle: "/dashboard/data",
     airtime: "/dashboard/airtime",
+    cable: "/dashboard/cable",
+    power: "/dashboard/power",
     transactions: "/dashboard/transactions",
     profile: "/dashboard/profile",
     help: "/dashboard/help",
