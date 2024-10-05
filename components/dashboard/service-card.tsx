@@ -44,19 +44,19 @@ const ServiceObject = [
     id: 5,
     title: "Save",
     icon: <IoIosWallet color={siteConfig.siteColors.primary} />,
-    path: siteConfig.paths.bonus,
+    path: siteConfig.paths.savings,
   },
   {
     id: 6,
     title: "Netflix",
     icon: <SiNetflix color={siteConfig.siteColors.primary} />,
-    path: siteConfig.paths.bonus,
+    path: siteConfig.paths.netflix,
   },
   {
     id: 7,
     title: "Loan",
     icon: <FaNairaSign color={siteConfig.siteColors.primary} />,
-    path: siteConfig.paths.bonus,
+    path: siteConfig.paths.loan,
   },
 ];
 
