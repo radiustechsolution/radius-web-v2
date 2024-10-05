@@ -20,32 +20,32 @@ import { IoGiftOutline, IoGiftSharp } from "react-icons/io5";
 const MenuObj = [
   {
     title: "Home",
-    icon: <RiHomeLine size={20} color="gray" />,
-    iconFill: <RiHomeFill size={20} className="text-primarymodecolor" />,
+    icon: <RiHomeLine size={23} color="gray" />,
+    iconFill: <RiHomeFill size={23} className="text-primarymodecolor" />,
     path: siteConfig.paths.dashboard,
   },
   {
     title: "Bonus",
-    icon: <IoGiftOutline size={20} color="gray" />,
-    iconFill: <IoGiftSharp className="text-primarymodecolor" size={20} />,
+    icon: <IoGiftOutline size={23} color="gray" />,
+    iconFill: <IoGiftSharp className="text-primarymodecolor" size={23} />,
     path: siteConfig.paths.bonus,
   },
   {
     title: "History",
-    icon: <LuFileSpreadsheet size={20} color="gray" />,
-    iconFill: <FaSheetPlastic className="text-primarymodecolor" size={20} />,
+    icon: <LuFileSpreadsheet size={23} color="gray" />,
+    iconFill: <FaSheetPlastic className="text-primarymodecolor" size={23} />,
     path: siteConfig.paths.transactions,
   },
   {
     title: "Help",
-    icon: <RiInformationLine size={20} color="gray" />,
-    iconFill: <RiInformationFill className="text-primarymodecolor" size={20} />,
+    icon: <RiInformationLine size={23} color="gray" />,
+    iconFill: <RiInformationFill className="text-primarymodecolor" size={23} />,
     path: siteConfig.paths.help,
   },
   {
     title: "Profile",
-    icon: <RiUser6Line size={20} color="gray" />,
-    iconFill: <RiUser6Fill className="text-primarymodecolor" size={20} />,
+    icon: <RiUser6Line size={23} color="gray" />,
+    iconFill: <RiUser6Fill className="text-primarymodecolor" size={23} />,
     path: siteConfig.paths.profile,
   },
 ];
