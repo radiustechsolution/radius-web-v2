@@ -3,6 +3,7 @@ import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { SwitchProps, useSwitch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
+import { IoSunnyOutline } from "react-icons/io5";
 
 import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
 
@@ -49,7 +50,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
         className: clsx(
           "px-px transition-opacity hover:opacity-80 cursor-pointer",
           className,
-          classNames?.base,
+          classNames?.base
         ),
       })}
     >
@@ -71,14 +72,14 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
               "px-0",
               "mx-0",
             ],
-            classNames?.wrapper,
+            classNames?.wrapper
           ),
         })}
       >
         {isSelected ? (
-          <MoonFilledIcon size={22} />
+          <IoSunnyOutline size={22} />
         ) : (
-          <SunFilledIcon size={22} />
+          <IoSunnyOutline size={22} />
         )}
       </div>
     </Component>

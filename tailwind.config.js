@@ -26,11 +26,17 @@ module.exports = {
         light: {
           colors: {
             primary: siteConfig.siteColors.primary,
+            card: siteConfig.siteColors.cardLightColor,
+            background: siteConfig.siteColors.bgLightColor,
+            bordercolor: "#EBEBEB",
           },
         },
         dark: {
           colors: {
             primary: siteConfig.siteColors.primary,
+            card: siteConfig.siteColors.cardDarkColor,
+            background: siteConfig.siteColors.bgDarkColor,
+            bordercolor: "#3d3d3dbb",
           },
         },
       },
