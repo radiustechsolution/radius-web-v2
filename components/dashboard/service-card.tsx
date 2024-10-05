@@ -61,7 +61,7 @@ const ServiceObject = [
 ];
 
 export const ServicesCard = () => (
-  <div className="grid grid-cols-4 gap-4 p-4 rounded-lg bg-card ">
+  <div className="grid grid-cols-4 gap-4 py-4 px-2 rounded-lg bg-card ">
     {ServiceObject.map((d) => (
       <Link
         href={d.path}
