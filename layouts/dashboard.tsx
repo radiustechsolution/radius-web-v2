@@ -21,32 +21,32 @@ import { useSession } from "next-auth/react";
 const MenuObj = [
   {
     title: "Home",
-    icon: <RiHomeLine size={23} color="gray" />,
-    iconFill: <RiHomeFill size={23} className="text-primarymodecolor" />,
+    icon: <RiHomeLine size={25} color="gray" />,
+    iconFill: <RiHomeFill size={25} className="text-primarymodecolor" />,
     path: siteConfig.paths.dashboard,
   },
   {
     title: "Bonus",
-    icon: <IoGiftOutline size={23} color="gray" />,
-    iconFill: <IoGiftSharp className="text-primarymodecolor" size={23} />,
+    icon: <IoGiftOutline size={25} color="gray" />,
+    iconFill: <IoGiftSharp className="text-primarymodecolor" size={25} />,
     path: siteConfig.paths.bonus,
   },
   {
     title: "History",
-    icon: <LuFileSpreadsheet size={23} color="gray" />,
-    iconFill: <FaSheetPlastic className="text-primarymodecolor" size={23} />,
+    icon: <LuFileSpreadsheet size={25} color="gray" />,
+    iconFill: <FaSheetPlastic className="text-primarymodecolor" size={25} />,
     path: siteConfig.paths.transactions,
   },
   {
     title: "Help",
-    icon: <RiInformationLine size={23} color="gray" />,
-    iconFill: <RiInformationFill className="text-primarymodecolor" size={23} />,
+    icon: <RiInformationLine size={25} color="gray" />,
+    iconFill: <RiInformationFill className="text-primarymodecolor" size={25} />,
     path: siteConfig.paths.help,
   },
   {
     title: "Profile",
-    icon: <RiUser6Line size={23} color="gray" />,
-    iconFill: <RiUser6Fill className="text-primarymodecolor" size={23} />,
+    icon: <RiUser6Line size={25} color="gray" />,
+    iconFill: <RiUser6Fill className="text-primarymodecolor" size={25} />,
     path: siteConfig.paths.profile,
   },
 ];
