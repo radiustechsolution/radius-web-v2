@@ -95,7 +95,7 @@ export const SideNav = ({ closeSideNav }: Types) => {
         <div className="p-3 flex flex-col gap-3">
           <div
             role="presentation"
-            onClick={closeSideNav}
+            onClick={handleLogout}
             className="px-2 cursor-pointer flex items-center gap-2"
           >
             <IoSettingsOutline size={20} />
