@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { FaSheetPlastic } from "react-icons/fa6";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { IoGiftOutline, IoGiftSharp } from "react-icons/io5";
+import { useSession } from "next-auth/react";
 
 const MenuObj = [
   {
@@ -55,10 +56,17 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Hooks
+  const { data: session } = useSession();
+
   // State to manage the sidenav visibility
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const [active, setActive] = useState<string>(router.pathname);
+
+  if (!session) {
+    return <div></div>;
+  }
 
   return (
     <div className="relative flex h-svh">
