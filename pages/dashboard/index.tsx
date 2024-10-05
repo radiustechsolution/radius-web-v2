@@ -6,12 +6,41 @@ import { IoMdAdd } from "react-icons/io";
 import { siteConfig } from "@/config/site";
 import { ServicesCard } from "@/components/dashboard/service-card";
 import { DashboardAccountCompCard } from "@/components/dashboard/dashboard-accout-comp-card";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
 import { GrAnnounce } from "react-icons/gr";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const DashboardPage = () => {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
+  const [loading, setLoading] = useState(false);
+
+  const handleClaimBonus = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/claim-bonus", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Re-fetch the session to get the updated balance
+        console.log(data);
+        // const session = await getSession();
+        // console.log("Updated session balance:", session?.user?.balance);
+      } else {
+        console.log(data);
+        toast("Something went wrong!", { toastId: "claim" });
+      }
+    } catch (error) {
+      console.error("Error claiming bonus:", error);
+      toast("Something went wrong!", { toastId: "claim" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -34,19 +63,29 @@ const DashboardPage = () => {
                 </div>
                 <div className=" leading-4">
                   <h1 className="text-[14px] font-medium">
-                    Claim today's Bonus
+                    Claim today&lsquo;s Bonus
                   </h1>
                   <p className="text-[11px] opacity-65 ">
                     Top up balance with ₦2 bonus
                   </p>
                 </div>
               </div>
-              <div className="rounded-lg bg-primarymodecolor px-3 py-1">
+              <div
+                role="presentation"
+                onClick={handleClaimBonus}
+                className="rounded-lg bg-primarymodecolor px-3 py-1"
+              >
                 <p className="text-[12px] text-card font-medium">Claim</p>
               </div>
             </div>
           </div>
         </div>
+
+        {loading && (
+          <div className="fixed left-0 top-0 w-full z-50 bg-[#36363690] flex items-center justify-center h-svh">
+            <Spinner color="white" />
+          </div>
+        )}
       </section>
     </DashboardLayout>
   );

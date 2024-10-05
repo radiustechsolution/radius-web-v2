@@ -15,23 +15,26 @@ datasource db {
 
 
 model user {
-  id            Int      @id @default(autoincrement())
-  first_name    String
-  last_name     String
-  username      String   @unique
-  email         String   @unique
-  otp           String?
-  phone_number  String   @unique
-  password      String
-  pin           String?  // Nullable field
-  balance       Decimal  @default(0.00) @db.Decimal(60, 2)
-  status        Boolean  @default(true)
-  promo_code    String
-  invited_by    String
-  token         String
-  account_type  String   @default("user")
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  id                Int      @id @default(autoincrement())
+  first_name        String
+  last_name         String
+  username          String   @unique
+  email             String   @unique
+  otp               String?
+  phone_number      String   @unique
+  password          String
+  pin               String?  // Nullable field
+  balance           Decimal  @default(0.00) @db.Decimal(60, 2)
+  status            Boolean  @default(true)
+  promo_code        String
+  invited_by        String
+  lastBonusClaim    DateTime?
+  last_bonus_claim  String   @default("now")
+  token             String
+  account_type      String   @default("user")
+  created_at        DateTime @default(now())
+  profile_locked    Boolean  @default(false) // Add this field
+  updated_at        DateTime @updatedAt
 }
 
 model admin {
