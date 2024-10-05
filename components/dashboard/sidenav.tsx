@@ -23,30 +23,31 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { signOut } from "next-auth/react";
 import { AsideButton } from "./AsideButton";
 import { ThemeSwitch } from "../theme-switch";
+import { AiOutlineAppstore } from "react-icons/ai";
 
 const AsideButtonObj = [
   {
     id: 0,
     title: "Dashboard",
-    icon: <IoHomeOutline size={17} />,
+    icon: <AiOutlineAppstore size={22} />,
     figure: 0,
   },
   {
     id: 1,
     title: "Notification",
-    icon: <IoNotificationsOutline size={17} />,
+    icon: <IoNotificationsOutline size={22} />,
     figure: 1,
   },
   {
     id: 2,
     title: "Transactions",
-    icon: <IoNotificationsOutline size={17} />,
+    icon: <IoNotificationsOutline size={22} />,
     figure: 0,
   },
   {
     id: 3,
     title: "Profile",
-    icon: <IoPersonOutline size={17} />,
+    icon: <IoPersonOutline size={22} />,
     figure: 0,
   },
 ];
@@ -97,20 +98,17 @@ export const SideNav = ({ closeSideNav }: Types) => {
             onClick={closeSideNav}
             className="px-2 cursor-pointer flex items-center gap-2"
           >
-            <IoSettingsOutline />
-            <p className="text-[14px]">Settings</p>
+            <IoSettingsOutline size={20} />
+            <p className="text-[15px]">Settings</p>
           </div>
           <div className="px-2 cursor-pointer flex items-center gap-2">
-            <IoHelpCircleOutline />
-            <p className="text-[14px]">Help</p>
+            <IoHelpCircleOutline size={20} />
+            <p className="text-[15px]">Help</p>
           </div>
         </div>
         <div className="p-3 border-t border-bordercolor">
-          <div
-            role="presentation"
-            className="px-2 cursor-pointer flex items-center justify-between gap-2"
-          >
-            <p className="text-[14px]">Day/Night</p>
+          <div className="px-2 cursor-pointer justify-between flex items-center gap-2">
+            <p className="text-[15px]">Day/Night</p>
             <ThemeSwitch />
           </div>
         </div>

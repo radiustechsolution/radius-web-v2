@@ -3,7 +3,7 @@ import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { SwitchProps, useSwitch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
-import { IoSunnyOutline } from "react-icons/io5";
+import { IoSunnyOutline, IoSunnySharp } from "react-icons/io5";
 
 import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
 
@@ -76,11 +76,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
           ),
         })}
       >
-        {isSelected ? (
-          <IoSunnyOutline size={22} />
-        ) : (
-          <IoSunnyOutline size={22} />
-        )}
+        {isSelected ? <IoSunnySharp size={22} /> : <IoSunnySharp size={22} />}
       </div>
     </Component>
   );

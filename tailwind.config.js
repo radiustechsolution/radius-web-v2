@@ -29,6 +29,8 @@ module.exports = {
             card: siteConfig.siteColors.cardLightColor,
             background: siteConfig.siteColors.bgLightColor,
             bordercolor: "#EBEBEB",
+            primarymodecolor: siteConfig.siteColors.primary,
+            primarymodecolorgray: siteConfig.siteColors.primary,
           },
         },
         dark: {
@@ -37,6 +39,8 @@ module.exports = {
             card: siteConfig.siteColors.cardDarkColor,
             background: siteConfig.siteColors.bgDarkColor,
             bordercolor: "#3d3d3dbb",
+            primarymodecolor: "#ffffff",
+            primarymodecolorgray: "#d1d5db",
           },
         },
       },

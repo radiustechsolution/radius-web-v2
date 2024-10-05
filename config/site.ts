@@ -15,5 +15,11 @@ export const siteConfig = {
     signin: "/auth/signin",
     signup: "/auth/signup",
     dashboard: "/dashboard",
+    databundle: "/dashboard/data",
+    airtime: "/dashboard/airtime",
+    transactions: "/dashboard/transactions",
+    profile: "/dashboard/profile",
+    help: "/dashboard/help",
+    bonus: "/dashboard/bonus",
   },
 };
