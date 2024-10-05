@@ -16,8 +16,8 @@ export const NavBar = ({ openNavBar }: Types) => {
         {/* <p className="font-medium text-[18px]">Chat</p> */}
       </div>
       <div className="flex items-center gap-3">
-        <div className="h-[32px] w-[32px] relative border border-bordercolor shrink-0 flex items-center justify-center rounded-full bg-background">
-          <IoNotificationsOutline />
+        <div className="h-[32px] w-[32px] relative shrink-0 flex items-center justify-center rounded-full bg-background">
+          <IoNotificationsOutline size={19} />
           <div className="absolute top-[6px] w-[6px] right-[8px] h-[6px] rounded-full bg-danger"></div>
         </div>
         <VscMenu
