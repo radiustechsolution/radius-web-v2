@@ -1,11 +1,7 @@
 import { Avatar } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 
-interface Types {
-  username?: boolean;
-}
-
-export const ProfileDetailComp = ({ username }: Types) => {
+export const ProfileDetailComp = () => {
   // Hook
   const { data: session } = useSession();
 
@@ -16,9 +12,7 @@ export const ProfileDetailComp = ({ username }: Types) => {
         <p className="font-medium text-[13px]">
           {session?.user?.first_name} {session?.user.last_name}
         </p>
-        {username && (
-          <p className="text-[12px] opacity-70">{session?.user?.username}</p>
-        )}
+        <p className="text-[12px] opacity-70">{session?.user?.username}</p>
       </div>
     </div>
   );
