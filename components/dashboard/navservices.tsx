@@ -7,14 +7,14 @@ import { ProfileDetailWelcomeNavComp } from "./profile-nav";
 import { NavbarServicesPageRightComp } from "./navbarservicespageright";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { siteConfig } from "@/config/site";
-import getPageTitle from "@/lib/getpagetitile";
 import { useRouter } from "next/router";
+import GetPageTitle from "@/lib/getpagetitile";
 type Types = {
   openNavBar: () => void;
 };
 
 export const NavBarServicesPage = ({ openNavBar }: Types) => {
-  const pageTitle = getPageTitle();
+  const pageTitle = GetPageTitle();
   const router = useRouter();
 
   // const page

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-const getPageTitle = () => {
+const GetPageTitle = () => {
   const router = useRouter();
   const { pathname } = router;
 
@@ -20,4 +20,4 @@ const getPageTitle = () => {
   return routeMappings[pathname] || "Dashboard";
 };
 
-export default getPageTitle;
+export default GetPageTitle;
