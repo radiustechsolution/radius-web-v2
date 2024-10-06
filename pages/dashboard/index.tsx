@@ -20,22 +20,21 @@ const DashboardPage = () => {
   const handleClaimBonus = async () => {
     setLoading(true);
     try {
-      for (let i = 0; i < 10; i++) {
-        const response = await fetch("/api/claim-bonus", {
-          method: "POST",
+      const response = await fetch("/api/claim-bonus", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: session?.user?.email,
+          xagonn: "sampleregex",
         });
-        const data = await response.json();
-        if (response.ok) {
-          const res = await signIn("credentials", {
-            redirect: false,
-            email: session?.user?.email,
-            xagonn: "sampleregex",
-          });
-          toast("Bonus claimed successfully!", { toastId: "claim-success" });
-        } else {
-          // console.log(data);
-          toast(data.message, { toastId: "claim" });
-        }
+        toast("Bonus claimed successfully!", { toastId: "claim-success" });
+      } else {
+        // console.log(data);
+        toast(data.message, { toastId: "claim" });
       }
     } catch (error) {
       // console.error("Error claiming bonus", error);
@@ -50,7 +49,7 @@ const DashboardPage = () => {
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-4 overflow-auto scrollbar-hide">
-          {/* Dashboard Details Card */}
+          {/* Dashboard Detail Card */}
           <DashboardAccountCompCard
             balance={formatCurrency(session?.user?.balance)}
           />
