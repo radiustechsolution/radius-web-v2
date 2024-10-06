@@ -9,6 +9,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/router";
+import { getToken } from "next-auth/jwt";
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -43,6 +44,16 @@ const DashboardPage = () => {
     }
   };
 
+  async function test(req: any) {
+    // Retrieve the token from the request
+    const session = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    console.log(session?.name);
+  }
+
   return (
     <DashboardLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
@@ -54,6 +65,8 @@ const DashboardPage = () => {
           />
           {/* Services Card */}
           <ServicesCard />
+
+          <Button onClick={test}>Test</Button>
 
           {/* Claim Bonus */}
           <div className="bg-card px-3 rounded-lg py-3">

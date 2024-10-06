@@ -18,7 +18,7 @@ export default async function claimBonus(
     }
 
     const userId: any = session.user.id;
-    const today = new Date().toISOString().slice(0, 10); // Format date as YYYY-MM-DD
+    const today = new Date().toISOString().slice(0, 10); //Format date as YYYY-MM-DD
 
     // Get the user from the database
     const user = await prisma.user.findUnique({
