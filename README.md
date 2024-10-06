@@ -54,3 +54,4 @@ After modifying the `.npmrc` file, you need to run `pnpm install` again to ensur
 
 Licensed under the [MIT license](https://github.com/nextui-org/next-pages-template/blob/main/LICENSE).
 # radius-v2
+# radius-web-v2
