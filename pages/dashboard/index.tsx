@@ -30,7 +30,7 @@ const DashboardPage = () => {
         const res = await signIn("credentials", {
           redirect: false,
           email: session?.user?.email,
-          password: session?.user.xagonn,
+          password: session?.user?.xagonn,
         });
         // toast("Bonus claimed successfully!", { toastId: "claim-success" });
       } else {

@@ -49,7 +49,7 @@ const SignUpPage = () => {
     if (res.ok) {
       // Step 2: Automatically log the user in after registration
       const signInRes = await signIn("credentials", {
-        redirect: false, // Step 3: Log the user in, which will create the session
+        redirect: false,
         email,
         password,
       });

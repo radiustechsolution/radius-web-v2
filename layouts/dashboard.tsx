@@ -83,7 +83,9 @@ export default function DashboardLayout({
       <main className="flex-1 flex flex-col">
         {/* Main Navbar */}
         <NavBar openNavBar={() => setIsOpen(!isOpen)} />
-        <div className="flex-1 p-2 overflow-auto">{children}</div>
+        <div className="flex-1 p-2 overflow-auto flex flex-col items-center">
+          {children}
+        </div>
         {/* Navigation Bar footer */}
         <div className="border-t flex items-center justify-between px-4 h-[65px] border-bordercolor">
           {MenuObj.map((v) => (
