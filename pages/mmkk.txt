@@ -15,39 +15,39 @@ datasource db {
 
 
 model user {
-  id                Int      @id @default(autoincrement())
+  id                Int       @id @default(autoincrement())
   first_name        String
   last_name         String
-  username          String   @unique
-  email             String   @unique
+  username          String    @unique
+  email             String    @unique
   otp               String?
-  phone_number      String   @unique
+  phone_number      String    @unique
   password          String
-  xagonn            String
-  pin               String?  // Nullable field
-  balance           Decimal  @default(0.00) @db.Decimal(60, 2)
-  status            Boolean  @default(true)
+  xagonn            String    @default("sampleregex")
+  pin               String?   // Nullable field
+  balance           Decimal   @default(0.00) @db.Decimal(60, 2)
+  status            Boolean   @default(true)
   promo_code        String
   invited_by        String
   lastBonusClaim    DateTime?
-  last_bonus_claim  String   @default("now")
+  last_bonus_claim  String    @default("now")
   token             String
-  account_type      String   @default("user")
-  created_at        DateTime @default(now())
-  profile_locked    Boolean  @default(false) // Add this field
-  updated_at        DateTime @updatedAt
+  account_type      String    @default("user")
+  created_at        DateTime  @default(now())
+  profile_locked    Boolean   @default(false) // Add this field
+  updated_at        DateTime  @updatedAt
 }
 
 model admin {
   id                  Int      @id @default(autoincrement())
   data_status         Boolean  @default(true)
   airtime_status      Boolean  @default(true)
-  electricity_status  Boolean @default(true)
+  electricity_status  Boolean  @default(true)
   cable_status        Boolean  @default(true)
   education_status    Boolean  @default(true)
   internet_status     Boolean  @default(true)
   daily_bonus         Decimal  @default(0.00) @db.Decimal(60, 2)
-  all_services_status Boolean @default(true)
+  all_services_status Boolean  @default(true)
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
 }

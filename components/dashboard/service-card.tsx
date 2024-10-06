@@ -13,49 +13,49 @@ const ServiceObject = [
   {
     id: 0,
     title: "Airtime",
-    icon: <IoPhonePortrait color={siteConfig.siteColors.primary} />,
+    icon: <IoPhonePortrait size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.airtime,
   },
   {
     id: 1,
     title: "Data",
-    icon: <TiWiFi color={siteConfig.siteColors.primary} />,
+    icon: <TiWiFi size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.databundle,
   },
   {
     id: 2,
     title: "Cable",
-    icon: <IoIosTv color={siteConfig.siteColors.primary} />,
+    icon: <IoIosTv size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.cable,
   },
   {
     id: 3,
     title: "Power",
-    icon: <ImPower color={siteConfig.siteColors.primary} />,
+    icon: <ImPower size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.power,
   },
   {
     id: 4,
     title: "Bonus",
-    icon: <BiSolidGift color={siteConfig.siteColors.primary} />,
+    icon: <BiSolidGift size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.bonus,
   },
   {
     id: 5,
     title: "Save",
-    icon: <IoIosWallet color={siteConfig.siteColors.primary} />,
+    icon: <IoIosWallet size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.savings,
   },
   {
     id: 6,
     title: "Netflix",
-    icon: <SiNetflix color={siteConfig.siteColors.primary} />,
+    icon: <SiNetflix size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.netflix,
   },
   {
     id: 7,
     title: "Loan",
-    icon: <FaNairaSign color={siteConfig.siteColors.primary} />,
+    icon: <FaNairaSign size={17} color={siteConfig.siteColors.primary} />,
     path: siteConfig.paths.loan,
   },
 ];
@@ -68,7 +68,7 @@ export const ServicesCard = () => (
         key={d.id}
         className="gap-1 flex flex-col items-center"
       >
-        <div className="p-2 bg-blue-100 sborder-[0.5px] border-blue-200 border rounded-full">
+        <div className="p-[9px] bg-blue-100 sborder-[0.5px] border-blue-200 border rounded-full">
           {d.icon}
         </div>
         <p className="text-[12px] opacity-60">{d.title}</p>

@@ -16,8 +16,6 @@ const DashboardPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleUpdate = async () => {};
-
   const handleClaimBonus = async () => {
     setLoading(true);
     try {
@@ -58,7 +56,7 @@ const DashboardPage = () => {
           <ServicesCard />
 
           {/* Claim Bonus */}
-          <div className="bg-card px-3 rounded-lg py-2">
+          <div className="bg-card px-3 rounded-lg py-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="p-2 bg-blue-100 sborder-[0.5px] border-blue-200 border rounded-full">
@@ -76,7 +74,7 @@ const DashboardPage = () => {
               <div
                 role="presentation"
                 onClick={handleClaimBonus}
-                className="rounded-lg bg-primarymodecolor px-3 py-1"
+                className="rounded-lg bg-primarymodecolor px-[14px] py-[6px]"
               >
                 <p className="text-[12px] text-card font-medium">Claim</p>
               </div>
