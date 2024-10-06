@@ -1,20 +1,22 @@
 import { Spinner } from "@nextui-org/spinner";
-// import { Avatar } from "@nextui-org/avatar";
 import DashboardLayout from "@/layouts/dashboard";
-import { TbCurrencyNaira } from "react-icons/tb";
-import { IoMdAdd } from "react-icons/io";
-import { siteConfig } from "@/config/site";
 import { ServicesCard } from "@/components/dashboard/service-card";
 import { DashboardAccountCompCard } from "@/components/dashboard/dashboard-accout-comp-card";
-import { getSession, useSession } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
 import { GrAnnounce } from "react-icons/gr";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Button } from "@nextui-org/button";
+import { useRouter } from "next/router";
 
 const DashboardPage = () => {
-  const { data: session, update } = useSession();
+  const router = useRouter();
+  const { data: session, update, status } = useSession();
+
   const [loading, setLoading] = useState(false);
+
+  const handleUpdate = async () => {};
 
   const handleClaimBonus = async () => {
     setLoading(true);
@@ -24,15 +26,16 @@ const DashboardPage = () => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
-        // Re-fetch the session to get the updated balance
-        console.log(data);
-        // const session = await getSession();
-        // console.log("Updated session balance:", session?.user?.balance);
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: session?.user?.email,
+          password: session?.user.xagonn,
+        });
+        // toast("Bonus claimed successfully!", { toastId: "claim-success" });
       } else {
         console.log(data);
-        toast("Something went wrong!", { toastId: "claim" });
+        toast(data.message, { toastId: "claim" });
       }
     } catch (error) {
       console.error("Error claiming bonus:", error);

@@ -30,6 +30,7 @@ export default NextAuth({
             token: user.token,
             balance: user.balance,
             created_at: user.created_at,
+            xagonn: user.xagonn,
           };
         }
         return null;
@@ -45,6 +46,7 @@ export default NextAuth({
       session.user.first_name = token.first_name;
       session.user.last_name = token.last_name;
       session.user.balance = token.balance;
+      session.user.xagonn = token.xagonn;
       session.user.token = token.token;
       session.user.account_type = token.account_type;
       session.user.username = token.username;
@@ -57,6 +59,7 @@ export default NextAuth({
         token.first_name = user.first_name;
         token.last_name = user.last_name;
         token.balance = user.balance;
+        token.xagonn = user.xagonn;
         token.token = user.token;
         token.username = user.username;
         token.status = user.status;

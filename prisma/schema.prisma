@@ -23,6 +23,7 @@ model user {
   otp               String?
   phone_number      String   @unique
   password          String
+  xagonn            String
   pin               String?  // Nullable field
   balance           Decimal  @default(0.00) @db.Decimal(60, 2)
   status            Boolean  @default(true)
