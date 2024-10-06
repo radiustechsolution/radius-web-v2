@@ -32,11 +32,11 @@ const DashboardPage = () => {
         });
         toast("Bonus claimed successfully!", { toastId: "claim-success" });
       } else {
-        console.log(data);
+        // console.log(data);
         toast(data.message, { toastId: "claim" });
       }
     } catch (error) {
-      console.error("Error claiming bonus:", error);
+      // console.error("Error claiming bonus", error);
       toast("Something went wrong!", { toastId: "claim" });
     } finally {
       setLoading(false);
