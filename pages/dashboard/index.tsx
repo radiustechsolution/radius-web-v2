@@ -20,21 +20,22 @@ const DashboardPage = () => {
   const handleClaimBonus = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/claim-bonus", {
-        method: "POST",
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        const res = await signIn("credentials", {
-          redirect: false,
-          email: session?.user?.email,
-          xagonn: "sampleregex",
+      for (let i = 0; i < 10; i++) {
+        const response = await fetch("/api/claim-bonus", {
+          method: "POST",
         });
-        toast("Bonus claimed successfully!", { toastId: "claim-success" });
-      } else {
-        // console.log(data);
-        toast(data.message, { toastId: "claim" });
+        const data = await response.json();
+        if (response.ok) {
+          const res = await signIn("credentials", {
+            redirect: false,
+            email: session?.user?.email,
+            xagonn: "sampleregex",
+          });
+          toast("Bonus claimed successfully!", { toastId: "claim-success" });
+        } else {
+          // console.log(data);
+          toast(data.message, { toastId: "claim" });
+        }
       }
     } catch (error) {
       // console.error("Error claiming bonus", error);
@@ -43,16 +44,6 @@ const DashboardPage = () => {
       setLoading(false);
     }
   };
-
-  async function test(req: any) {
-    // Retrieve the token from the request
-    const session = await getToken({
-      req,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-
-    console.log(session?.name);
-  }
 
   return (
     <DashboardLayout>
@@ -65,8 +56,6 @@ const DashboardPage = () => {
           />
           {/* Services Card */}
           <ServicesCard />
-
-          <Button onClick={test}>Test</Button>
 
           {/* Claim Bonus */}
           <div className="bg-card px-3 rounded-lg py-3">
