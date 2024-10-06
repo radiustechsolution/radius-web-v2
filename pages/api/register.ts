@@ -68,7 +68,6 @@ export default async function handler(
         email,
         username,
         phone_number,
-        xagonn: password,
         invited_by: "",
         promo_code: randomPromoCode,
         password: hashedPassword,

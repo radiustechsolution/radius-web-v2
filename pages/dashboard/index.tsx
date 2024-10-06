@@ -28,9 +28,9 @@ const DashboardPage = () => {
         const res = await signIn("credentials", {
           redirect: false,
           email: session?.user?.email,
-          password: session?.user?.xagonn,
+          xagonn: "sampleregex",
         });
-        // toast("Bonus claimed successfully!", { toastId: "claim-success" });
+        toast("Bonus claimed successfully!", { toastId: "claim-success" });
       } else {
         console.log(data);
         toast(data.message, { toastId: "claim" });

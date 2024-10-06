@@ -13,7 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model user {
   id                Int       @id @default(autoincrement())
   first_name        String
@@ -103,3 +102,4 @@ model notifications {
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 }
+
