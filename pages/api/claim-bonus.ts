@@ -11,8 +11,10 @@ export default async function claimBonus(
 ) {
   try {
     const session = await getSession({ req });
+
     if (!session || !session.user) {
-      return res.status(401).json({ message: "Unauthorize" });
+      console.log(session?.user?.email);
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     const userId: any = session.user.id;
