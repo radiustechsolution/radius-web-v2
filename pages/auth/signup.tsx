@@ -103,7 +103,7 @@ const SignUpPage = () => {
           />
           <div className="flex justify-between items-center">
             <input
-              type="tel"
+              type="text"
               maxLength={15}
               minLength={4}
               className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-[49%]"
