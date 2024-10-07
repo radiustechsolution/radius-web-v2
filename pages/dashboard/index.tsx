@@ -5,7 +5,7 @@ import { DashboardAccountCompCard } from "@/components/dashboard/dashboard-accou
 import { getSession, signIn, useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
 import { GrAnnounce } from "react-icons/gr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/router";
@@ -16,6 +16,17 @@ const DashboardPage = () => {
   const { data: session, update, status } = useSession();
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const updated = async () => {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: session?.user?.email,
+        xagonn: "sampleregex",
+      });
+    };
+    update();
+  }, []);
 
   const handleClaimBonus = async () => {
     setLoading(true);
