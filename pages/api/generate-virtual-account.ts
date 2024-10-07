@@ -71,7 +71,7 @@ export default async function handler(
   const userId = session.user.id; // Assuming user ID is stored in session
   const { first_name, last_name, email, phone_number } = session.user; // Adjust according to your session structure
   try {
-    // Call the function to create a virtual account
+    // Call the function to creates a virtual account
     const virtualAccount = await createVirtualAccount(
       first_name,
       last_name,
