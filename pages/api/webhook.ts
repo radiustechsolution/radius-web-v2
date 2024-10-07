@@ -63,7 +63,7 @@ export default async function webhook(
         data: {
           user_id: String(user.id),
           type: "credit",
-          x_ref: id,
+          x_ref: String(id),
           trans_type: "wallet_funding",
           txf: String(generateRef("FUND", user.id)),
           amount: creditableAmount,
