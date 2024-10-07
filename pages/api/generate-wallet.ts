@@ -10,8 +10,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { ref, first_name, last_name, email, phone_number, customer_id } =
-      req.body;
+    const {
+      ref,
+      first_name,
+      last_name,
+      account_number,
+      bank_name,
+      customer_id,
+    } = req.body;
 
     try {
       //   const response = await fetch(
@@ -32,10 +38,6 @@ export default async function handler(
       //       signal: AbortSignal.timeout(50000),
       //     }
       //   );
-
-      const account_name = "Olumide Oludowole";
-      const account_number = "2029838389";
-      const bank_name = "Wema";
 
       if (1 == 1) {
         // const resJson = await response.json();

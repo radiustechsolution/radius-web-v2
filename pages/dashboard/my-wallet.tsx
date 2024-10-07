@@ -15,24 +15,44 @@ const AddMoneyPage = () => {
     const ref = `VA-${session?.user.id}-${Date.now()}`;
 
     try {
-      const response = await fetch("/api/generate-wallet", {
-        method: "POST",
-        body: JSON.stringify({
-          ref: ref,
-          first_name: session?.user.first_name,
-          last_name: session?.user.last_name,
-          email: session?.user.email,
-          phone_number: session?.user.phone_number,
-          customer_id: session?.user.id, // Pass customer ID for saving in DB
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      //
+      const response = await fetch(
+        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: session?.user.first_name,
+            last_name: session?.user.last_name,
+            email: session?.user.email,
+            phone_number: session?.user.phone_number,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
+      const json = await response.json();
       if (response.ok) {
-        const resJson = await response.json();
-        const { account_number, bank_name } = resJson.data;
+        const { account_number, bank_name } = json.data;
+
+        // Add to db
+        const response = await fetch("/api/generate-wallet", {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: session?.user.first_name,
+            last_name: session?.user.last_name,
+            customer_id: session?.user.id,
+            account_number: account_number,
+            bank_name: bank_name,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         // Optionally re-sign in the user or update session state
         await signIn("credentials", {
