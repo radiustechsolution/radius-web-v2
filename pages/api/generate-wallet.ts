@@ -28,6 +28,7 @@ export default async function handler(
             "Content-Type": "application/json",
             Accept: "application/json",
           },
+          signal: AbortSignal.timeout(50000),
         }
       );
 
