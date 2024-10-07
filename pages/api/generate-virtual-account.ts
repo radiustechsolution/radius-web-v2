@@ -15,13 +15,12 @@ async function createVirtualAccount(
   const ref = `VA-${userId}-${Date.now()}`;
 
   try {
-    // Call Flutterwave API to create a virtual account for the customer
     const flutterwaveResponse = await axios.post(
       "https://api.flutterwave.com/v3/virtual-account-numbers",
       {
         email: email,
         is_permanent: true,
-        bvn: "22366804906", // This should ideally be replaced with a valid BVN from your user's input
+        bvn: "22366804906", // Replace with valid BVN
         tx_ref: ref,
         firstname: first_name,
         lastname: last_name,
@@ -30,15 +29,15 @@ async function createVirtualAccount(
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+          Authorization: `Bearer FLWSECK-9f573cb00dfd500f1e2ba364198529cf-18c83938749vt-X`,
         },
       }
     );
 
-    // Extract account details from the response
+    console.log("Flutterwave Response:", flutterwaveResponse.data);
+
     const { account_number, bank_name } = flutterwaveResponse.data.data;
 
-    // Store the virtual account in the database
     await prisma.virtual_accounts.create({
       data: {
         customer_id: Number(userId),
@@ -53,7 +52,14 @@ async function createVirtualAccount(
 
     return { account_number, bank_name };
   } catch (error: any) {
-    throw new Error("Error creating virtual account: " + error.message);
+    console.error(
+      "Error creating virtual account:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      "Error creating virtual account: " +
+        (error.response?.data?.message || error.message)
+    );
   }
 }
 
