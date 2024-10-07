@@ -13,8 +13,18 @@ const AddMoneyPage = () => {
   const handleGenerateAccount = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/generate-virtual-account", {
+      const response = await fetch("/api/generate-wallet", {
         method: "POST",
+        body: JSON.stringify({
+          first_name: session?.user.first_name,
+          last_name: session?.user.last_name,
+          email: session?.user.email,
+          phone_number: session?.user.phone_number,
+          userId: session?.user.id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (response.ok) {
         const res = await signIn("credentials", {
