@@ -1,4 +1,3 @@
-// pages/api/generate-wallet
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -11,43 +10,31 @@ export default async function handler(req: any, res: any) {
   const { first_name, last_name, email, phone_number, userId } = req.body;
   const ref = `VA-${userId}-${Date.now()}`;
 
-  // Check if the Flutterwave secret key is defined
-  //   if (!process.env.FLW_SECRET_KEY) {
-  //     return res.status(500).json({ message: "Internal server error" });
-  //   }
-
-  console.log("Got First");
+  console.log("Sending request to Laravel server");
 
   try {
-    console.log("Got Second");
-    // Perform the request to Flutterwave API
+    // Call your Laravel server's virtual account creation endpoint
     const response = await fetch(
-      "https://api.flutterwave.com/v3/virtual-account-numbers",
+      "https://appapi.radiustech.com.ng/api/virtualaccountnew",
       {
         method: "POST",
         body: JSON.stringify({
-          email: email,
-          is_permanent: true,
-          bvn: "22366804906",
-          tx_ref: ref,
-          firstname: first_name,
-          lastname: last_name,
-          narration: `${first_name} ${last_name}`,
-          phonenumber: phone_number,
+          email,
+          ref,
+          phone_number,
+          first_name,
+          last_name,
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer FLWSECK-9f573cb00dfd500f1e2ba364198529cf-18c83938749vt-X",
+          Accept: "application/json",
         },
       }
     );
 
-    console.log("Got Third");
+    console.log("Received response from Laravel server");
 
-    // Check if the response is okay
     if (!response.ok) {
-      console.log("Got Fourt");
       const errorResponse = await response.json();
       return res.status(response.status).json({
         message: errorResponse.message || "Failed to create virtual account",
@@ -55,15 +42,6 @@ export default async function handler(req: any, res: any) {
     }
 
     const resJson = await response.json();
-
-    console.log(resJson);
-
-    // Check if the necessary data is present
-    if (!resJson.data) {
-      return res
-        .status(500)
-        .json({ message: "No data received from Flutterwave" });
-    }
 
     const { account_number, bank_name } = resJson.data;
 
