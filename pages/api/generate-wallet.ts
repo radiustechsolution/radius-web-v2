@@ -20,29 +20,7 @@ export default async function handler(
     } = req.body;
 
     try {
-      //   const response = await fetch(
-      //     "https://appapi.radiustech.com.ng/api/virtualaccountnew",
-      //     {
-      //       method: "POST",
-      //       body: JSON.stringify({
-      //         ref,
-      //         first_name,
-      //         last_name,
-      //         email,
-      //         phone_number,
-      //       }),
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Accept: "application/json",
-      //       },
-      //       signal: AbortSignal.timeout(50000),
-      //     }
-      //   );
-
       if (1 == 1) {
-        // const resJson = await response.json();
-        // const { account_number, bank_name } = resJson.data;
-
         // Store the virtual account in the database
         await prisma.virtual_accounts.create({
           data: {
@@ -61,9 +39,9 @@ export default async function handler(
           data: { account_number, bank_name },
         });
       } else {
-        // return res.status(response.status).json({
-        //   message: "Failed to create virtual account",
-        // });
+        return res.status(400).json({
+          message: "Failed to create virtual account",
+        });
       }
     } catch (error: any) {
       console.error("Virtual account creation error:", error.message);
