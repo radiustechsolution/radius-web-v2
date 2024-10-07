@@ -29,9 +29,13 @@ const SigninPage = () => {
     });
 
     if (res && !res.error) {
+      setLoading(false);
+
       router.push(siteConfig.paths.dashboard);
     } else {
       //   console.log(res);
+      setLoading(false);
+
       toast(
         (res?.error == "CredentialsSignin" &&
           "Email or password is incorrect") ||
@@ -39,8 +43,6 @@ const SigninPage = () => {
         { toastId: "failedlogin" }
       );
     }
-
-    setLoading(false);
   };
 
   return (
