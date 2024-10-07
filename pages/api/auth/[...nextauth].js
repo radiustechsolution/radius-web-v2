@@ -39,6 +39,7 @@ export default NextAuth({
                 token: user.token,
                 balance: user.balance,
                 created_at: user.created_at,
+                phone_number: user.phone_number,
                 account_number: account_number,
                 account_name: account_name,
                 bank_name: bank_name,
@@ -68,6 +69,7 @@ export default NextAuth({
                 last_name: user.last_name,
                 email: user.email,
                 username: user.username,
+                phone_number: user.phone_number,
                 token: user.token,
                 balance: user.balance,
                 created_at: user.created_at,
@@ -93,9 +95,11 @@ export default NextAuth({
       session.user.first_name = token.first_name;
       session.user.last_name = token.last_name;
       session.user.balance = token.balance;
+      session.user.email = token.email;
       session.user.token = token.token;
       session.user.account_type = token.account_type;
       session.user.username = token.username;
+      session.user.phone_number = token.phone_number;
       session.user.created_at = token.created_at;
       session.user.account_name = token.account_name;
       session.user.account_number = token.account_number;
@@ -108,9 +112,11 @@ export default NextAuth({
         token.first_name = user.first_name;
         token.last_name = user.last_name;
         token.balance = user.balance;
+        token.email = user.email;
         token.token = user.token;
         token.username = user.username;
         token.status = user.status;
+        token.phone_number = user.phone_number;
         token.account_type = user.account_type;
         token.created_at = user.created_at;
         token.account_name = user.account_name;

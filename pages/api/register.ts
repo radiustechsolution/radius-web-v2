@@ -5,6 +5,7 @@ import { randomBytes } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
 import axios from "axios"; // Import Axios for API calls
+import bankAccountQueue from "@/lib/bullqueue";
 
 const prisma = new PrismaClient();
 
@@ -73,44 +74,44 @@ export default async function handler(
       },
     });
 
-    const ref = `VA-${user.id}-${Date.now()}`;
+    // Create a function that will be called when the client click generate virtual account button
 
-    // Call Flutterwave API to create a virtual account for the customer
-    const flutterwaveResponse = await axios.post(
-      "https://api.flutterwave.com/v3/virtual-account-numbers",
-      {
-        email: email,
-        is_permanent: true,
-        bvn: "22366804906",
-        tx_ref: ref,
-        firstname: first_name,
-        lastname: last_name,
-        narration: `${first_name} ${last_name}`,
-        phonenumber: phone_number,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
-          // "Content-Type": "application/json",
-        },
-      }
-    );
+    // // Call Flutterwave API to create a virtual account for the customer
+    // const flutterwaveResponse = await axios.post(
+    //   "https://api.flutterwave.com/v3/virtual-account-numbers",
+    //   {
+    //     email: email,
+    //     is_permanent: true,
+    //     bvn: "22366804906",
+    //     tx_ref: ref,
+    //     firstname: first_name,
+    //     lastname: last_name,
+    //     narration: `${first_name} ${last_name}`,
+    //     phonenumber: phone_number,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+    //       // "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
 
-    // Extract account details from the response
-    const { account_number, bank_name } = flutterwaveResponse.data.data;
+    // // Extract account details from te response
+    // const { account_number, bank_name } = flutterwaveResponse.data.data;
 
-    // Store the virtual account in the database
-    await prisma.virtual_accounts.create({
-      data: {
-        customer_id: user.id,
-        account_id: ref,
-        account_reference: ref,
-        account_number,
-        account_name: `${first_name} ${last_name}`,
-        bank_name,
-        bank_code: "1234",
-      },
-    });
+    // // Store the virtual account in the database
+    // await prisma.virtual_accounts.create({
+    //   data: {
+    //     customer_id: user.id,
+    //     account_id: ref,
+    //     account_reference: ref,
+    //     account_number,
+    //     account_name: `${first_name} ${last_name}`,
+    //     bank_name,
+    //     bank_code: "1234",
+    //   },
+    // });
 
     // Create a welcome notification
     await prisma.notifications.create({
