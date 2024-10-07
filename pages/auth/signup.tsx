@@ -48,7 +48,10 @@ const SignUpPage = () => {
     const response = await res.json();
 
     if (res.ok) {
-      toast("Creating your Bank Account", { toastId: "xxsa", isLoading: true });
+      toast("Creating your Bank Account", {
+        toastId: "xxsa",
+        isLoading: loading,
+      });
 
       // Step 2 Create Virtual account
       const response2 = await fetch(
