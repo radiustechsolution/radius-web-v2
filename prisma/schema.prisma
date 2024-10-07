@@ -28,13 +28,14 @@ model user {
   status            Boolean   @default(true)
   promo_code        String
   invited_by        String
-  lastBonusClaim    DateTime?
   last_bonus_claim  String    @default("now")
   token             String
   account_type      String    @default("user")
+  profile_locked    Boolean   @default(false) // Added this field
   created_at        DateTime  @default(now())
-  profile_locked    Boolean   @default(false) // Add this field
   updated_at        DateTime  @updatedAt
+  // Relation to virtual_accounts
+  virtual_accounts  virtual_accounts[] @relation("UserVirtualAccounts")
 }
 
 model admin {
@@ -57,21 +58,22 @@ model transactions {
   user_id           String
   type              String
   txf               String   @unique
-  x_ref             String
-  session_id        String
+  x_ref             String?
+  session_id        String?
   amount            Decimal  @db.Decimal(60, 2)
-  fee               Decimal  @db.Decimal(60, 2)
+  fee               Decimal?  @db.Decimal(60, 2)
   balance_before    Decimal  @db.Decimal(60, 2)
   balance_after     Decimal  @db.Decimal(60, 2)
   trans_type        String
-  account_type      String
-  beneficiary       String
+  account_type      String?
+  amount_sent       Decimal?  @db.Decimal(60, 2)
+  beneficiary       String?
   status            String
   narration         String
-  account_name      String
-  account_number    String
-  bank_name         String
-  bank_code         String
+  account_name      String?
+  account_number    String?
+  bank_name         String?
+  bank_code         String?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
 }
@@ -79,7 +81,7 @@ model transactions {
 
 model virtual_accounts {
   id                  Int      @id @default(autoincrement())
-  customer_id         String
+  customer_id         Int
   account_id          String
   account_reference   String
   account_number      String
@@ -88,7 +90,9 @@ model virtual_accounts {
   bank_code           String
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
+  user                user     @relation("UserVirtualAccounts", fields: [customer_id], references: [id])
 }
+
 
 model notifications {
   id            Int      @id @default(autoincrement())

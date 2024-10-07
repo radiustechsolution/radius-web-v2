@@ -38,7 +38,9 @@ export default function ServicesPageLayout({
       <main className="flex-1 flex flex-col">
         {/* Main Navbar */}
         <NavBarServicesPage openNavBar={() => setIsOpen(!isOpen)} />
-        <div className="flex-1 p-2 overflow-auto">{children}</div>
+        <div className="flex-1 p-2 overflow-auto flex flex-col items-center">
+          {children}
+        </div>
       </main>
 
       {/* Close the sidenav when clicked outside on mobile */}

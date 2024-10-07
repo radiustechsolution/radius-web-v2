@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
+import axios from "axios"; // Import Axios for API calls
 
 const prisma = new PrismaClient();
 
@@ -38,22 +39,18 @@ export default async function handler(
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   try {
-    // Check if the phone number already exists
-    const existingPhone = await prisma.user.findUnique({
-      where: { phone_number },
-    });
-    const existingUsernmae = await prisma.user.findUnique({
-      where: { username },
-    });
-    const existingEmail = await prisma.user.findUnique({
-      where: { email },
-    });
+    // Check if phone number, username, or email already exists
+    const [existingPhone, existingUsername, existingEmail] = await Promise.all([
+      prisma.user.findUnique({ where: { phone_number } }),
+      prisma.user.findUnique({ where: { username } }),
+      prisma.user.findUnique({ where: { email } }),
+    ]);
 
     if (existingPhone) {
       return res.status(400).json({ error: "Phone number already exists" });
     }
 
-    if (existingUsernmae) {
+    if (existingUsername) {
       return res.status(400).json({ error: "Username already exists" });
     }
 
@@ -61,6 +58,7 @@ export default async function handler(
       return res.status(400).json({ error: "Email already exists" });
     }
 
+    // Create the user in the database
     const user: any = await prisma.user.create({
       data: {
         first_name,
@@ -75,11 +73,51 @@ export default async function handler(
       },
     });
 
+    const ref = `VA-${user.id}-${Date.now()}`;
+
+    // Call Flutterwave API to create a virtual account for the customer
+    const flutterwaveResponse = await axios.post(
+      "https://api.flutterwave.com/v3/virtual-account-numbers",
+      {
+        email: email,
+        is_permanent: true,
+        bvn: "22366804906",
+        tx_ref: ref,
+        firstname: first_name,
+        lastname: last_name,
+        narration: `${first_name} ${last_name}`,
+        phonenumber: phone_number,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+          // "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Extract account details from the response
+    const { account_number, bank_name } = flutterwaveResponse.data.data;
+
+    // Store the virtual account in the database
+    await prisma.virtual_accounts.create({
+      data: {
+        customer_id: user.id,
+        account_id: ref,
+        account_reference: ref,
+        account_number,
+        account_name: `${first_name} ${last_name}`,
+        bank_name,
+        bank_code: "1234",
+      },
+    });
+
+    // Create a welcome notification
     await prisma.notifications.create({
       data: {
         customer_id: String(user.id),
         message:
-          "Welcome to Radius Data! Your account has been created. Kindly proceed with your funding account generation",
+          "Welcome to Radius Data! Your account was created succesfully. We're glad you joined us",
         status: false,
         link: "",
         img: "",

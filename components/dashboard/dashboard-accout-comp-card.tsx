@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+import Link from "next/link";
 import { RiShieldCheckFill } from "react-icons/ri";
 import { RxCaretRight } from "react-icons/rx";
 
@@ -28,9 +30,12 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
           <span className="text-[17px]">₦</span>
           {balance}
         </h1>
-        <div className="px-[10px] flex items-center py-1 bg-white rounded-full">
+        <Link
+          href={siteConfig.paths.addmoney}
+          className="px-[10px] flex items-center py-1 bg-white rounded-full"
+        >
           <p className="text-[12px] font-medium text-primary">Add Money</p>
-        </div>
+        </Link>
       </div>
     </div>
   );

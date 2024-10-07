@@ -53,6 +53,7 @@ const DashboardPage = () => {
           <DashboardAccountCompCard
             balance={formatCurrency(session?.user?.balance)}
           />
+
           {/* Services Card */}
           <ServicesCard />
 

@@ -26,5 +26,6 @@ export const siteConfig = {
     loan: "/dashboard/loan",
     help: "/dashboard/help",
     bonus: "/dashboard/bonus",
+    addmoney: "/dashboard/my-wallet",
   },
 };

@@ -3,14 +3,17 @@ import NextAuth from "next-auth";
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string; // or appropriate type
-      first_name: string; // Add fullname here
-      last_name: string; // Add fullname here
+      id: string;
+      first_name: string;
+      last_name: string;
       email?: string | null;
       image?: string | null;
       balance?: any | null;
       xagonn?: any | null;
       username?: string | null;
+      account_number?: string | null;
+      account_name?: string | null;
+      bank_name?: string | null;
     };
   }
 }

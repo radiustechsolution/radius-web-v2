@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "transactions" ALTER COLUMN "session_id" DROP NOT NULL,
+ALTER COLUMN "fee" DROP NOT NULL,
+ALTER COLUMN "account_type" DROP NOT NULL,
+ALTER COLUMN "beneficiary" DROP NOT NULL,
+ALTER COLUMN "account_name" DROP NOT NULL,
+ALTER COLUMN "account_number" DROP NOT NULL,
+ALTER COLUMN "bank_name" DROP NOT NULL,
+ALTER COLUMN "bank_code" DROP NOT NULL;

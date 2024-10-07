@@ -19,19 +19,31 @@ export default NextAuth({
         if (credentials.password) {
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },
+            include: {
+              virtual_accounts: true, // Fetch related virtual account(s)
+            },
           });
 
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
-            return {
-              id: user.id,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email,
-              username: user.username,
-              token: user.token,
-              balance: user.balance,
-              created_at: user.created_at,
-            };
+            // Check if user has any virtual accounts
+            if (user.virtual_accounts.length > 0) {
+              // Extract the first virtual account data
+              const { account_number, account_name, bank_name } =
+                user.virtual_accounts[0];
+              return {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                username: user.username,
+                token: user.token,
+                balance: user.balance,
+                created_at: user.created_at,
+                account_number: account_number,
+                account_name: account_name,
+                bank_name: bank_name,
+              };
+            }
           }
         }
 
@@ -39,20 +51,31 @@ export default NextAuth({
         if (credentials.xagonn) {
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },
+            include: {
+              virtual_accounts: true, // Fetch related virtual account(s) based on customer_id
+            },
           });
 
           if (user && credentials.xagonn === "sampleregex") {
-            // Custom validation for xagonn
-            return {
-              id: user.id,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email,
-              username: user.username,
-              token: user.token,
-              balance: user.balance,
-              created_at: user.created_at,
-            };
+            // Check if user has a virtual account
+            if (user.virtual_accounts.length > 0) {
+              // Extract the first virtual account data
+              const { account_number, account_name, bank_name } =
+                user.virtual_accounts[0];
+              return {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                username: user.username,
+                token: user.token,
+                balance: user.balance,
+                created_at: user.created_at,
+                account_number: account_number,
+                account_name: account_name,
+                bank_name: bank_name,
+              };
+            }
           }
         }
 
@@ -74,6 +97,9 @@ export default NextAuth({
       session.user.account_type = token.account_type;
       session.user.username = token.username;
       session.user.created_at = token.created_at;
+      session.user.account_name = token.account_name;
+      session.user.account_number = token.account_number;
+      session.user.bank_name = token.bank_name;
       return session;
     },
     async jwt({ token, user }) {
@@ -87,6 +113,9 @@ export default NextAuth({
         token.status = user.status;
         token.account_type = user.account_type;
         token.created_at = user.created_at;
+        token.account_name = user.account_name;
+        token.account_number = user.account_number;
+        token.bank_name = user.bank_name;
       }
       return token;
     },

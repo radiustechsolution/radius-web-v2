@@ -2,6 +2,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
+import { generateRef } from "@/lib/functions";
 
 const prisma = new PrismaClient();
 
@@ -13,14 +14,13 @@ export default async function claimBonus(
     const session = await getSession({ req });
 
     if (!session || !session.user) {
-      console.log(session?.user?.email);
       return res.status(401).json({ message: "Unauthorized" });
     }
 
     const userId: any = session.user.id;
-    const today = new Date().toISOString().slice(0, 10); //Format date as YYYY-MM-DD
+    const today = new Date().toISOString().slice(0, 10);
 
-    // Get the user from the database
+    // Get the user and check if bonus was already claimed
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
@@ -29,58 +29,60 @@ export default async function claimBonus(
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if the user has already claimed today
     if (user.last_bonus_claim === today) {
       return res.status(400).json({ message: "Bonus already claimed today." });
     }
 
-    // Get the daily bonus price from the admin table
+    // Get daily bonus amount from the admin table
     const admin = await prisma.admin.findUnique({ where: { id: 1 } });
     const dailyBonus: any = admin?.daily_bonus ?? 0;
+    const old_balance = user.balance;
 
-    // Lock user profile before crediting to prevent race conditions
-    await prisma.user.update({
-      where: { id: userId },
-      data: { profile_locked: true },
-    });
-
-    // Credit user balance
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        balance: {
-          increment: dailyBonus,
+    // Perform a transaction to lock user, update balance, and unlock
+    const [_, updatedUser, __] = await prisma.$transaction([
+      prisma.user.update({
+        where: { id: userId },
+        data: { profile_locked: true },
+      }),
+      prisma.user.update({
+        where: { id: userId },
+        data: {
+          balance: { increment: dailyBonus },
+          last_bonus_claim: today,
         },
-        last_bonus_claim: today, // Update the last claimed date
-      },
-    });
+        select: { balance: true }, // Select only balance to get updated balance
+      }),
+      prisma.user.update({
+        where: { id: userId },
+        data: { profile_locked: false },
+      }),
+    ]);
 
-    // Unlock user profile after the process
-    await prisma.user.update({
-      where: { id: userId },
-      data: { profile_locked: false },
-    });
-
-    // Fetch the updated user data to get the new balance
-    const updatedUser: any = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    // Update the session balance with the new balance
-    session.user.balance = updatedUser.balance;
-
-    // Update the JWT token to reflect the new balance
-    await prisma.user.update({
-      where: { id: userId },
-      data: { balance: updatedUser.balance },
-    });
+    try {
+      // Create a transaction record
+      await prisma.transactions.create({
+        data: {
+          user_id: String(user.id), // Make sure this is a string
+          type: "credit",
+          trans_type: "daily_bonus",
+          txf: String(generateRef("BN", user.id)), // Make sure this generates a unique value
+          amount: dailyBonus, // This should be a number (matching Decimal)
+          balance_before: old_balance, // Should match the Decimal type (Number)
+          balance_after: updatedUser.balance, // Should match the Decimal type (Number)
+          status: "successful",
+          narration: "Daily bonus",
+          // You can omit the optional fields if not needed
+        },
+      });
+    } catch (error) {
+      console.error("Error creating transaction:", error);
+    }
 
     return res.status(200).json({
       message: "Bonus claimed successfully!",
-      newBalance: updatedUser.balance,
+      newBalance: updatedUser.balance, // Return the updated balance
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: "An error occurred." });
   }
 }
