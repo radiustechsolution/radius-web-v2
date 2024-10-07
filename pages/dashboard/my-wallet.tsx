@@ -16,23 +16,24 @@ const AddMoneyPage = () => {
       const response = await fetch("/api/generate-virtual-account", {
         method: "POST",
       });
-
-      if (!response.ok) {
-        toast("Failed to create virtual account");
+      if (response.ok) {
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: session?.user?.email,
+          xagonn: "sampleregex",
+        });
+        // Handle success
+        toast("Virtual account created successfully!", { toastId: "caxax" });
+        setLoading(false);
+      } else {
+        toast("Failed to create virtual account", { toastId: "mkwdds" });
+        setLoading(false);
       }
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: session?.user?.email,
-        xagonn: "sampleregex",
-      });
-      // Handle success
-      toast("Virtual account created successfully!", { toastId: "caxax" });
     } catch (error: any) {
-      console.error("Error:", error.message);
+      console.error("Virtual account creation:", error.message);
       toast("Error creating virtual account: " + error.message, {
         toastId: "caxax",
-      }); // Replace with a toast notification
-    } finally {
+      });
       setLoading(false);
     }
   };
