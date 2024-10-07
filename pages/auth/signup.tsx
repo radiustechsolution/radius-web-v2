@@ -48,7 +48,7 @@ const SignUpPage = () => {
     const response = await res.json();
 
     if (res.ok) {
-      toast("Creating your Bank Account", {
+      toast.loading("Generating your Bank Account", {
         toastId: "xxsa",
         isLoading: loading,
       });
@@ -101,6 +101,7 @@ const SignUpPage = () => {
             password,
           });
 
+          toast.dismiss();
           if (signInRes && !signInRes.error) {
             router.push(siteConfig.paths.dashboard);
             setLoading(false);
