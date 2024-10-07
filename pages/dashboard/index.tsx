@@ -26,7 +26,7 @@ const DashboardPage = () => {
       });
     };
     updated();
-  }, []);
+  }, [session?.user?.email]);
 
   const handleClaimBonus = async () => {
     setLoading(true);
