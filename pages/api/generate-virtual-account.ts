@@ -29,8 +29,9 @@ async function createVirtualAccount(
       },
       {
         headers: {
-          Authorization: `Bearer FLWSECK-9f573cb00dfd500f1e2ba364198529cf-18c83938749vt-X`,
+          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
         },
+        timeout: 50000,
       }
     );
 
