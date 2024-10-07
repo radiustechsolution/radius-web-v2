@@ -25,6 +25,9 @@ export default async function webhook(
     //   return res.status(401).json({ message: "Invalid signature" });
     // }
 
+    // Log the entire payload
+    console.log("Flutterwave webhook payload:", req.body);
+
     const event = req.body;
 
     // Extract the relevant details from the event payload
