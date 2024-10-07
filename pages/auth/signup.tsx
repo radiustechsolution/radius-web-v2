@@ -48,7 +48,7 @@ const SignUpPage = () => {
     const response = await res.json();
 
     if (res.ok) {
-      toast.loading("Generating your Bank Account", {
+      toast("Generating your Bank Account", {
         toastId: "xxsa",
         isLoading: loading,
       });
