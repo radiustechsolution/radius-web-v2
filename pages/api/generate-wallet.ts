@@ -1,71 +1,71 @@
+// pages/api/generate-wallet.ts
 import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: any, res: any) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === "POST") {
+    const { ref, first_name, last_name, email, phone_number, customer_id } =
+      req.body;
 
-  const { first_name, last_name, email, phone_number, userId } = req.body;
-  const ref = `VA-${userId}-${Date.now()}`;
+    try {
+      const response = await fetch(
+        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ref,
+            first_name,
+            last_name,
+            email,
+            phone_number,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
-  console.log("Sending request to Laravel server");
+      if (response.ok) {
+        const resJson = await response.json();
+        const { account_number, bank_name } = resJson.data;
 
-  try {
-    // Call your Laravel server's virtual account creation endpoint
-    const response = await fetch(
-      "https://appapi.radiustech.com.ng/api/virtualaccountnew",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          ref,
-          phone_number,
-          first_name,
-          last_name,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        // Store the virtual account in the database
+        await prisma.virtual_accounts.create({
+          data: {
+            customer_id: Number(customer_id),
+            account_id: ref,
+            account_reference: ref,
+            account_number,
+            account_name: `${first_name} ${last_name}`,
+            bank_name,
+            bank_code: "1234",
+          },
+        });
+
+        return res.status(200).json({
+          message: "Virtual account created successfully!",
+          data: { account_number, bank_name },
+        });
+      } else {
+        return res.status(response.status).json({
+          message: "Failed to create virtual account",
+        });
       }
-    );
-
-    console.log("Received response from Laravel server");
-
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      return res.status(response.status).json({
-        message: errorResponse.message || "Failed to create virtual account",
+    } catch (error: any) {
+      console.error("Virtual account creation error:", error.message);
+      return res.status(500).json({
+        message: "Error creating virtual account",
+        error: error.message,
       });
     }
-
-    const resJson = await response.json();
-
-    const { account_number, bank_name } = resJson.data;
-
-    // Store the virtual account in the database
-    await prisma.virtual_accounts.create({
-      data: {
-        customer_id: Number(userId),
-        account_id: ref,
-        account_reference: ref,
-        account_number,
-        account_name: `${first_name} ${last_name}`,
-        bank_name,
-        bank_code: "1234",
-      },
-    });
-
-    return res
-      .status(200)
-      .json({ message: "Virtual account created successfully" });
-  } catch (error: any) {
-    console.error("Error creating virtual account:", error);
-    return res.status(500).json({
-      message: "An error occurred while creating the virtual account.",
-      error: error.message,
-    });
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

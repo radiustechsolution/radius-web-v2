@@ -15,55 +15,43 @@ const AddMoneyPage = () => {
     const ref = `VA-${session?.user.id}-${Date.now()}`;
 
     try {
-      const responses = await fetch(
-        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            ref: ref,
-            first_name: session?.user.first_name,
-            last_name: session?.user.last_name,
-            email: session?.user.email,
-            phone_number: session?.user.phone_number,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetch("/api/generate-wallet", {
+        method: "POST",
+        body: JSON.stringify({
+          ref: ref,
+          first_name: session?.user.first_name,
+          last_name: session?.user.last_name,
+          email: session?.user.email,
+          phone_number: session?.user.phone_number,
+          customer_id: session?.user.id, // Pass customer ID for saving in DB
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      // const response = await fetch("/api/generate-wallet", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     first_name: session?.user.first_name,
-      //     last_name: session?.user.last_name,
-      //     email: session?.user.email,
-      //     phone_number: session?.user.phone_number,
-      //     userId: session?.user.id,
-      //   }),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      if (responses.ok) {
-        const res = await signIn("credentials", {
+      if (response.ok) {
+        const resJson = await response.json();
+        const { account_number, bank_name } = resJson.data;
+
+        // Optionally re-sign in the user or update session state
+        await signIn("credentials", {
           redirect: false,
-          email: session?.user?.email,
-          xagonn: "sampleregex",
+          email: session?.user.email,
+          xagonn: "sampleregex", // Example data
         });
+
         // Handle success
         toast("Virtual account created successfully!", { toastId: "caxax" });
-        setLoading(false);
       } else {
         toast("Failed to create virtual account", { toastId: "mkwdds" });
-        setLoading(false);
       }
     } catch (error: any) {
       console.error("Virtual account creation:", error.message);
       toast("Error creating virtual account: " + error.message, {
         toastId: "caxax",
       });
+    } finally {
       setLoading(false);
     }
   };
@@ -71,9 +59,7 @@ const AddMoneyPage = () => {
   return (
     <ServicesPageLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
-        {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
-          {/* Card With Details */}
           {session?.user.account_number ? (
             <div className="bg-card p-4 flex flex-col gap-4 rounded-lg">
               <div className="flex flex-col gap-1">
@@ -96,9 +82,6 @@ const AddMoneyPage = () => {
                 >
                   Copy Number
                 </Button>
-                {/* <Button className="bg-primary w-[49%] rounded-full text-[13px] text-white">
-                Share Details
-              </Button> */}
               </div>
             </div>
           ) : (
@@ -124,9 +107,6 @@ const AddMoneyPage = () => {
                 >
                   Generate Wallet
                 </Button>
-                {/* <Button className="bg-primary w-[49%] rounded-full text-[13px] text-white">
-                Share Details
-              </Button> */}
               </div>
             </div>
           )}
