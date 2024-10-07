@@ -50,7 +50,7 @@ const SignUpPage = () => {
     if (res.ok) {
       toast("Generating your Bank Account", {
         toastId: "xxsa",
-        isLoading: loading,
+        isLoading: true,
       });
 
       // Step 2 Create Virtual account
