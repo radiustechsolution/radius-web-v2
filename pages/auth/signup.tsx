@@ -29,100 +29,88 @@ const SignUpPage = () => {
     const password = formData.get("password");
     const username = formData.get("username");
 
-    try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          first_name,
-          last_name,
-          phone_number,
-          email,
-          password,
-          username,
-        }),
-      });
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        password,
+        username,
+      }),
+    });
 
-      const response = await res.json();
+    const ref = `VA-${"acct"}-${Date.now()}`;
+    const response = await res.json();
 
-      if (!res.ok) {
-        setLoading(false);
-        return toast(response?.error || "Error during registration");
-      }
+    if (res.ok) {
+      toast("Creating your Bank Account", { toastId: "xxsa", isLoading: true });
 
-      toast("Creating your Bank Account", { toastId: "xxsa" });
-
-      // Step 2: Create Virtual Account
-      const ref = `VA-${"acct"}-${Date.now()}`;
-      const virtualAccountRes = await fetch(
+      // Step 2 Create Virtual account
+      const response2 = await fetch(
         "https://appapi.radiustech.com.ng/api/virtualaccountnew",
         {
           method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone_number: phone_number,
+          }),
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify({
-            ref: ref,
-            first_name,
-            last_name,
-            email,
-            phone_number,
-          }),
         }
       );
 
-      const virtualAccountData = await virtualAccountRes.json();
+      const json = await response2.json();
 
-      if (!virtualAccountRes.ok) {
-        setLoading(false);
-        return toast(
-          virtualAccountData?.error || "Failed to create virtual account"
-        );
+      if (response2.ok) {
+        const { account_number, bank_name } = json.data;
+
+        // Add to db
+        const response3 = await fetch("/api/generate-wallet", {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: first_name,
+            last_name: last_name,
+            customer_id: response.user.id,
+            account_number: account_number,
+            bank_name: bank_name,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response3.ok) {
+          // Step 2: Automatically log the user in after registration
+          const signInRes = await signIn("credentials", {
+            redirect: false,
+            email,
+            password,
+          });
+
+          if (signInRes && !signInRes.error) {
+            router.push(siteConfig.paths.dashboard);
+            setLoading(false);
+          } else {
+            setLoading(false);
+            toast("Login failed after registration");
+          }
+        } else {
+        }
       }
-
-      const { account_number, bank_name } = virtualAccountData.data;
-
-      // Step 3: Add to DB
-      const walletRes = await fetch("/api/generate-wallet", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ref: ref,
-          first_name,
-          last_name,
-          customer_id: 23,
-          account_number,
-          bank_name,
-        }),
-      });
-
-      if (!walletRes.ok) {
-        setLoading(false);
-        return toast("Failed to save virtual account details");
-      }
-
-      // Step 4: Automatically log the user in after registration
-      const signInRes = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-
-      if (signInRes && !signInRes.error) {
-        router.push(siteConfig.paths.dashboard);
-        setLoading(false);
-      } else {
-        setLoading(false);
-        toast("Login failed after registration");
-      }
-    } catch (error) {
+    } else {
       setLoading(false);
-      toast("An unexpected error occurred. Please try again.");
+      toast(response?.error || "Error during registration");
     }
   };
 
