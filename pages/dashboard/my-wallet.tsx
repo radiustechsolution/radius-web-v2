@@ -12,21 +12,41 @@ const AddMoneyPage = () => {
 
   const handleGenerateAccount = async () => {
     setLoading(true);
+    const ref = `VA-${session?.user.id}-${Date.now()}`;
+
     try {
-      const response = await fetch("/api/generate-wallet", {
-        method: "POST",
-        body: JSON.stringify({
-          first_name: session?.user.first_name,
-          last_name: session?.user.last_name,
-          email: session?.user.email,
-          phone_number: session?.user.phone_number,
-          userId: session?.user.id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
+      const responses = await fetch(
+        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: session?.user.first_name,
+            last_name: session?.user.last_name,
+            email: session?.user.email,
+            phone_number: session?.user.phone_number,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+
+      // const response = await fetch("/api/generate-wallet", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     first_name: session?.user.first_name,
+      //     last_name: session?.user.last_name,
+      //     email: session?.user.email,
+      //     phone_number: session?.user.phone_number,
+      //     userId: session?.user.id,
+      //   }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      if (responses.ok) {
         const res = await signIn("credentials", {
           redirect: false,
           email: session?.user?.email,
