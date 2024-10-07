@@ -25,7 +25,7 @@ const DashboardPage = () => {
         xagonn: "sampleregex",
       });
     };
-    updated();
+    session?.user.email && updated();
   }, [session?.user?.email]);
 
   const handleClaimBonus = async () => {
