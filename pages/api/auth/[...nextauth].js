@@ -44,6 +44,18 @@ export default NextAuth({
                 account_name: account_name,
                 bank_name: bank_name,
               };
+            } else {
+              return {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                username: user.username,
+                token: user.token,
+                balance: user.balance,
+                created_at: user.created_at,
+                phone_number: user.phone_number,
+              };
             }
           }
         }
@@ -76,6 +88,18 @@ export default NextAuth({
                 account_number: account_number,
                 account_name: account_name,
                 bank_name: bank_name,
+              };
+            } else {
+              return {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                username: user.username,
+                phone_number: user.phone_number,
+                token: user.token,
+                balance: user.balance,
+                created_at: user.created_at,
               };
             }
           }

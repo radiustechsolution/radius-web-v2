@@ -2,8 +2,9 @@ import { title } from "@/components/primitives";
 import ServicesPageLayout from "@/layouts/servicespages";
 import { copyText } from "@/lib/functions";
 import { Button } from "@nextui-org/button";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AddMoneyPage = () => {
   const { data: session } = useSession();
@@ -14,20 +15,23 @@ const AddMoneyPage = () => {
     try {
       const response = await fetch("/api/generate-virtual-account", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create virtual account");
+        toast("Failed to create virtual account");
       }
-
-      // Handle success (e.g., refresh session, show success message)
-      alert("Virtual account created successfully!"); // Replace with a toast notification
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: session?.user?.email,
+        xagonn: "sampleregex",
+      });
+      // Handle success
+      toast("Virtual account created successfully!", { toastId: "caxax" });
     } catch (error: any) {
       console.error("Error:", error.message);
-      alert("Error creating virtual account: " + error.message); // Replace with a toast notification
+      toast("Error creating virtual account: " + error.message, {
+        toastId: "caxax",
+      }); // Replace with a toast notification
     } finally {
       setLoading(false);
     }
@@ -67,27 +71,40 @@ const AddMoneyPage = () => {
               </div>
             </div>
           ) : (
-            // Card prompting to generate account
-            <div className="bg-card p-4 flex flex-col gap-4 rounded-lg border border-dashed border-gray-300">
-              <h2 className={`${title({ size: "sm" })} text-center`}>
-                You do not have a virtual account yet.
-              </h2>
-              <p className="text-[14px] text-center opacity-70">
-                To add money to your wallet, please generate a virtual account.
-              </p>
-              <Button
-                onClick={handleGenerateAccount}
-                isLoading={loading}
-                className="bg-primary w-full rounded-full text-white font-medium"
-              >
-                Generate Virtual Account
-              </Button>
+            <div className="bg-card p-4 flex flex-col gap-4 rounded-lg">
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center justify-between">
+                  <p className="text-[13px] uppercase opacity-65">
+                    {session?.user.account_name}
+                  </p>
+                  <p className="text-[13px] opacity-65">
+                    {session?.user?.bank_name}
+                  </p>
+                </div>
+                <h1 className={`${title({ size: "sm" })} tracking-widest`}>
+                  Generate your Wallet
+                </h1>
+              </div>
+              <div className="flex justify-between items-center">
+                <Button
+                  isLoading={loading}
+                  onClick={handleGenerateAccount}
+                  className="bg-blue-100 w-[100%] font-medium rounded-full text-[15px] text-primary"
+                >
+                  Generate Wallet
+                </Button>
+                {/* <Button className="bg-primary w-[49%] rounded-full text-[13px] text-white">
+                Share Details
+              </Button> */}
+              </div>
             </div>
           )}
-          <p className="text-[12px] p-5 opacity-55 text-center">
-            Deposit made to the account above incurs charges of 1.4%. If you
-            sent N100, you will receive N98.6.
-          </p>
+          {session?.user.account_name && (
+            <p className="text-[12px] p-5 opacity-55 text-center">
+              Deposit made to the account above incurs charges of 1.4%. If you
+              sent N100, you will receive N98.6.
+            </p>
+          )}
         </div>
       </section>
     </ServicesPageLayout>

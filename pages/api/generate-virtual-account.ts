@@ -64,16 +64,12 @@ export default async function handler(
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
-
   const session = await getSession({ req });
-
   if (!session) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-
   const userId = session.user.id; // Assuming user ID is stored in session
   const { first_name, last_name, email, phone_number } = session.user; // Adjust according to your session structure
-
   try {
     // Call the function to create a virtual account
     const virtualAccount = await createVirtualAccount(
@@ -83,7 +79,6 @@ export default async function handler(
       phone_number,
       userId
     );
-
     return res.status(200).json({
       message: "Virtual account created successfully",
       virtualAccount,

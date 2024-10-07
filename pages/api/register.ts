@@ -5,7 +5,6 @@ import { randomBytes } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
 import axios from "axios"; // Import Axios for API calls
-import bankAccountQueue from "@/lib/bullqueue";
 
 const prisma = new PrismaClient();
 
@@ -74,7 +73,7 @@ export default async function handler(
       },
     });
 
-    // Create a function that will be called when the client click generate virtual account button
+    // const ref = `VA-${user.id}-${Date.now()}`;
 
     // // Call Flutterwave API to create a virtual account for the customer
     // const flutterwaveResponse = await axios.post(
@@ -97,7 +96,7 @@ export default async function handler(
     //   }
     // );
 
-    // // Extract account details from te response
+    // // Extract account details from the response
     // const { account_number, bank_name } = flutterwaveResponse.data.data;
 
     // // Store the virtual account in the database
@@ -113,19 +112,19 @@ export default async function handler(
     //   },
     // });
 
-    // Create a welcome notification
-    await prisma.notifications.create({
-      data: {
-        customer_id: String(user.id),
-        message:
-          "Welcome to Radius Data! Your account was created succesfully. We're glad you joined us",
-        status: false,
-        link: "",
-        img: "",
-        ref: "",
-        type: "message",
-      },
-    });
+    // // Create a welcome notification
+    // await prisma.notifications.create({
+    //   data: {
+    //     customer_id: String(user.id),
+    //     message:
+    //       "Welcome to Radius Data! Your account was created succesfully. We're glad you joined us",
+    //     status: false,
+    //     link: "",
+    //     img: "",
+    //     ref: "",
+    //     type: "message",
+    //   },
+    // });
 
     return res.status(201).json({ message: "User created successfully", user });
   } catch (error: any) {
