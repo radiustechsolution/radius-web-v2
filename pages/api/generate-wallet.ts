@@ -9,15 +9,17 @@ export default async function handler(req: any, res: any) {
   }
 
   const { first_name, last_name, email, phone_number, userId } = req.body;
-
   const ref = `VA-${userId}-${Date.now()}`;
 
   // Check if the Flutterwave secret key is defined
-  if (!process.env.FLW_SECRET_KEY) {
-    return res.status(500).json({ message: "Internal server error" });
-  }
+  //   if (!process.env.FLW_SECRET_KEY) {
+  //     return res.status(500).json({ message: "Internal server error" });
+  //   }
+
+  console.log("Got First");
 
   try {
+    console.log("Got Second");
     // Perform the request to Flutterwave API
     const response = await fetch(
       "https://api.flutterwave.com/v3/virtual-account-numbers",
@@ -26,7 +28,7 @@ export default async function handler(req: any, res: any) {
         body: JSON.stringify({
           email: email,
           is_permanent: true,
-          bvn: "22366804906", // Replace with valid BVN
+          bvn: "22366804906",
           tx_ref: ref,
           firstname: first_name,
           lastname: last_name,
@@ -35,14 +37,17 @@ export default async function handler(req: any, res: any) {
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
-          Accept: "application/json",
+          Authorization:
+            "Bearer FLWSECK-9f573cb00dfd500f1e2ba364198529cf-18c83938749vt-X",
         },
       }
     );
 
+    console.log("Got Third");
+
     // Check if the response is okay
     if (!response.ok) {
+      console.log("Got Fourt");
       const errorResponse = await response.json();
       return res.status(response.status).json({
         message: errorResponse.message || "Failed to create virtual account",
