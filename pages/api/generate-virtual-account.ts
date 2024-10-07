@@ -31,7 +31,6 @@ async function createVirtualAccount(
         headers: {
           Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
         },
-        timeout: 50000,
       }
     );
 
