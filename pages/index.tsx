@@ -38,7 +38,7 @@ export default function IndexPage() {
 
         {/* Bottom */}
         <div className="relative z-10 w-full">
-          <Link href={siteConfig.paths.signin}>
+          <Link href={siteConfig.paths.signup}>
             <button className="h-[50px] w-full text-[14px] font-semibold text-white rounded-lg bg-primary">
               Let&apos;s start
             </button>
