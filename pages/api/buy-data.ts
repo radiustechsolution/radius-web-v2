@@ -82,7 +82,7 @@ export default async function handler(
     planId,
   }: BuyDataRequestBody = req.body;
 
-  // Step 1: Validate inputs
+  // Step 1: Validate input
   if (!customerId || !network || !phone_number || !planId) {
     return res.status(400).json({ error: "Missing required fields" });
   }
