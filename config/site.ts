@@ -1,9 +1,10 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Radius - Utility and Bills Payment Made Easy and Affordable ",
+  name: "Radius - Utility and Bills Payment Made Cheap and Seamless ",
   shortName: "Radius",
-  description: "Utility and Bills Payment Made Easy and Affordable",
+  description:
+    "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",
   siteColors: {
     primary: "#0E14A2",
     cardLightColor: "#ffffff",

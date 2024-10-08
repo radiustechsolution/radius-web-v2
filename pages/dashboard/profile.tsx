@@ -1,7 +1,7 @@
 import { signOut, useSession } from "next-auth/react";
 import DashboardLayout from "@/layouts/dashboard";
 import { Spinner } from "@nextui-org/spinner";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Link } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
 
 const ProfilePage = () => {
@@ -63,8 +63,13 @@ const ProfilePage = () => {
 
         <p className="text-center leading-4 mt-7 text-[12px]">
           <span className="opacity-50">Reach out to</span>{" "}
-          <span className=" underline underline-offset-2 opacity-70">
-            08141314105
+          <span className="opacity-70">
+            <Link
+              className="text-[12px] underline underline-offset-2"
+              href={`tel:08141314105`}
+            >
+              08141314105
+            </Link>
           </span>{" "}
           <span className=" opacity-50">
             should you have issues or need a Software Development service.
@@ -77,7 +82,7 @@ const ProfilePage = () => {
           onClick={handleLogout}
           className="mt-6 flex justify-center"
         >
-          <button className="px-7 py-1 bg-primary text-white rounded-full text-[16px] hover:bg-blue-700 transition-all">
+          <button className="px-7 py-2 bg-primary text-white rounded-full text-[14px] hover:bg-blue-700 transition-all">
             Logout
           </button>
         </div>
