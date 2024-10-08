@@ -65,6 +65,22 @@ export default async function handler(
     // Step 3: Check customer's balance
     const balance = await getCustomerBalance(customerId);
     if (balance < amount) {
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          "Customer transaction failed while purchasing N" +
+            amount +
+            " airtime. ID: " +
+            customerId +
+            " Network: " +
+            network +
+            ", Error: " +
+            "Customer balance is insufficient",
+          "Failed Transaction"
+        );
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
+      }
       throw new Error("Insufficient balance");
     }
 
@@ -112,12 +128,10 @@ export default async function handler(
     const airtimeData = await airtimeResponse.json();
     if (airtimeData.status != "ORDER_RECEIVED") {
       if (airtimeData.status == "INSUFFICIENT_BALANCE") {
-        // Step 8: Refund customer balance in case of failure
         await prisma.user.update({
           where: { id: customerId },
           data: {
             balance: { increment: amount },
-            profile_locked: false, // Unlock profile in case of failure
           },
         });
         await prisma.transactions.update({
@@ -129,7 +143,24 @@ export default async function handler(
           },
         });
 
-        errorMsg = airtimeData?.status;
+        try {
+          await sendEmail(
+            "xeonncodes@gmail.com",
+            "Customer transaction failed while purchasing N" +
+              amount +
+              " airtime. ID: " +
+              customerId +
+              " Network: " +
+              network +
+              ", Error: " +
+              airtimeData?.status,
+            "Failed Transaction"
+          );
+        } catch (emailError) {
+          console.error("Email sending failed:", emailError);
+        }
+
+        // errorMsg = airtimeData?.status;
       }
       throw new Error("Airtime purchase failed. Try again!");
     }
@@ -151,21 +182,6 @@ export default async function handler(
     });
   } catch (error: any) {
     console.error("Airtime purchase error: ", error);
-
-    // To Admin
-    await sendEmail(
-      "xeonncodes@gmail.com",
-      "Customer transaction failed while purchasing N" +
-        amount +
-        " airtime. ID: " +
-        customerId +
-        " Network: " +
-        network +
-        ", Error: " +
-        errorMsg,
-      "Failed Transaction"
-    );
-
     return res.status(500).json({
       error: error.message || "An unexpected error occurred",
       message: "Airtime purchase failed",
