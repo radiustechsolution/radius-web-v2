@@ -112,6 +112,14 @@ export default async function handler(
     const airtimeData = await airtimeResponse.json();
     if (airtimeData.status != "ORDER_RECEIVED") {
       if (airtimeData.status == "INSUFFICIENT_BALANCE") {
+        // Step 8: Refund customer balance in case of failure
+        await prisma.user.update({
+          where: { id: customerId },
+          data: {
+            balance: { increment: amount },
+            profile_locked: false, // Unlock profile in case of failure
+          },
+        });
         await prisma.transactions.update({
           where: { txf: transactionReference },
           data: {
@@ -143,14 +151,6 @@ export default async function handler(
     });
   } catch (error: any) {
     console.error("Airtime purchase error: ", error);
-    // Step 8: Refund customer balance in case of failure
-    await prisma.user.update({
-      where: { id: customerId },
-      data: {
-        balance: { increment: amount },
-        profile_locked: false, // Unlock profile in case of failure
-      },
-    });
 
     // To Admin
     await sendEmail(
