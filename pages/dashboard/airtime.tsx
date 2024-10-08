@@ -25,7 +25,6 @@ const AirtimePage = () => {
   const handleAirtimePurchase = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       // API call to buy airtime
       const response = await fetch("/api/buy-airtime", {

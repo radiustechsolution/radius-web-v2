@@ -1,7 +1,11 @@
+import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
 import dataPlans, { Product } from "@/util/dataplan";
 import { Button } from "@nextui-org/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const networks = [
   { id: "MTN", name: "MTN" },
@@ -11,6 +15,10 @@ const networks = [
 ];
 
 const DataPage = () => {
+  // Hook
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(""); // State to hold the selected network
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -43,15 +51,47 @@ const DataPage = () => {
     }
   };
 
-  const handleDataBundlePurchase = (e: any) => {
+  const handleDataBundlePurchase = async (e: any) => {
     e.preventDefault();
     setLoading(true);
+    try {
+      // API call to buy airtime
+      const response = await fetch("/api/buy-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerId: session?.user.id,
+          network: selectedNetwork,
+          phone_number: phoneNumber,
+          planId: selectedPlan?.PRODUCT_ID,
+          merchant: selectedNetwork,
+          amount: parseFloat(amount),
+        }),
+      });
 
-    // Simulate API request for airtime purchase
-    setTimeout(() => {
+      const data = await response.json();
+
+      if (response.ok) {
+        // Data purchase successful
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: session?.user?.email,
+          xagonn: "sampleregex",
+        });
+        toast("Data purchase successful!");
+        router.push(siteConfig.paths.dashboard);
+      } else {
+        // Handle error messages from the server
+        toast(data.error || "Data purchase failed. Please try again.");
+      }
+    } catch (error) {
+      // Handle fetch errors
+      toast("An unexpected error occurred. Please try again.");
+    } finally {
       setLoading(false);
-      alert("Data bundle purchase successful!");
-    }, 2000);
+    }
   };
 
   return (
@@ -66,7 +106,7 @@ const DataPage = () => {
             {/* Select Network */}
             <div className="border px-2 rounded-md border-gray-300">
               <select
-                className="bg-transparent text-[15px] outline-none h-[47px] placeholder-gray-500 w-full"
+                className="bg-transparent outline-none h-[53px] placeholder-gray-500 w-full"
                 name="network"
                 value={selectedNetwork}
                 onChange={handleNetworkChange}
@@ -88,7 +128,7 @@ const DataPage = () => {
             {selectedNetwork && (
               <div className="border px-2 rounded-md border-gray-300">
                 <select
-                  className="bg-transparent text-[15px] outline-none h-[47px] placeholder-gray-500 w-full"
+                  className="bg-transparent outline-none h-[53px] placeholder-gray-500 w-full"
                   name="plan"
                   value={selectedPlan?.PRODUCT_ID || ""}
                   onChange={handlePlanChange}
@@ -111,13 +151,12 @@ const DataPage = () => {
                 </select>
               </div>
             )}
-
             {/* Only show the other fields when a plan is selected */}
             {selectedPlan && (
               <>
                 <input
                   type="number"
-                  className="bg-transparent text-[15px] border px-2 outline-none h-[47px] placeholder-gray-500 rounded-md border-gray-300 w-full"
+                  className="bg-transparent border px-2 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
                   placeholder="Amount"
                   name="amount"
                   value={amount}
@@ -129,7 +168,7 @@ const DataPage = () => {
 
                 <input
                   type="tel"
-                  className="bg-transparent text-[15px] border px-2 outline-none h-[47px] placeholder-gray-500 rounded-md border-gray-300 w-full"
+                  className="bg-transparent border px-2 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
                   placeholder="eg, 08141314105"
                   name="phone_number"
                   value={phoneNumber}
@@ -141,7 +180,6 @@ const DataPage = () => {
                 />
               </>
             )}
-
             <Button
               type="submit"
               isLoading={loading}
