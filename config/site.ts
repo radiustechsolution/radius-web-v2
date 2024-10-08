@@ -27,5 +27,7 @@ export const siteConfig = {
     help: "/dashboard/help",
     bonus: "/dashboard/bonus",
     addmoney: "/dashboard/my-wallet",
+    transfer: "/dashboard/transfer",
+    notification: "/dashboard/notification",
   },
 };

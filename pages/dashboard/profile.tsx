@@ -1,14 +1,73 @@
-import { Spinner } from "@nextui-org/spinner";
-// import { Avatar } from "@nextui-org/avatar";
+import { signOut, useSession } from "next-auth/react";
 import DashboardLayout from "@/layouts/dashboard";
+import { Spinner } from "@nextui-org/spinner";
+import { Avatar } from "@nextui-org/react";
+import { siteConfig } from "@/config/site";
 
 const ProfilePage = () => {
+  const { data: session } = useSession();
+
+  const { first_name, last_name, email, phone_number, username } =
+    session?.user || {};
+
+  const handleLogout = async () => {
+    await signOut({ redirect: true, callbackUrl: siteConfig.paths.signin });
+  };
+
   return (
     <DashboardLayout>
-      <section className="w-full max-w-[580px] flex flex-col h-full">
-        {/* Dashboard area */}
-        <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
-          <p>Profile Page</p>
+      <section className="w-full max-w-[580px] mx-auto flex flex-col h-full p-3">
+        {/* Dashboard Header */}
+        <div className="mb-6">
+          <p className="text-2xl font-semibold text-primarymodecolorgray">
+            Profile
+          </p>
+          <p className="text-sm opacity-80">
+            View and update your profile information.
+          </p>
+        </div>
+
+        {/* Profile Section */}
+        <div className="bg-card p-4 rounded-xl shadow-lg space-y-6">
+          {/* Profile Image and Name */}
+          <div className="flex items-center space-x-2">
+            <div className="rounded-full overflow-hidden bg-card">
+              <Avatar className="shrink-0" />
+            </div>
+            <div className="leading-5">
+              <p className="text-[16px] font-semibold">
+                {first_name} {last_name}
+              </p>
+              <p className="text-sm opacity-70">@{username}</p>
+            </div>
+          </div>
+
+          {/* User Info */}
+          <div className="space-y-1">
+            <div className="flex justify-between items-center opacity-80">
+              <p className="text-sm">Email</p>
+              <p className="font-semibold text-[14px]">{email}</p>
+            </div>
+            <div className="flex justify-between items-center opacity-80">
+              <p className="text-sm">Phone Number</p>
+              <p className="font-semibold text-[14px]">{phone_number}</p>
+            </div>
+            <div className="flex justify-between items-center opacity-80">
+              <p className="text-sm">Username</p>
+              <p className="font-semibold text-[14px]">{username}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Update Button */}
+        <div
+          role="presentation"
+          onClick={handleLogout}
+          className="mt-6 flex justify-center"
+        >
+          <button className="px-5 py-2 bg-primary text-white rounded-full text-[16px] hover:bg-blue-700 transition-all">
+            Logout
+          </button>
         </div>
       </section>
     </DashboardLayout>

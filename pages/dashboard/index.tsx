@@ -2,14 +2,12 @@ import { Spinner } from "@nextui-org/spinner";
 import DashboardLayout from "@/layouts/dashboard";
 import { ServicesCard } from "@/components/dashboard/service-card";
 import { DashboardAccountCompCard } from "@/components/dashboard/dashboard-accout-comp-card";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
 import { GrAnnounce } from "react-icons/gr";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Button } from "@nextui-org/button";
 import { useRouter } from "next/router";
-import { getToken } from "next-auth/jwt";
 
 const DashboardPage = () => {
   const router = useRouter();

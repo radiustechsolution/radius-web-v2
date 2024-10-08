@@ -1,29 +1,68 @@
+import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
 import { Button } from "@nextui-org/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const networks = [
-  { id: 1, name: "MTN" },
-  { id: 2, name: "AIRTEL" },
-  { id: 3, name: "GLO" },
-  { id: 4, name: "9MOBILE" },
+  { id: "01", name: "MTN" },
+  { id: "04", name: "AIRTEL" },
+  { id: "02", name: "GLO" },
+  { id: "03", name: "9MOBILE" },
 ];
 
 const AirtimePage = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
-  const [selectedNetwork, setSelectedNetwork] = useState(""); // State to hold the selected network
+  const [selectedNetwork, setSelectedNetwork] = useState("");
+  const [merchant, setMerchant] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
 
-  const handleAirtimePurchase = (e: any) => {
+  const handleAirtimePurchase = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate API request for airtime purchase
-    setTimeout(() => {
+    try {
+      // API call to buy airtime
+      const response = await fetch("/api/buy-airtime", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerId: session?.user.id,
+          network: selectedNetwork,
+          phone_number: phoneNumber,
+          merchant: merchant,
+          amount: parseFloat(amount),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Airtime purchase successful
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: session?.user?.email,
+          xagonn: "sampleregex",
+        });
+        toast("Airtime purchase successful!");
+        router.push(siteConfig.paths.dashboard);
+      } else {
+        // Handle error messages from the server
+        toast(data.error || "Airtime purchase failed. Please try again.");
+      }
+    } catch (error) {
+      // Handle fetch errors
+      toast("An unexpected error occurred. Please try again.");
+    } finally {
       setLoading(false);
-      alert("Airtime purchase successful!");
-    }, 2000);
+    }
   };
 
   return (
@@ -41,7 +80,20 @@ const AirtimePage = () => {
                 className="bg-transparent  outline-none h-[53px] placeholder-gray-500 w-full"
                 name="network"
                 value={selectedNetwork}
-                onChange={(e) => setSelectedNetwork(e.target.value)}
+                onChange={(e) => {
+                  setSelectedNetwork(e.target.value),
+                    setMerchant(
+                      e.target.value == "01"
+                        ? "MTN"
+                        : e.target.value == "02"
+                          ? "GLO"
+                          : e.target.value == "03"
+                            ? "9MOBILE"
+                            : e.target.value == "04"
+                              ? "AIRTEL"
+                              : "undetermined"
+                    );
+                }}
                 required
                 disabled={loading}
               >

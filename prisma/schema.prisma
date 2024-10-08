@@ -70,6 +70,7 @@ model transactions {
   beneficiary       String?
   status            String
   narration         String
+  merchant          String?
   account_name      String?
   account_number    String?
   bank_name         String?

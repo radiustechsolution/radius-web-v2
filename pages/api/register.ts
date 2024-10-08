@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
-import axios from "axios"; // Import Axios for API calls
+import { sendEmail } from "@/lib/sendmail";
 
 const prisma = new PrismaClient();
 
@@ -73,58 +73,21 @@ export default async function handler(
       },
     });
 
-    // const ref = `VA-${user.id}-${Date.now()}`;
+    try {
+      await sendEmail(
+        "xeonncodes@gmail.com",
+        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}`,
+        "New Customer Registration"
+      );
 
-    // // Call Flutterwave API to create a virtual account for the customer
-    // const flutterwaveResponse = await axios.post(
-    //   "https://api.flutterwave.com/v3/virtual-account-numbers",
-    //   {
-    //     email: email,
-    //     is_permanent: true,
-    //     bvn: "22366804906",
-    //     tx_ref: ref,
-    //     firstname: first_name,
-    //     lastname: last_name,
-    //     narration: `${first_name} ${last_name}`,
-    //     phonenumber: phone_number,
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
-    //       // "Content-Type": "application/json",
-    //     },
-    //   }
-    // );
-
-    // // Extract account details from the response
-    // const { account_number, bank_name } = flutterwaveResponse.data.data;
-
-    // // Store the virtual account in the database
-    // await prisma.virtual_accounts.create({
-    //   data: {
-    //     customer_id: user.id,
-    //     account_id: ref,
-    //     account_reference: ref,
-    //     account_number,
-    //     account_name: `${first_name} ${last_name}`,
-    //     bank_name,
-    //     bank_code: "1234",
-    //   },
-    // });
-
-    // // Create a welcome notification
-    // await prisma.notifications.create({
-    //   data: {
-    //     customer_id: String(user.id),
-    //     message:
-    //       "Welcome to Radius Data! Your account was created succesfully. We're glad you joined us",
-    //     status: false,
-    //     link: "",
-    //     img: "",
-    //     ref: "",
-    //     type: "message",
-    //   },
-    // });
+      await sendEmail(
+        email,
+        "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
+        "Welcome to Radius"
+      );
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+    }
 
     return res.status(201).json({ message: "User created successfully", user });
   } catch (error: any) {

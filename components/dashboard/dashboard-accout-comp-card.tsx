@@ -16,12 +16,10 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
           <RiShieldCheckFill size={14} color="white" />
           <p className="text-white text-[12px] font-light">Available Balance</p>
         </div>
-        <div className="flex items-center">
-          <p className="text-white text-[12px] font-light">
-            Transaction History
-          </p>
+        <Link href={siteConfig.paths.transfer} className="flex items-center">
+          <p className="text-white text-[12px] font-light">Send Money</p>
           <RxCaretRight size={14} color="white" />
-        </div>
+        </Link>
       </div>
 
       {/* Card Bottom */}
