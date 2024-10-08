@@ -26,7 +26,7 @@ const HelpPage = () => {
               className="space-y-4"
             >
               <div>
-                <label className="block text-sm ">Your Name</label>
+                <p className="block text-sm ">Your Name</p>
                 <input
                   type="text"
                   name="name"
@@ -36,7 +36,7 @@ const HelpPage = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm ">Your Email</label>
+                <p className="block text-sm ">Your Email</p>
                 <input
                   type="email"
                   name="email"
@@ -46,7 +46,7 @@ const HelpPage = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm ">Message</label>
+                <p className="block text-sm ">Message</p>
                 <textarea
                   name="message"
                   required
