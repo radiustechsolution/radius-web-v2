@@ -82,7 +82,7 @@ export default async function handler(
     planId,
   }: BuyDataRequestBody = req.body;
 
-  // Step 1: Validate input
+  // Step 1: Validate inputs
   if (!customerId || !network || !phone_number || !planId) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -101,7 +101,8 @@ export default async function handler(
     }
 
     // Step 3: Resolve plan amount
-    const plan_amount: any = resolvePlanAmount(network, planId);
+    const plan_amount_resolved = resolvePlanAmount(network, planId);
+    const plan_amount: any = plan_amount_resolved + plan_amount_resolved * 1.06;
     const product_name = resolvePlanName(network, planId);
 
     // Step 4: Check customer's balance
