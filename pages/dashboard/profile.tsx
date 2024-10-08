@@ -28,7 +28,7 @@ const ProfilePage = () => {
         </div>
 
         {/* Profile Section */}
-        <div className="bg-card p-4 rounded-xl shadow-lg space-y-6">
+        <div className="bg-card p-4 rounded-xl space-y-6">
           {/* Profile Image and Name */}
           <div className="flex items-center space-x-2">
             <div className="rounded-full overflow-hidden bg-card">
@@ -46,18 +46,30 @@ const ProfilePage = () => {
           <div className="space-y-1">
             <div className="flex justify-between items-center opacity-80">
               <p className="text-sm">Email</p>
-              <p className="font-semibold text-[14px]">{email}</p>
+              <p className="font-medium opacity-90 text-[14px]">{email}</p>
             </div>
             <div className="flex justify-between items-center opacity-80">
               <p className="text-sm">Phone Number</p>
-              <p className="font-semibold text-[14px]">{phone_number}</p>
+              <p className="font-medium opacity-90 text-[14px]">
+                {phone_number}
+              </p>
             </div>
             <div className="flex justify-between items-center opacity-80">
               <p className="text-sm">Username</p>
-              <p className="font-semibold text-[14px]">{username}</p>
+              <p className="font-medium opacity-90 text-[14px]">{username}</p>
             </div>
           </div>
         </div>
+
+        <p className="text-center leading-4 mt-7 text-[12px]">
+          <span className="opacity-50">Reach out to</span>{" "}
+          <span className=" underline underline-offset-2 opacity-70">
+            08141314105
+          </span>{" "}
+          <span className=" opacity-50">
+            should you have issues or need a Software Development service.
+          </span>
+        </p>
 
         {/* Update Button */}
         <div
@@ -65,7 +77,7 @@ const ProfilePage = () => {
           onClick={handleLogout}
           className="mt-6 flex justify-center"
         >
-          <button className="px-5 py-2 bg-primary text-white rounded-full text-[16px] hover:bg-blue-700 transition-all">
+          <button className="px-7 py-1 bg-primary text-white rounded-full text-[16px] hover:bg-blue-700 transition-all">
             Logout
           </button>
         </div>

@@ -87,7 +87,7 @@ export default async function handler(
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  let updatedUser, airtimeResponse, errorMsg;
+  let updatedUser;
 
   try {
     // Step 2: Lock user profile to prevent concurrent transactions
@@ -122,7 +122,6 @@ export default async function handler(
 
     // Step 5: Begin transaction to decrement balance and update records
     const transactionReference = generateRef("DT", customerId);
-
     await prisma.$transaction(async (prisma) => {
       updatedUser = await prisma.user.update({
         where: { id: customerId },
@@ -154,62 +153,70 @@ export default async function handler(
     });
 
     // Step 6: Proceed with Data Purchase API request
-    // const networkMapped = mapNetworkToApiValue(network);
-    // const apiResponse = await fetch("https://datastationapi.com/api/data/", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Token ${process.env.DATA_STATION_KEY}`,
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     network: networkMapped,
-    //     mobile_number: phone_number,
-    //     plan: planId,
-    //     Ported_number: true,
-    //   }),
-    // });
+    const networkMapped = mapNetworkToApiValue(network);
+    const apiResponse = await fetch("https://datastationapi.com/api/data/", {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${process.env.DATA_STATION_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        network: networkMapped,
+        mobile_number: phone_number,
+        plan: planId,
+        Ported_number: true,
+      }),
+    });
 
-    // const databundleData = await apiResponse.json();
+    const databundleData = await apiResponse.json();
 
-    // if (databundleData.Status !== "successful") {
-    //   if (databundleData.Status === "INSUFFICIENT_BALANCE") {
-    //     await prisma.user.update({
-    //       where: { id: customerId },
-    //       data: {
-    //         balance: { increment: plan_amount },
-    //       },
-    //     });
-    //     await prisma.transactions.update({
-    //       where: { txf: transactionReference },
-    //       data: {
-    //         amount_sent: 0,
-    //         balance_after: balance,
-    //         status: "failed",
-    //       },
-    //     });
+    if (!databundleData.Status || databundleData.Status !== "successful") {
+      await prisma.user.update({
+        where: { id: customerId },
+        data: {
+          balance: { increment: plan_amount },
+        },
+      });
+      await prisma.transactions.update({
+        where: { txf: transactionReference },
+        data: {
+          amount_sent: 0,
+          balance_after: balance,
+          status: "failed",
+        },
+      });
 
-    //     try {
-    //       await sendEmail(
-    //         "xeonncodes@gmail.com",
-    //         `Customer transaction failed while purchasing ${planName}`,
-    //         "Failed Transaction"
-    //       );
-    //     } catch (emailError) {
-    //       console.error("Email sending failed:", emailError);
-    //     }
-    //   }
-    //   throw new Error("Data purchase failed. Try again!");
-    // }
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+          "Failed Transaction"
+        );
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
+      }
+      throw new Error("Data purchase failed. Try again!");
+    }
 
-    // // Step 7: Update transaction status on successful data purchase
-    // await prisma.transactions.update({
-    //   where: { txf: transactionReference },
-    //   data: {
-    //     x_ref: databundleData.order_id,
-    //     amount_sent: new Decimal(databundleData.plan_amount),
-    //     status: "successful",
-    //   },
-    // });
+    // Step 7: Update transaction status on successful data purchase
+    await prisma.transactions.update({
+      where: { txf: transactionReference },
+      data: {
+        x_ref: databundleData.ident,
+        amount_sent: new Decimal(databundleData.plan_amount),
+        status: "successful",
+      },
+    });
+
+    try {
+      await sendEmail(
+        "xeonncodes@gmail.com",
+        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        "Successful Data Purchase"
+      );
+    } catch (emailError) {
+      console.error("Data purchase failed:", emailError);
+    }
 
     // Step 8: Return successful response
     res.status(200).json({ message: plan_amount });

@@ -148,19 +148,21 @@ export default async function handler(
             "xeonncodes@gmail.com",
             "Customer transaction failed while purchasing N" +
               amount +
-              " airtime. ID: " +
-              customerId +
+              " airtime. Email: " +
+              lockUser.email +
               " Network: " +
-              network +
+              merchant +
               ", Error: " +
-              airtimeData?.status,
+              airtimeData?.status +
+              " Customer Name: " +
+              lockUser.first_name +
+              " " +
+              lockUser.last_name,
             "Failed Transaction"
           );
         } catch (emailError) {
           console.error("Email sending failed:", emailError);
         }
-
-        // errorMsg = airtimeData?.status;
       }
       throw new Error("Airtime purchase failed. Try again!");
     }
@@ -174,6 +176,16 @@ export default async function handler(
         status: "successful",
       },
     });
+
+    try {
+      await sendEmail(
+        "xeonncodes@gmail.com",
+        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount} Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        "Successful airtime Purchase"
+      );
+    } catch (emailError) {
+      console.error("Airtime purchase failed:", emailError);
+    }
 
     // Step 7: Return successful response
     res.status(200).json({

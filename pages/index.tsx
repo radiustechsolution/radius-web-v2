@@ -2,29 +2,43 @@ import DefaultLayout from "@/layouts/default";
 import { subtitle } from "@/components/primitives";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="w-full gap-10 max-w-[1300px] px-4 flex flex-col items-center justify-center h-full">
+      <section className="relative w-full gap-10 max-w-[600px] px-4 flex flex-col items-center justify-center h-full">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/landing_bg1.jpg" // Add the path to your image here
+            layout="fill"
+            objectFit="cover"
+            alt="Background"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+        </div>
+
         {/* Head */}
-        <div className="text-center flex flex-col items-center">
+        <div className="relative z-10 text-left flex flex-col items-center">
           <h1
-            className={`tracking-tight inline font-semibold text-[26px] sm:text-3xl lg:text-4xl text-[#161616]`}
+            className={`tracking-tight inline font-semibold text-[30px] sm:text-3xl lg:text-4xl text-white`}
           >
-            How would you like to use Radius Data?
+            Enjoy Cheapest Data Sales on Radius.
           </h1>
           <p
-            className={`${subtitle()} max-w-[90%] text-[15px] sm:text-md text-gray-500`}
+            className={`${subtitle()} max-w-[90%] text-[15px] sm:text-md text-gray-300`}
           >
-            Anyone is cool. We&apos;re here to serve you with the best 😎
+            Spend less, save more when you use Radius for your everyday surfing
+            needs. 😎
           </p>
         </div>
 
         {/* Bottom */}
-        <div className="">
+        <div className="relative z-10 w-full">
           <Link href={siteConfig.paths.signin}>
-            <button className="h-[43px] px-6 text-[14px] font-semibold text-white rounded-full bg-primary">
+            <button className="h-[50px] w-full text-[14px] font-semibold text-white rounded-lg bg-primary">
               Let&apos;s start
             </button>
           </Link>

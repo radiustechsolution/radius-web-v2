@@ -4,7 +4,7 @@ import DashboardLayout from "@/layouts/dashboard";
 const HelpPage = () => {
   return (
     <DashboardLayout>
-      <section className="w-full max-w-[580px] mx-auto flex flex-col h-full p-6">
+      <section className="w-full max-w-[580px] mx-auto flex flex-col h-full p-3">
         {/* Dashboard Header */}
         <div className="mb-6">
           <p className="text-2xl font-semibold text-primarymodecolorgray">
