@@ -13,6 +13,7 @@ export default function IndexPage() {
           <Image
             src="/landing_bg1.jpg" // Add the path to your image here
             layout="fill"
+            quality={50}
             objectFit="cover"
             alt="Background"
           />
