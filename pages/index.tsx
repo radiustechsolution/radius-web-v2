@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="relative w-full gap-10 max-w-[600px] px-4 flex flex-col items-center justify-center h-full">
+      <section className="relative w-full gap-10 px-4 flex flex-col items-center justify-center h-full">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
