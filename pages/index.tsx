@@ -34,9 +34,9 @@ export default function IndexPage() {
               surfing needs.
             </p>
 
-            <Link href={siteConfig.paths.signup} className="w-full mt-3">
+            <Link href={siteConfig.paths.signin} className="w-full mt-3">
               <Button
-                className="bg-white text-black w-[45%] font-semibold"
+                className="bg-white text-black w-[85%] font-semibold"
                 size="lg"
               >
                 Proceed
