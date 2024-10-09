@@ -25,14 +25,14 @@ export default function IndexPage() {
         </div>
 
         <div className="flex py-5 absolute top-[0px] right-[10px] items-center gap-2">
-          <BsFillRSquareFill color={"white"} size={30} />
+          <BsFillRSquareFill color={"white"} size={35} />
         </div>
 
         <div className="flex mb-[100px] flex-col gap-[20px]">
           {/* Head */}
           <div className="relative z-10 text-left flex flex-col items-center">
             <h1
-              className={` inline font-extrabold text-[30px] sm:text-3xl lg:text-4xl text-white`}
+              className={`inline font-extrabold text-[34px] sm:text-3xl lg:text-4xl text-white`}
             >
               Enjoy Cheap Data Sales on Radius.
             </h1>
