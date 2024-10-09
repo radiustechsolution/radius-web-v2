@@ -39,7 +39,7 @@ export default async function handler(
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   try {
-    // Check if phone number, username, or email already exists
+    // Check if phone numbern, username, or email already exists
     const [existingPhone, existingUsername, existingEmail] = await Promise.all([
       prisma.user.findUnique({ where: { phone_number } }),
       prisma.user.findUnique({ where: { username } }),
