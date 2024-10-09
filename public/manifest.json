@@ -3,7 +3,7 @@
   "background_color": "#000000",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "name": "Radius Payment Solutions",
   "short_name": "Radius",
   "description": "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",

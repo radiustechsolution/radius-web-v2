@@ -30,5 +30,7 @@ export const siteConfig = {
     addmoney: "/dashboard/my-wallet",
     transfer: "/dashboard/transfer",
     notification: "/dashboard/notification",
+    requestotp: "/auth/request-otp",
+    resetpassword: "/auth/reset-password",
   },
 };

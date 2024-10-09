@@ -54,3 +54,9 @@ export const getUtcTime = () => {
   const utcTime = fromZonedTime(nigeriaTime, "Africa/Lagos");
   return utcTime;
 };
+
+// Generate OTP
+export function generateOTP() {
+  const otp = Math.floor(100000 + Math.random() * 900000);
+  return otp.toString();
+}

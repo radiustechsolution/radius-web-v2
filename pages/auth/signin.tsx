@@ -61,14 +61,21 @@ const SigninPage = () => {
             required
             disabled={loading}
           />
-          <input
-            type="password"
-            className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
-            placeholder="Password"
-            name="password"
-            required
-            disabled={loading}
-          />
+          <div className="w-full flex flex-col gap-1">
+            <input
+              type="password"
+              className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
+              placeholder="Password"
+              name="password"
+              required
+              disabled={loading}
+            />
+            <Link href={siteConfig.paths.requestotp}>
+              <p className="text-right text-[14px] text-black underline underline-offset-4 opacity-90">
+                Forgot password
+              </p>
+            </Link>
+          </div>
           <Button
             type="submit"
             isLoading={loading}
