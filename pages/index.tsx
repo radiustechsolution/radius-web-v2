@@ -2,7 +2,7 @@ import DefaultLayout from "@/layouts/default";
 import { Landingsubtitle, subtitle } from "@/components/primitives";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { BsFillRSquareFill } from "react-icons/bs";
 import { Button } from "@nextui-org/button";
 

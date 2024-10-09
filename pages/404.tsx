@@ -5,7 +5,7 @@ import { ComingSoonComp, NotFound } from "@/components/coming-soon";
 import ServicesPageLayout from "@/layouts/servicespages";
 import DefaultLayout from "@/layouts/default";
 import { Button } from "@nextui-org/button";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { siteConfig } from "@/config/site";
