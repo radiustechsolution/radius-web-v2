@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import { generateRef } from "@/lib/functions";
+import { sendEmail } from "@/lib/sendmail";
 
 const prisma = new PrismaClient();
 
@@ -74,6 +75,16 @@ export default async function webhook(
           narration: `Wallet funding via Flutterwave (${currency})`,
         },
       });
+
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+          "New Wallet Funding"
+        );
+      } catch (emailError) {
+        console.error("Wallet funding:", emailError);
+      }
 
       return res
         .status(200)
