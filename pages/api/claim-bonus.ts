@@ -38,7 +38,7 @@ export default async function claimBonus(
     const dailyBonus: any = admin?.daily_bonus ?? 0;
     const old_balance = user.balance;
 
-    // Perform a transaction to lock user, update balance, and unlock
+    // Perform a transaction to lock user update balance, and unlock
     const [_, updatedUser, __] = await prisma.$transaction([
       prisma.user.update({
         where: { id: userId },
