@@ -9,7 +9,7 @@ const PageNotFound = () => {
   return (
     <DefaultLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
-        {/* Dashboard area */}
+        {/* Dashboard asrea */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
           <NotFound />
         </div>
