@@ -23,9 +23,9 @@ const HistoryPage = () => {
       }
     };
 
-    // if (session?.user.email) {
-    fetchTransactionHistory();
-    // }
+    if (session?.user.email) {
+      fetchTransactionHistory();
+    }
   }, [session?.user.email]);
 
   return (
@@ -37,7 +37,7 @@ const HistoryPage = () => {
             <Spinner /> // Show loading spinner while fetching data
           ) : (
             <div className="space-y-4">
-              {transactions?.length === 1 ? (
+              {transactions?.length === 0 ? (
                 <div className="flex-1 flex items-center justify-center">
                   <div className="w-full flex items-center gap-4 flex-col justify-center">
                     <img
