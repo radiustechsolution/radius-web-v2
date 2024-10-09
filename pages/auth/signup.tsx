@@ -77,23 +77,23 @@ const SignUpPage = () => {
       if (response2.ok) {
         const { account_number, bank_name } = json.data;
 
-        // Add to db
-        const response3 = await fetch("/api/generate-wallet", {
-          method: "POST",
-          body: JSON.stringify({
-            ref: ref,
-            first_name: first_name,
-            last_name: last_name,
-            customer_id: response.user.id,
-            account_number: account_number,
-            bank_name: bank_name,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        // Generate wallet
+        // const response3 = await fetch("/api/generate-wallet", {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     ref: ref,
+        //     first_name: first_name,
+        //     last_name: last_name,
+        //     customer_id: response.user.id,
+        //     account_number: account_number,
+        //     bank_name: bank_name,
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
 
-        if (response3.ok) {
+        if (1 == 1) {
           // Step 2: Automatically log the user in after registration
           const signInRes = await signIn("credentials", {
             redirect: false,
