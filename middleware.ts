@@ -30,6 +30,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(chatUrl);
   }
 
+  // if()
+
   // Continue to the requested page
   return NextResponse.next();
 }
