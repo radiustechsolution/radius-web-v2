@@ -27,9 +27,9 @@ model user {
   balance           Decimal   @default(0.00) @db.Decimal(60, 2)
   status            Boolean   @default(true)
   promo_code        String
-  invited_by        String
+  invited_by        String?
   last_bonus_claim  String    @default("now")
-  token             String
+  token             String?
   account_type      String    @default("user")
   profile_locked    Boolean   @default(false) // Added this field
   created_at        DateTime  @default(now())
@@ -84,12 +84,12 @@ model transactions {
 model virtual_accounts {
   id                  Int      @id @default(autoincrement())
   customer_id         Int
-  account_id          String
+  account_id          String?
   account_reference   String
   account_number      String
   account_name        String
   bank_name           String
-  bank_code           String
+  bank_code           String?
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
   user                user     @relation("UserVirtualAccounts", fields: [customer_id], references: [id])
