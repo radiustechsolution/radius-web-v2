@@ -16,7 +16,7 @@ export const Head = () => {
         name="viewport"
       />
       <link href="/favicon.ico" rel="icon" />
-      <link rel="manifest" href="/manifest.json" />
+      {/* <link rel="manifest" href="/manifest.json" /> */}
     </NextHead>
   );
 };
