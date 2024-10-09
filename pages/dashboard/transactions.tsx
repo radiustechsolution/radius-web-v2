@@ -23,9 +23,9 @@ const HistoryPage = () => {
       }
     };
 
-    if (session?.user.email) {
-      fetchTransactionHistory();
-    }
+    // if (session?.user.email) {
+    fetchTransactionHistory();
+    // }
   }, [session?.user.email]);
 
   return (
