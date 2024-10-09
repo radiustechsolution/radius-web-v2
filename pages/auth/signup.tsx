@@ -54,46 +54,46 @@ const SignUpPage = () => {
       });
 
       // Step 2 Create Virtual account
-      // const response2 = await fetch(
-      //   "https://appapi.radiustech.com.ng/api/virtualaccountnew",
-      //   {
-      //     method: "POST",
-      //     body: JSON.stringify({
-      //       ref: ref,
-      //       first_name: first_name,
-      //       last_name: last_name,
-      //       email: email,
-      //       phone_number: phone_number,
-      //     }),
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Accept: "application/json",
-      //     },
-      //   }
-      // );
+      const response2 = await fetch(
+        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone_number: phone_number,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
-      // const json = await response2.json();
+      const json = await response2.json();
 
-      if (1 == 1) {
-        // const { account_number, bank_name } = json.data;
+      if (response2.ok) {
+        const { account_number, bank_name } = json.data;
 
-        // Generate wallet
-        // const response3 = await fetch("/api/generate-wallet", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     ref: ref,
-        //     first_name: first_name,
-        //     last_name: last_name,
-        //     customer_id: response.user.id,
-        //     account_number: account_number,
-        //     bank_name: bank_name,
-        //   }),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
+        // Add to db
+        const response3 = await fetch("/api/generate-wallet", {
+          method: "POST",
+          body: JSON.stringify({
+            ref: ref,
+            first_name: first_name,
+            last_name: last_name,
+            customer_id: response.user.id,
+            account_number: account_number,
+            bank_name: bank_name,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-        if (1 == 1) {
+        if (response3.ok) {
           // Step 2: Automatically log the user in after registration
           const signInRes = await signIn("credentials", {
             redirect: false,

@@ -34,7 +34,7 @@ export default function IndexPage() {
             <h1
               className={`inline font-extrabold text-[34px] sm:text-3xl lg:text-4xl text-white`}
             >
-              Enjoy Cheap Data with Daily Bonus on Radius.
+              Enjoy Cheap Data and Daily Bonus on Radius
             </h1>
             <p
               className={`${subtitle()} max-w-[90%] leading-6 text-[13px] sm:text-md text-white opacity-90`}
