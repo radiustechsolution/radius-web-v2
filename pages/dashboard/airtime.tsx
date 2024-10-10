@@ -50,15 +50,20 @@ const AirtimePage = () => {
           email: session?.user?.email,
           xagonn: "sampleregex",
         });
-        toast("Airtime purchase successful!");
+        toast.success("Airtime purchase successful!", { toastId: "cscsa" });
         router.push(siteConfig.paths.dashboard);
       } else {
         // Handle error messages from the server
-        toast(data.error || "Airtime purchase failed. Please try again.");
+        toast.error(
+          data.error || "Airtime purchase failed. Please try again.",
+          { toastId: "csscsa" }
+        );
       }
     } catch (error) {
       // Handle fetch errors
-      toast("An unexpected error occurred. Please try again.");
+      toast.error("An unexpected error occurred. Please try again.", {
+        toastId: "mlkk",
+      });
     } finally {
       setLoading(false);
     }

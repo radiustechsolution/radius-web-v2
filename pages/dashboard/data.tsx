@@ -80,15 +80,19 @@ const DataPage = () => {
           email: session?.user?.email,
           xagonn: "sampleregex",
         });
-        toast("Data purchase successful!");
+        toast.success("Data purchase successful!", { toastId: "mmnns" });
         router.push(siteConfig.paths.dashboard);
       } else {
         // Handle error messages from the server
-        toast(data.error || "Data purchase failed. Please try again.");
+        toast.error(data.error || "Data purchase failed. Please try again.", {
+          toastId: "ccwes",
+        });
       }
     } catch (error) {
       // Handle fetch errors
-      toast("An unexpected error occurred. Please try again.");
+      toast.error("An unexpected error occurred. Please try again.", {
+        toastId: "ccssa",
+      });
     } finally {
       setLoading(false);
     }

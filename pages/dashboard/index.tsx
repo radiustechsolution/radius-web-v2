@@ -40,14 +40,16 @@ const DashboardPage = () => {
           email: session?.user?.email,
           xagonn: "sampleregex",
         });
-        toast("Bonus claimed successfully!", { toastId: "claim-success" });
+        toast.success("Bonus claimed successfully!", {
+          toastId: "claim-success",
+        });
       } else {
         // console.log(data);
-        toast(data.message, { toastId: "claim" });
+        toast.error(data.message, { toastId: "claim" });
       }
     } catch (error) {
       // console.error("Error claiming bonus", error);
-      toast("Something went wrong!", { toastId: "claim" });
+      toast.error("Something went wrong!", { toastId: "claim" });
     } finally {
       setLoading(false);
     }
