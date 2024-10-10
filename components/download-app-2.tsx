@@ -44,11 +44,11 @@ export const DownloadAppButton2 = () => {
     <>
       {deferredPrompt && (
         <button
-          className="tracking-widest uppercase flex items-center gap-1 px-4 text-[11px] py-[10px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
+          className="tracking-widest uppercase flex items-center gap-1 px-3 text-[10px] py-[9px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
           onClick={handleInstallClick}
         >
           Install
-          <HiDownload size={16} color="white" />
+          <HiDownload size={15} color="white" />
         </button>
       )}
     </>
