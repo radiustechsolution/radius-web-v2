@@ -35,13 +35,16 @@ export default async function claimBonus(
 
     // Check if user has made any purchase on the app.
     const check = await prisma.transactions.findFirst({
-      where: { user_id: userId, trans_type: "debit" },
+      where: {
+        user_id: String(userId),
+        trans_type: "debit",
+      },
     });
 
     if (!check) {
       return res
-        .status(401)
-        .json({ message: "Purchase any of our product to qualify." });
+        .status(403) // Changed to 403 Forbidden
+        .json({ message: "Purchase any of our products to qualify." });
     }
 
     // Get daily bonus amount from the admin table
