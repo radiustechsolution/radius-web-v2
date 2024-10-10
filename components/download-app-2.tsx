@@ -46,8 +46,8 @@ export const DownloadAppButton2 = () => {
           role="presentation"
           onClick={handleInstallClick}
           className="animate-grow-shrink"
-          size={16}
-          color="white"
+          size={19}
+          color="black"
         />
       )}
     </>
