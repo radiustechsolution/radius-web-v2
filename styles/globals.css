@@ -29,3 +29,17 @@ body::-webkit-scrollbar {
   font-family: "Dancing Script", cursive;
   /* color: #36363690; */
 }
+
+@keyframes growShrink {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-grow-shrink {
+  animation: growShrink 1s ease-in-out infinite;
+}

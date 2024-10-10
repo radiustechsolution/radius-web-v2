@@ -5,6 +5,9 @@ import { siteConfig } from "@/config/site";
 import Image from "next/legacy/image";
 import { BsFillRSquareFill } from "react-icons/bs";
 import { Button } from "@nextui-org/button";
+import { useState, useEffect } from "react";
+import { HiDownload } from "react-icons/hi";
+import { DownloadAppButton } from "@/components/download-app";
 
 export default function IndexPage() {
   return (
@@ -43,6 +46,8 @@ export default function IndexPage() {
               </Button>
             </Link>
           </div>
+
+          <DownloadAppButton />
         </div>
       </section>
     </DefaultLayout>
