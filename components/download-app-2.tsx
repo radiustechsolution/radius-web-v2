@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HiDownload } from "react-icons/hi";
+import { MdDownloadForOffline } from "react-icons/md";
 
 export const DownloadAppButton2 = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -42,7 +43,7 @@ export const DownloadAppButton2 = () => {
   return (
     <>
       {deferredPrompt && (
-        <HiDownload
+        <MdDownloadForOffline
           role="presentation"
           onClick={handleInstallClick}
           className="animate-grow-shrink"

@@ -1,12 +1,10 @@
-import { Avatar } from "@nextui-org/react";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { RiMenu3Line } from "react-icons/ri";
-import { ProfileDetailComp } from "./profileComp";
 import { VscMenu } from "react-icons/vsc";
 import { ProfileDetailWelcomeNavComp } from "./profile-nav";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { DownloadAppButton2 } from "../download-app-2";
+
 type Types = {
   openNavBar: () => void;
 };
