@@ -43,3 +43,17 @@ body::-webkit-scrollbar {
 .animate-grow-shrink {
   animation: growShrink 1s ease-in-out infinite;
 }
+
+@keyframes growShrink2 {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.animate-grow-shrink2 {
+  animation: growShrink2 1s ease-in-out infinite;
+}

@@ -46,7 +46,7 @@ export const DownloadAppButton2 = () => {
         <MdDownloadForOffline
           role="presentation"
           onClick={handleInstallClick}
-          className="animate-grow-shrink"
+          className="animate-grow-shrink2"
           size={19}
           color="black"
         />
