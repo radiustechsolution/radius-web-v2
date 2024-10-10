@@ -1,5 +1,5 @@
 import { Avatar } from "@nextui-org/react";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { IoNotificationsSharp } from "react-icons/io5";
 import { RiMenu3Line } from "react-icons/ri";
 import { ProfileDetailComp } from "./profileComp";
 import { VscMenu } from "react-icons/vsc";
@@ -24,7 +24,7 @@ export const NavBar = ({ openNavBar }: Types) => {
           href={siteConfig.paths.notification}
           className="h-[32px] w-[32px] relative shrink-0 flex items-center justify-center rounded-full bg-background"
         >
-          <IoNotificationsOutline size={19} />
+          <IoNotificationsSharp size={19} />
           {/* <div className="absolute top-[6px] w-[6px] right-[8px] h-[6px] rounded-full bg-danger"></div> */}
         </Link>
         <VscMenu
