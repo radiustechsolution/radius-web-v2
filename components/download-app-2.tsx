@@ -43,11 +43,10 @@ export const DownloadAppButton2 = () => {
   return (
     <>
       {deferredPrompt && (
-        <div className="h-[35px] rounded-full bg-black w-[35px]">
+        <div className="h-[25px] animate-grow-shrink2 flex items-center justify-center    rounded-full bg-black w-[25px]">
           <HiDownload
             role="presentation"
             onClick={handleInstallClick}
-            className="animate-grow-shrink2"
             size={19}
             color="white"
           />
