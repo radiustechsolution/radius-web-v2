@@ -47,7 +47,7 @@ export const DownloadAppButton2 = () => {
           <HiDownload
             role="presentation"
             onClick={handleInstallClick}
-            size={19}
+            size={17}
             color="white"
           />
         </div>
