@@ -43,13 +43,15 @@ export const DownloadAppButton2 = () => {
   return (
     <>
       {deferredPrompt && (
-        <MdDownloadForOffline
-          role="presentation"
-          onClick={handleInstallClick}
-          className="animate-grow-shrink2"
-          size={19}
-          color="black"
-        />
+        <div className="h-[35px] rounded-full bg-black w-[35px]">
+          <HiDownload
+            role="presentation"
+            onClick={handleInstallClick}
+            className="animate-grow-shrink2"
+            size={19}
+            color="white"
+          />
+        </div>
       )}
     </>
   );
