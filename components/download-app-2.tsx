@@ -43,15 +43,25 @@ export const DownloadAppButton2 = () => {
   return (
     <>
       {deferredPrompt && (
-        <div className="h-[25px] animate-grow-shrink2 flex items-center justify-center    rounded-full bg-black w-[25px]">
-          <HiDownload
-            role="presentation"
-            onClick={handleInstallClick}
-            size={17}
-            color="white"
-          />
-        </div>
+        <button
+          className="tracking-widest uppercase flex items-center gap-1 px-4 text-[11px] py-[10px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
+          onClick={handleInstallClick}
+        >
+          Install
+          <HiDownload size={16} color="white" />
+        </button>
       )}
     </>
   );
 };
+
+{
+  /* <div className="h-[25px] animate-grow-shrink2 flex items-center justify-center    rounded-full bg-black w-[25px]">
+  <HiDownload
+    role="presentation"
+    onClick={handleInstallClick}
+    size={17}
+    color="white"
+  />
+</div>; */
+}
