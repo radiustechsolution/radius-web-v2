@@ -41,6 +41,7 @@ export default function IndexPage() {
               <Button
                 className="bg-white text-black w-[85%] font-semibold"
                 size="lg"
+                radius="md"
               >
                 Proceed
               </Button>
