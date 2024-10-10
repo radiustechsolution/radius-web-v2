@@ -37,7 +37,7 @@ export default async function claimBonus(
     const check = await prisma.transactions.findFirst({
       where: {
         user_id: String(userId),
-        trans_type: "debit",
+        type: "debit",
       },
     });
 
