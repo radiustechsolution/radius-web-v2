@@ -33,6 +33,17 @@ export default async function claimBonus(
       return res.status(400).json({ message: "Bonus already claimed today." });
     }
 
+    // Check if user has made any purchase on the app.
+    const check = await prisma.transactions.findFirst({
+      where: { user_id: userId, trans_type: "debit" },
+    });
+
+    if (!check) {
+      return res
+        .status(401)
+        .json({ message: "Purchase any of our product to qualify." });
+    }
+
     // Get daily bonus amount from the admin table
     const admin = await prisma.admin.findUnique({ where: { id: 1 } });
     const dailyBonus: any = admin?.daily_bonus ?? 0;
