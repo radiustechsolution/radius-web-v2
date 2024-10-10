@@ -13,7 +13,7 @@ export default function IndexPage() {
         {/* Hero Page */}
         <div className="relative h-[100svh] flex text-center items-center flex-col justify-center">
           <Image
-            src={"/ld.jpg"}
+            src={"/ai.jpg"}
             layout="fill"
             objectFit="cover"
             alt="Hero Background"
