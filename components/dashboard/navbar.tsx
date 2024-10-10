@@ -6,6 +6,7 @@ import { VscMenu } from "react-icons/vsc";
 import { ProfileDetailWelcomeNavComp } from "./profile-nav";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { DownloadAppButton2 } from "../download-app-2";
 type Types = {
   openNavBar: () => void;
 };
@@ -25,6 +26,7 @@ export const NavBar = ({ openNavBar }: Types) => {
           <IoNotificationsOutline size={19} />
           {/* <div className="absolute top-[6px] w-[6px] right-[8px] h-[6px] rounded-full bg-danger"></div> */}
         </Link>
+        <DownloadAppButton2 />
         <VscMenu
           role="presentation"
           onClick={openNavBar}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiDownload } from "react-icons/hi";
 
-export const DownloadAppButton = () => {
+export const DownloadAppButton2 = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
@@ -43,11 +43,7 @@ export const DownloadAppButton = () => {
     <>
       {deferredPrompt && (
         <div className="z-40 absolute bottom-7">
-          <button
-            className="tracking-widest uppercase flex items-center gap-1 px-4 text-[11px] py-[10px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
-            onClick={handleInstallClick}
-          >
-            Install
+          <button className="animate-grow-shrink" onClick={handleInstallClick}>
             <HiDownload size={16} color="white" />
           </button>
         </div>
