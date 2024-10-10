@@ -44,7 +44,7 @@ export default async function claimBonus(
     if (!check) {
       return res
         .status(403) // Changed to 403 Forbidden
-        .json({ message: "Purchase any of our products to qualify." });
+        .json({ message: "Purchase any product to start claiming." });
     }
 
     // Get daily bonus amount from the admin table
