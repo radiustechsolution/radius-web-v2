@@ -53,12 +53,14 @@ export default function App({ Component, pageProps }: AppProps) {
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider defaultTheme="light">
         <SessionProvider>
-          <button
-            className="z-40 p-2 bg-primary text-white"
-            onClick={handleInstallClick}
-          >
-            Install Our App
-          </button>
+          {deferredPrompt && (
+            <button
+              className="z-40 p-2 bg-primary text-white"
+              onClick={handleInstallClick}
+            >
+              Install Our App
+            </button>
+          )}
           <Component {...pageProps} />
         </SessionProvider>
         <ToastContainer />
