@@ -7,33 +7,47 @@ import { siteConfig } from "./config/site";
 const protectedRoutes = [siteConfig.paths.dashboard];
 
 export async function middleware(req: NextRequest) {
-  // Get the session token
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  try {
+    // Get the session token
+    const session = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
 
-  const { pathname } = req.nextUrl;
+    const { pathname } = req.nextUrl;
 
-  if (protectedRoutes.includes(pathname)) {
-    // If no session exists, redirect to /signin
-    if (!session) {
-      const signInUrl = new URL(siteConfig.paths.signin, req.url);
-      return NextResponse.redirect(signInUrl);
+    // Handle protected routes (e.g., /dashboard)
+    if (protectedRoutes.includes(pathname)) {
+      // If no session exists, redirect to /signin
+      if (!session) {
+        const signInUrl = new URL(siteConfig.paths.signin, req.url);
+        return NextResponse.redirect(signInUrl);
+      }
     }
+
+    // Redirect to /dashboard if user is already signed in and trying to access /signin or /signup
+    if (
+      (pathname === siteConfig.paths.signin ||
+        pathname === siteConfig.paths.signup) &&
+      session
+    ) {
+      const dashboardUrl = new URL(siteConfig.paths.dashboard, req.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+
+    // Optionally handle offline mode
+    // if (!navigator.onLine) {
+    //   const offlineUrl = new URL("/offline", req.url); // assuming you have an offline page
+    //   return NextResponse.redirect(offlineUrl);
+    // }
+
+    // Continue to the requested page
+    return NextResponse.next();
+  } catch (error: any) {
+    console.error("Error in middleware:", error);
+    const errorUrl = new URL(siteConfig.paths.error, req.url);
+    return NextResponse.redirect(errorUrl);
   }
-
-  // If the user is trying to access /signin or /register while already logged in
-  if (
-    (pathname === siteConfig.paths.signin ||
-      pathname === siteConfig.paths.signup) &&
-    session
-  ) {
-    const chatUrl = new URL(siteConfig.paths.dashboard, req.url);
-    return NextResponse.redirect(chatUrl);
-  }
-
-  // if()
-
-  // Continue to the requested page
-  return NextResponse.next();
 }
 
 // Paths middleware should run on

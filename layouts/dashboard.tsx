@@ -64,9 +64,9 @@ export default function DashboardLayout({
   const router = useRouter();
   const [active, setActive] = useState<string>(router.pathname);
 
-  if (!session) {
-    return <div></div>;
-  }
+  // if (!session) {
+  //   return <div></div>;
+  // }
 
   return (
     <div className="relative flex h-svh">

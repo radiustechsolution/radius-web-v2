@@ -7,6 +7,7 @@ import {
   OfflineComp,
 } from "@/components/coming-soon";
 import ServicesPageLayout from "@/layouts/servicespages";
+import { title } from "@/components/primitives";
 
 const PageNotFound = () => {
   return (
@@ -14,7 +15,7 @@ const PageNotFound = () => {
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
-          <OfflineComp />
+          <h1 className={title()}>An Error Occured!</h1>
         </div>
       </section>
     </ServicesPageLayout>

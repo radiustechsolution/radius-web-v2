@@ -11,7 +11,11 @@ export default function OfflinePage() {
             Oops! It seems you&apos;ve lost your internet connection. Please
             check your network and try again.
           </p>
-          <Link href="/" passHref>
+          <Link
+            className="bg-blue-100 text-primary font-semibold px-7 py-3 rounded-lg"
+            href="/"
+            passHref
+          >
             Go back to Home
           </Link>
         </div>
