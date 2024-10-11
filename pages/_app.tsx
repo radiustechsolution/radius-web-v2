@@ -12,6 +12,17 @@ import { useEffect, useState } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
+  useEffect(() => {
+    // Register the service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch((error) => {
+          console.log("Service Worker registration failed:", error);
+        });
+      });
+    }
+  }, []);
+
   function useNetwork() {
     const [isOnline, setNetwork] = useState(true); // Default to true
 

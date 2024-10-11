@@ -1,6 +1,12 @@
 {
   "theme_color": "#0E14A2",
   "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "name": "Radius Utility App",
+  "short_name": "Radius",
+  "description": "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",
   "icons": [
     {
       "purpose": "maskable",
@@ -14,15 +20,5 @@
       "src": "/icon512_rounded.png",
       "type": "image/png"
     }
-  ],
-  "orientation": "any",
-  "display": "standalone",
-  "dir": "auto",
-  "lang": "en-GB",
-  "name": "Radius Utility App",
-  "short_name": "Radius",
-  "start_url": "/",
-  "scope": "/",
-  "description": "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",
-  "id": "https://www.radius.com.ng"
+  ]
 }
