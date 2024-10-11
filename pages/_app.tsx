@@ -12,16 +12,16 @@ import { useEffect, useState } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  useEffect(() => {
-    // Register the service worker
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").catch((error) => {
-          console.log("Service Worker registration failed:", error);
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Register the service worker
+  //   if ("serviceWorker" in navigator) {
+  //     window.addEventListener("load", () => {
+  //       navigator.serviceWorker.register("/sw.js").catch((error) => {
+  //         console.log("Service Worker registration failed:", error);
+  //       });
+  //     });
+  //   }
+  // }, []);
 
   function useNetwork() {
     const [isOnline, setNetwork] = useState(true); // Default to true
@@ -60,9 +60,9 @@ export default function App({ Component, pageProps }: AppProps) {
       router.push("/offline");
     } else {
       console.log("You're back online.");
-      if (router.pathname == "/offline") {
-        toast.success("You're back online!");
+      if (router.pathname === "/offline") {
         router.push("/dashboard");
+        toast.success("You're back online!");
       }
     }
   }, [isOnline]);
