@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import { generateRef } from "@/lib/functions";
+import { sendEmail } from "@/lib/sendmail";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +43,15 @@ export default async function claimBonus(
     });
 
     if (!check) {
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          `Customer tried to claim bonus without buying a product. Customer ID: ${user.id}. Name: ${user.first_name} ${user.last_name}`,
+          "Daily Bonus Issue"
+        );
+      } catch (emailError) {
+        console.error("Failed daily bonus issue:", emailError);
+      }
       return res
         .status(403) // Changed to 403 Forbidden
         .json({ message: "Purchase any product to start claiming." });

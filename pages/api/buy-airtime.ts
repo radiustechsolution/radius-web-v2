@@ -70,8 +70,10 @@ export default async function handler(
           "xeonncodes@gmail.com",
           "Customer transaction failed while purchasing N" +
             amount +
-            " airtime. ID: " +
-            customerId +
+            " airtime. Name: " +
+            lockUser.first_name +
+            " " +
+            lockUser.last_name +
             " Network: " +
             network +
             ", Error: " +
@@ -182,6 +184,11 @@ export default async function handler(
         "xeonncodes@gmail.com",
         `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount} Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
         "Successful airtime Purchase"
+      );
+      await sendEmail(
+        lockUser.email,
+        `Hello ${lockUser.username},\n\nGreat news! Your airtime purchase of ${amount} was successful.\n\nDetails:\nNetwork: ${merchant}\nNew Balance: ${balance}\n\nThank you for trusting us. We’re excited to continue serving you with more seamless and rewarding experiences!\n\nWarm regards,\nThe Radius Team`,
+        "Your Airtime Purchase was Successful!"
       );
     } catch (emailError) {
       console.error("Airtime purchase failed:", emailError);
