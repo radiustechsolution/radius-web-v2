@@ -61,6 +61,7 @@ export default function App({ Component, pageProps }: AppProps) {
     } else {
       console.log("You're back online.");
       // toast.success("You're back online!");
+      router.push("/dashboard");
     }
   }, [isOnline]);
 
