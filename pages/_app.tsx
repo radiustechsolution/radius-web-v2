@@ -60,8 +60,10 @@ export default function App({ Component, pageProps }: AppProps) {
       router.push("/offline");
     } else {
       console.log("You're back online.");
-      // toast.success("You're back online!");
-      router.push("/dashboard");
+      if (router.pathname == "/offline") {
+        toast.success("You're back online!");
+        router.push("/dashboard");
+      }
     }
   }, [isOnline]);
 
