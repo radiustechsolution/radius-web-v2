@@ -62,7 +62,7 @@ export default function App({ Component, pageProps }: AppProps) {
       console.log("You're back online.");
       if (router.pathname === "/offline") {
         router.push("/dashboard");
-        toast.success("You're back online!");
+        // toast.success("You're back online!");
       }
     }
   }, [isOnline]);
