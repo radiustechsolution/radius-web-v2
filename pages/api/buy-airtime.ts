@@ -75,7 +75,7 @@ export default async function handler(
             " " +
             lockUser.last_name +
             " Network: " +
-            network +
+            merchant +
             ", Error: " +
             "Customer balance is insufficient",
           "Failed Transaction"
