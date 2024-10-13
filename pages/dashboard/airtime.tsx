@@ -1,9 +1,10 @@
+import { SetPin } from "@/components/dashboard/modal-setpin";
 import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
 import { Button } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const networks = [
@@ -21,6 +22,7 @@ const AirtimePage = () => {
   const [merchant, setMerchant] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
+  const ref = useRef<any>(null);
 
   const handleAirtimePurchase = async (e: any) => {
     e.preventDefault();
@@ -66,6 +68,12 @@ const AirtimePage = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const UpdateModal = () => {
+    if (ref.current) {
+      ref?.current?.setOpen();
     }
   };
 
@@ -151,6 +159,8 @@ const AirtimePage = () => {
             </Button>
           </form>
         </div>
+
+        <SetPin ref={ref} />
       </section>
     </ServicesPageLayout>
   );
