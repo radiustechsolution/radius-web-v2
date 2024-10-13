@@ -157,6 +157,8 @@ const AirtimePage = () => {
                               ? "AIRTEL"
                               : "undetermined"
                     );
+                  setPhoneNumber("");
+                  setAmount("");
                 }}
                 required
                 disabled={loading}
