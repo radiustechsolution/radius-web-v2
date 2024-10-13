@@ -1,4 +1,4 @@
-import { generateRef, getCurrentTime } from "@/lib/functions";
+import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import dataPlans from "@/util/dataplan";
 import { PrismaClient } from "@prisma/client";
@@ -131,6 +131,8 @@ export default async function handler(
         select: { balance: true },
       });
 
+      const currentTime = GetCurrentTime();
+
       // Create transaction record (status: pending)
       await prisma.transactions.create({
         data: {
@@ -147,7 +149,7 @@ export default async function handler(
           balance_after: updatedUser.balance,
           status: "pending",
           narration: `${product_name} processing`,
-          created_at: getCurrentTime(),
+          created_at: currentTime,
         },
       });
     });

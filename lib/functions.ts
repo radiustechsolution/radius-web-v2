@@ -60,3 +60,10 @@ export function generateOTP() {
   const otp = Math.floor(100000 + Math.random() * 900000);
   return otp.toString();
 }
+
+// Get current time (Nigeria Time)
+export const GetCurrentTime = () => {
+  const date = new Date();
+  const nigeriaTime = new Date(date.getTime() + 1 * 60 * 60 * 1000);
+  return nigeriaTime;
+};
