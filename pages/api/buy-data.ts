@@ -204,7 +204,7 @@ export default async function handler(
       data: {
         x_ref: databundleData.ident,
         amount_sent: new Decimal(databundleData.plan_amount),
-        profit: new Decimal(plan_amount - databundleData.plan_amount),
+        // profit: new Decimal(plan_amount - databundleData.plan_amount),
         status: "successful",
       },
     });
