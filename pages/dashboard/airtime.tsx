@@ -220,6 +220,7 @@ const AirtimePage = () => {
         >
           <div className=" leading-7">
             <p className="text-lg">Network: {merchant.toUpperCase()}</p>
+            <p>Beneficiary: {phoneNumber}</p>
             <p>Amount: ₦{amount}</p>
             <p>Cashback: ₦{Number(amount) * 0.015}</p>
             <p>Total: ₦{Number(amount) - Number(amount) * 0.015}</p>
