@@ -169,13 +169,15 @@ export default async function handler(
       throw new Error("Airtime purchase failed. Try again!");
     }
 
+    const profit = new Decimal(amount).minus(new Decimal(airtimeData.amount));
+
     // Step 6: Update transaction status on successful airtime purchase
     await prisma.transactions.update({
       where: { txf: transactionReference },
       data: {
         x_ref: airtimeData.orderid,
         amount_sent: new Decimal(airtimeData.amount),
-        profit: new Decimal(amount - airtimeData.amount),
+        profit: profit,
         status: "successful",
       },
     });

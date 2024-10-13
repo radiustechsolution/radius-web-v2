@@ -198,13 +198,17 @@ export default async function handler(
       throw new Error("Data purchase failed. Try again!");
     }
 
+    const profit = new Decimal(plan_amount).minus(
+      new Decimal(databundleData.plan_amount)
+    );
+
     // Step 7: Update transaction status on successful data purchase
     await prisma.transactions.update({
       where: { txf: transactionReference },
       data: {
         x_ref: databundleData.ident,
         amount_sent: new Decimal(databundleData.plan_amount),
-        // profit: new Decimal(plan_amount - databundleData.plan_amount),
+        profit: profit,
         status: "successful",
       },
     });
