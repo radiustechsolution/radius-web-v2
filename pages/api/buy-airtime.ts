@@ -67,14 +67,16 @@ export default async function handler(
       throw new Error("pin");
     }
 
+    const chargeAmount: any = Number(amount) - Number(amount) * 0.015;
+
     // Step 3: Check customer's balance
     const balance = await getCustomerBalance(customerId);
-    if (balance < amount) {
+    if (balance < chargeAmount) {
       try {
         await sendEmail(
           "xeonncodes@gmail.com",
           "Customer transaction failed while purchasing N" +
-            amount +
+            chargeAmount +
             " airtime. Name: " +
             lockUser.first_name +
             " " +
@@ -98,7 +100,7 @@ export default async function handler(
       updatedUser = await prisma.user.update({
         where: { id: customerId },
         data: {
-          balance: { decrement: amount },
+          balance: { decrement: chargeAmount },
         },
         select: { balance: true },
       });
@@ -114,7 +116,7 @@ export default async function handler(
           txf: transactionReference,
           fee: 0,
           merchant: merchant,
-          amount: amount,
+          amount: chargeAmount,
           beneficiary: phone_number,
           balance_before: balance,
           balance_after: updatedUser.balance,
@@ -140,7 +142,7 @@ export default async function handler(
         await prisma.user.update({
           where: { id: customerId },
           data: {
-            balance: { increment: amount },
+            balance: { increment: chargeAmount },
           },
         });
         await prisma.transactions.update({
@@ -156,7 +158,7 @@ export default async function handler(
           await sendEmail(
             "xeonncodes@gmail.com",
             "Customer transaction failed while purchasing N" +
-              amount +
+              chargeAmount +
               " airtime. Email: " +
               lockUser.email +
               " Network: " +
@@ -176,7 +178,9 @@ export default async function handler(
       throw new Error("Airtime purchase failed. Try again!");
     }
 
-    const profit = new Decimal(amount).minus(new Decimal(airtimeData.amount));
+    const profit = new Decimal(chargeAmount).minus(
+      new Decimal(airtimeData.amount)
+    );
 
     // Step 6: Update transaction status on successful airtime purchase
     await prisma.transactions.update({
@@ -192,12 +196,12 @@ export default async function handler(
     try {
       await sendEmail(
         "xeonncodes@gmail.com",
-        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount} Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
         "Successful airtime Purchase"
       );
       await sendEmail(
         lockUser.email,
-        `Hello ${lockUser.username},\n\nGreat news! Your airtime purchase of ${amount} was successful.\n\nDetails:\nNetwork: ${merchant}\nNew Balance: ${balance}\n\nThank you for trusting us. We’re excited to continue serving you with more seamless and rewarding experiences!\n\nWarm regards,\nThe Radius Team`,
+        `Hello ${lockUser.username}, Great news! Your airtime purchase of ₦${amount} was successful. You saved ₦${amount - chargeAmount} using Radius for this purchase. Details: Network: ${merchant}. Thank you for trusting us. We’re excited to continue serving you with more seamless and rewarding experiences! Warm regards, The Radius Team`,
         "Your Airtime Purchase was Successful!"
       );
     } catch (emailError) {
