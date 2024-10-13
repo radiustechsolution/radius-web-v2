@@ -97,7 +97,6 @@ export const SetPin = forwardRef((props, ref) => {
                 type="number"
                 maxLength={4}
                 minLength={4}
-                autoFocus
                 onChange={(e) => setPin(e.target.value)}
                 radius="sm"
                 endContent={

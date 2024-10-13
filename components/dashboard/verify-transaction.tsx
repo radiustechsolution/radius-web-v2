@@ -95,7 +95,6 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
                 type="number"
                 maxLength={4}
                 minLength={4}
-                autoFocus
                 onChange={(e) => setPin(e.target.value)}
                 radius="sm"
                 endContent={
