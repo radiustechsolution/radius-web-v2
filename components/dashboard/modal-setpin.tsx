@@ -5,10 +5,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  Checkbox,
   ModalFooter,
   useDisclosure,
-  Link,
 } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { forwardRef, useImperativeHandle, useState } from "react";
@@ -19,7 +17,7 @@ interface Types {
   openModal: () => void;
 }
 
-export const SetPin = forwardRef((props, ref) => {
+const SetPin = forwardRef((props, ref) => {
   // Hooks
   const { data: session } = useSession();
 
@@ -126,3 +124,6 @@ export const SetPin = forwardRef((props, ref) => {
     </Modal>
   );
 });
+
+SetPin.displayName = "SetPin";
+export default SetPin;

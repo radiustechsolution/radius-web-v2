@@ -124,3 +124,6 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
     </Modal>
   );
 });
+
+VerifyTransaction.displayName = "VerifyTransaction";
+export default VerifyTransaction;
