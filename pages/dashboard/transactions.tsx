@@ -73,7 +73,9 @@ const HistoryPage = () => {
                             "(" + transaction?.merchant + ")"}
                         </p>
                         <p className="text-[12px] opacity-70">
-                          {new Date(transaction?.created_at).toLocaleString()}
+                          {new Date(
+                            transaction?.created_at - 1
+                          ).toLocaleString()}
                         </p>
                       </div>
                     </div>
