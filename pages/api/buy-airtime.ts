@@ -175,6 +175,7 @@ export default async function handler(
       data: {
         x_ref: airtimeData.orderid,
         amount_sent: new Decimal(airtimeData.amount),
+        profit: new Decimal(amount - airtimeData.amount),
         status: "successful",
       },
     });
