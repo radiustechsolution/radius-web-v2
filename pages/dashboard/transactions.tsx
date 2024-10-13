@@ -74,7 +74,9 @@ const HistoryPage = () => {
                         </p>
                         <p className="text-[12px] opacity-70">
                           {new Date(
-                            transaction?.created_at - 1
+                            new Date(transaction?.created_at).setHours(
+                              new Date(transaction?.created_at).getHours() - 1
+                            )
                           ).toLocaleString()}
                         </p>
                       </div>
