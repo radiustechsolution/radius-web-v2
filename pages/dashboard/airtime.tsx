@@ -1,5 +1,5 @@
-import { SetPin } from "@/components/dashboard/modal-setpin";
-import { VerifyTransaction } from "@/components/dashboard/verify-transaction";
+import SetPin from "@/components/dashboard/modal-setpin";
+import VerifyTransaction from "@/components/dashboard/verify-transaction";
 import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
 import { Button } from "@nextui-org/react";
