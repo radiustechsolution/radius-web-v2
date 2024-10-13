@@ -5,21 +5,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  Checkbox,
   ModalFooter,
   useDisclosure,
-  Link,
 } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 import { IoLockClosed } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 interface Types {
-  openModal: () => void;
+  children: React.ReactNode;
+  action: () => void;
+  cancelTransaction: () => void;
 }
 
-export const SetPin = forwardRef((props, ref) => {
+export const VerifyTransaction = forwardRef((props: Types, ref) => {
   // Hooks
   const { data: session } = useSession();
 
@@ -29,19 +29,24 @@ export const SetPin = forwardRef((props, ref) => {
   const [isLoading, setIsLoading] = useState(false);
   const [pin, setPin] = useState("");
 
-  const setOpen = () => {
+  const setOpenConfirm = () => {
     setIsOpen(!isOpen);
   };
 
+  const CancelBuy = () => {
+    setIsOpen(false);
+    props.cancelTransaction();
+  };
+
   useImperativeHandle(ref, () => ({
-    setOpen,
+    setOpenConfirm,
   }));
 
-  const SetPin = async () => {
+  const VerifyPin = async () => {
     setIsLoading(true);
     try {
       // API call to buy airtime
-      const response = await fetch("/api/setpin", {
+      const response = await fetch("/api/verify-pin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,19 +60,11 @@ export const SetPin = forwardRef((props, ref) => {
       const data = await response.json();
 
       if (response.ok) {
-        // Airtime purchase successful
-        const res = await signIn("credentials", {
-          redirect: false,
-          email: session?.user?.email,
-          xagonn: "sampleregex",
-        });
-        setIsOpen(false);
-        toast.success("Pin Set Successfully", { toastId: "cscssetpina" });
+        props.action();
       } else {
-        toast.error(
-          data.error || "Airtime purchase failed. Please try again.",
-          { toastId: "csscsa" }
-        );
+        toast.error(data.error || "Something went wrong! Try again", {
+          toastId: "csscsa",
+        });
       }
     } catch (error) {
       // Handle fetch errors
@@ -90,9 +87,10 @@ export const SetPin = forwardRef((props, ref) => {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              Setup your 4 digit transaction PIN
+              Confirm Transaction
             </ModalHeader>
             <ModalBody>
+              {props.children}
               <Input
                 type="number"
                 maxLength={4}
@@ -109,16 +107,16 @@ export const SetPin = forwardRef((props, ref) => {
               />
             </ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="flat" onPress={setOpen}>
-                Close
+              <Button color="danger" variant="bordered" onPress={CancelBuy}>
+                Cancel
               </Button>
               <Button
                 isLoading={isLoading}
                 color="primary"
                 className="text-white"
-                onPress={SetPin}
+                onPress={VerifyPin}
               >
-                Set Pin
+                Confirm
               </Button>
             </ModalFooter>
           </>

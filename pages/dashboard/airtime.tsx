@@ -1,4 +1,5 @@
 import { SetPin } from "@/components/dashboard/modal-setpin";
+import { VerifyTransaction } from "@/components/dashboard/verify-transaction";
 import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
 import { Button } from "@nextui-org/react";
@@ -23,10 +24,13 @@ const AirtimePage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
   const ref = useRef<any>(null);
+  const refConfirm = useRef<any>(null);
 
-  const handleAirtimePurchase = async (e: any) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleAirtimePurchase = async () => {
+    if (refConfirm.current) {
+      refConfirm?.current?.setOpenConfirm();
+    }
+
     try {
       // API call to buy airtime
       const response = await fetch("/api/buy-airtime", {
@@ -42,9 +46,7 @@ const AirtimePage = () => {
           amount: parseFloat(amount),
         }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
         // Airtime purchase successful
         const res = await signIn("credentials", {
@@ -55,11 +57,15 @@ const AirtimePage = () => {
         toast.success("Airtime purchase successful!", { toastId: "cscsa" });
         router.push(siteConfig.paths.dashboard);
       } else {
-        // Handle error messages from the server
-        toast.error(
-          data.error || "Airtime purchase failed. Please try again.",
-          { toastId: "csscsa" }
-        );
+        if (data.error == "pin") {
+          UpdateModal();
+        } else {
+          // Handle error messages from the server
+          toast.error(
+            data.error || "Airtime purchase failed. Please try again.",
+            { toastId: "csscsa" }
+          );
+        }
       }
     } catch (error) {
       // Handle fetch errors
@@ -71,9 +77,58 @@ const AirtimePage = () => {
     }
   };
 
+  const VerifyUserPin = async () => {
+    // Check if user balance is sufficient
+    if (session?.user?.balance < Number(amount)) {
+      return toast.error("Insufficient balance 😔!", { toastId: "cmsll" });
+    }
+
+    // Check if amount is less than 50
+    if (Number(amount) < 50) {
+      return toast.error("Amount cannot be less than ₦50", {
+        toastId: "cmslll",
+      });
+    }
+
+    setLoading(true);
+    // Check if user has set pin
+    const checkRes = await fetch("/api/check-user-setpin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: session?.user.id,
+      }),
+    });
+    const checkData = await checkRes.json();
+
+    if (!checkRes.ok) {
+      if (checkData.error == "pin") {
+        setLoading(false);
+        return UpdateModal();
+      } else {
+        setLoading(false);
+        return toast.error(
+          checkData.error ||
+            "Something went wrong!. Try again or contact support.",
+          { toastId: "failed-pin-set" }
+        );
+      }
+    } else {
+      return ConfirmTransaction();
+    }
+  };
+
   const UpdateModal = () => {
     if (ref.current) {
       ref?.current?.setOpen();
+    }
+  };
+
+  const ConfirmTransaction = () => {
+    if (refConfirm.current) {
+      refConfirm?.current?.setOpenConfirm();
     }
   };
 
@@ -82,10 +137,7 @@ const AirtimePage = () => {
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
-          <form
-            onSubmit={handleAirtimePurchase}
-            className="w-full flex flex-col gap-3"
-          >
+          <div className="w-full flex flex-col gap-3">
             {/* Select Network */}
             <div className="border px-3 rounded-md border-gray-300">
               <select
@@ -150,16 +202,29 @@ const AirtimePage = () => {
             )}
 
             <Button
-              type="submit"
+              type="button"
+              onClick={VerifyUserPin}
               isLoading={loading}
               className="h-[50px] text-white rounded-lg mt-5 font-semibold bg-primary w-full"
               disabled={loading || !selectedNetwork} // Disable button if no network is selected
             >
               {loading ? "Processing..." : "Proceed"}
             </Button>
-          </form>
+          </div>
         </div>
 
+        <VerifyTransaction
+          cancelTransaction={() => setLoading(false)}
+          action={handleAirtimePurchase}
+          ref={refConfirm}
+        >
+          <div className=" leading-7">
+            <p className="text-lg">Network: {merchant.toUpperCase()}</p>
+            <p>Amount: ₦{amount}</p>
+            <p>Cashback: ₦{Number(amount) * 0.015}</p>
+            <p>Total: ₦{Number(amount) - Number(amount) * 0.015}</p>
+          </div>
+        </VerifyTransaction>
         <SetPin ref={ref} />
       </section>
     </ServicesPageLayout>

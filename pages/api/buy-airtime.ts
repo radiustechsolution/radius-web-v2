@@ -62,6 +62,11 @@ export default async function handler(
       throw new Error("Failed. Try again later.");
     }
 
+    // Check if user has set pin
+    if (!lockUser.pin) {
+      throw new Error("pin");
+    }
+
     // Step 3: Check customer's balance
     const balance = await getCustomerBalance(customerId);
     if (balance < amount) {
