@@ -93,8 +93,8 @@ const SetPin = forwardRef((props, ref) => {
             <ModalBody>
               <div className="flex border border-gray-300 mt-2 rounded-md items-center">
                 <input
-                  type={!eye ? "password" : "text"}
-                  className="bg-transparent  text-black px-5 outline-none h-[47px] placeholder-gray-500  basis-[89%] w-[100%]"
+                  type={"number"}
+                  className="bg-transparent  text-black px-5 outline-none h-[47px] placeholder-gray-500  basis-[100%] w-[100%]"
                   placeholder="4 Digit Pin"
                   onChange={(e) => setPin(e.target.value)}
                   required
@@ -102,7 +102,7 @@ const SetPin = forwardRef((props, ref) => {
                   minLength={4}
                   disabled={isLoading}
                 />
-                {!eye ? (
+                {/* {!eye ? (
                   <IoEyeOffOutline
                     role="presentation"
                     onClick={() => setEye(!eye)}
@@ -116,7 +116,7 @@ const SetPin = forwardRef((props, ref) => {
                     className="basis-[10%] cursor-pointer"
                     size={22}
                   />
-                )}
+                )} */}
               </div>
             </ModalBody>
             <ModalFooter>
