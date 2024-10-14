@@ -94,7 +94,7 @@ const SetPin = forwardRef((props, ref) => {
               <div className="flex border border-gray-300 mt-2 rounded-md items-center">
                 <input
                   type={"number"}
-                  className="bg-transparent  text-black px-5 outline-none h-[47px] placeholder-gray-500  basis-[100%] w-[100%]"
+                  className="bg-transparent px-5 outline-none h-[47px] placeholder-gray-500  basis-[100%] w-[100%]"
                   placeholder="4 Digit Pin"
                   onChange={(e) => setPin(e.target.value)}
                   required

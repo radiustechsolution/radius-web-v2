@@ -95,7 +95,7 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
               <div className="flex border border-gray-300 mt-2 rounded-md items-center">
                 <input
                   type={!eye ? "password" : "text"}
-                  className="bg-transparent  text-black px-5 outline-none h-[47px] placeholder-gray-500  basis-[89%] w-[100%]"
+                  className="bg-transparent px-5 outline-none h-[47px] placeholder-gray-500  basis-[89%] w-[100%]"
                   placeholder="Pin"
                   onChange={(e) => setPin(e.target.value)}
                   required
