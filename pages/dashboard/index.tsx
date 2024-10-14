@@ -8,6 +8,8 @@ import { GrAnnounce } from "react-icons/gr";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { FaWhatsapp } from "react-icons/fa6";
+import WhatsAppCard from "@/components/dashboard/whatsapp-group";
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -93,6 +95,9 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
+
+          {/* Chat on whatsapp */}
+          <WhatsAppCard />
         </div>
 
         {loading && (
