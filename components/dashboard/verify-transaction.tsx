@@ -97,6 +97,7 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
                 minLength={4}
                 onChange={(e) => setPin(e.target.value)}
                 radius="sm"
+                size="lg"
                 endContent={
                   <IoLockClosed className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }

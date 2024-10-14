@@ -2,7 +2,7 @@ import SetPin from "@/components/dashboard/modal-setpin";
 import VerifyTransaction from "@/components/dashboard/verify-transaction";
 import { siteConfig } from "@/config/site";
 import ServicesPageLayout from "@/layouts/servicespages";
-import { Button } from "@nextui-org/react";
+import { Button, Divider } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
@@ -220,12 +220,32 @@ const AirtimePage = () => {
           action={handleAirtimePurchase}
           ref={refConfirm}
         >
-          <div className=" leading-7">
-            <p className="text-lg">Network: {merchant.toUpperCase()}</p>
-            <p>Beneficiary: {phoneNumber}</p>
-            <p>Amount: ₦{amount}</p>
-            <p>Cashback: ₦{Number(amount) * 0.015}</p>
-            <p>Total: ₦{Number(amount) - Number(amount) * 0.015}</p>
+          <div className="flex flex-col gap-4 mb-3">
+            <div className="flex border-b pb-2 border-bordercolor items-center justify-between">
+              <p>Network:</p>
+              <p className="font-medium">{merchant.toUpperCase()}</p>
+            </div>
+            <div className="flex pb-2 border-b border-bordercolor items-center justify-between">
+              <p>Beneficiary:</p>
+              <p className="font-medium">{phoneNumber}</p>
+            </div>
+
+            <div className="flex pb-2 border-b border-bordercolor items-center justify-between">
+              <p>Amount:</p>
+              <p className="font-medium">₦{amount}</p>
+            </div>
+
+            <div className="flex pb-2 border-b border-bordercolor items-center justify-between">
+              <p>Cashback:</p>
+              <p className="font-medium">₦{Number(amount) * 0.015}</p>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <p>Total Payment:</p>
+              <p className="font-medium">
+                ₦{Number(amount) - Number(amount) * 0.015}
+              </p>
+            </div>
           </div>
         </VerifyTransaction>
         <SetPin ref={ref} />
