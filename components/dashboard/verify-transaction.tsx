@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { IoLockClosed } from "react-icons/io5";
+import { IoEyeOffOutline, IoEyeOutline, IoLockClosed } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 interface Types {
@@ -28,6 +28,7 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [pin, setPin] = useState("");
+  const [eye, setEye] = useState(false);
 
   const setOpenConfirm = () => {
     setIsOpen(!isOpen);
@@ -91,20 +92,31 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
             </ModalHeader>
             <ModalBody>
               {props.children}
-              <Input
-                type="number"
-                maxLength={4}
-                minLength={4}
-                onChange={(e) => setPin(e.target.value)}
-                radius="sm"
-                size="lg"
-                endContent={
-                  <IoLockClosed className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                }
-                // label="Pin"
-                placeholder="4 Digit Pin"
-                variant="bordered"
-              />
+              <div className="flex border border-gray-300 mt-2 rounded-md items-center">
+                <input
+                  type={!eye ? "password" : "text"}
+                  className="bg-transparent  text-black px-5 outline-none h-[47px] placeholder-gray-500  basis-[89%] w-[100%]"
+                  placeholder="Pin"
+                  onChange={(e) => setPin(e.target.value)}
+                  required
+                  disabled={isLoading}
+                />
+                {!eye ? (
+                  <IoEyeOffOutline
+                    role="presentation"
+                    onClick={() => setEye(!eye)}
+                    className="basis-[10%] cursor-pointer"
+                    size={22}
+                  />
+                ) : (
+                  <IoEyeOutline
+                    role="presentation"
+                    onClick={() => setEye(!eye)}
+                    className="basis-[10%] cursor-pointer"
+                    size={22}
+                  />
+                )}
+              </div>
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="bordered" onPress={CancelBuy}>

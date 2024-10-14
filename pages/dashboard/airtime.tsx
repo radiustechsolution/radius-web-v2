@@ -80,7 +80,7 @@ const AirtimePage = () => {
   const VerifyUserPin = async () => {
     // Check if user balance is sufficient
     if (session?.user?.balance < Number(amount)) {
-      return toast.error("Insufficient balance 😔!", { toastId: "cmsll" });
+      return toast.error("Insufficient balance 😔", { toastId: "cmsll" });
     }
 
     // Check if amount is less than 50
