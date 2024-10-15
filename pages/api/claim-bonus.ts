@@ -35,27 +35,27 @@ export default async function claimBonus(
     }
 
     // Check if user has made any purchase on the app.
-    const check = await prisma.transactions.findFirst({
-      where: {
-        user_id: String(userId),
-        type: "debit",
-      },
-    });
+    // const check = await prisma.transactions.findFirst({
+    //   where: {
+    //     user_id: String(userId),
+    //     type: "debit",
+    //   },
+    // });
 
-    if (!check) {
-      try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
-          `Customer tried to claim bonus without buying a product. Customer ID: ${user.id}. Name: ${user.first_name} ${user.last_name}`,
-          "Daily Bonus Issue"
-        );
-      } catch (emailError) {
-        console.error("Failed daily bonus issue:", emailError);
-      }
-      return res
-        .status(403) // Changed to 403 Forbidden
-        .json({ message: "Purchase any product to start claiming." });
-    }
+    // if (!check) {
+    //   try {
+    //     await sendEmail(
+    //       "xeonncodes@gmail.com",
+    //       `Customer tried to claim bonus without buying a product. Customer ID: ${user.id}. Name: ${user.first_name} ${user.last_name}`,
+    //       "Daily Bonus Issue"
+    //     );
+    //   } catch (emailError) {
+    //     console.error("Failed daily bonus issue:", emailError);
+    //   }
+    //   return res
+    //     .status(403) // Changed to 403 Forbidden
+    //     .json({ message: "Purchase any product to start claiming." });
+    // }
 
     // Get daily bonus amount from the admin table
     const admin = await prisma.admin.findUnique({ where: { id: 1 } });
