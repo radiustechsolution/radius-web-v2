@@ -14,6 +14,11 @@ export default function IndexPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  const GoNext = () => {
+    setIsLoading(true);
+    router.push(siteConfig.paths.signin);
+  };
+
   return (
     <DefaultLayout>
       <section className="w-full h-[100svh] bg-background relative">
@@ -45,7 +50,7 @@ export default function IndexPage() {
               className="bg-white text-black w-[85%] mt-3 font-semibold"
               size="lg"
               isLoading={isLoading}
-              onClick={() => router.push(siteConfig.paths.signin)}
+              onClick={GoNext}
               radius="md"
             >
               Proceed
