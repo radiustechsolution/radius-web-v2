@@ -8,8 +8,12 @@ import { Button } from "@nextui-org/button";
 import { useState, useEffect } from "react";
 import { HiDownload } from "react-icons/hi";
 import { DownloadAppButton } from "@/components/download-app";
+import { useRouter } from "next/router";
 
 export default function IndexPage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <DefaultLayout>
       <section className="w-full h-[100svh] bg-background relative">
@@ -37,15 +41,15 @@ export default function IndexPage() {
               surfing needs.
             </p>
 
-            <Link href={siteConfig.paths.signin} className="w-full mt-3">
-              <Button
-                className="bg-white text-black w-[85%] font-semibold"
-                size="lg"
-                radius="md"
-              >
-                Proceed
-              </Button>
-            </Link>
+            <Button
+              className="bg-white text-black w-[85%] mt-3 font-semibold"
+              size="lg"
+              isLoading={isLoading}
+              onClick={() => router.push(siteConfig.paths.signin)}
+              radius="md"
+            >
+              Proceed
+            </Button>
           </div>
 
           <DownloadAppButton />
