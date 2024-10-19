@@ -14,6 +14,8 @@ html,
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  touch-action: manipulation; /* Prevents pinch-zoom */
+  overscroll-behavior: none; /* Prevents zoom via double-tap */
 }
 
 html::-webkit-scrollbar,
