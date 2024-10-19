@@ -1,5 +1,6 @@
 import React from "react";
 import NextHead from "next/head";
+
 import { siteConfig } from "@/config/site";
 
 export const Head = () => {
@@ -16,14 +17,6 @@ export const Head = () => {
       />
       <link href="/favicon.ico" rel="icon" />
       <link rel="manifest" href="/manifest.json" />
-      {/* Inject JS to prevent zoom gestures */}
-      <script>
-        {`
-          document.addEventListener('gesturestart', function (e) {
-            e.preventDefault();
-          });
-        `}
-      </script>
     </NextHead>
   );
 };
