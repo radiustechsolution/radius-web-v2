@@ -1,4 +1,5 @@
 import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
+import { blockedEmail } from "@/lib/object";
 import { sendEmail } from "@/lib/sendmail";
 import dataPlans from "@/util/dataplan";
 import { PrismaClient } from "@prisma/client";
@@ -90,6 +91,23 @@ export default async function handler(
   let updatedUser;
 
   try {
+    // Fetch the user's email
+    const customer = await prisma.user.findUnique({
+      where: { id: customerId },
+      select: { email: true },
+    });
+
+    if (!customer) {
+      return res.status(404).json({ error: "Customer not found" });
+    }
+
+    // Step 2: Check if the user's email is in the blockedEmail list
+    if (blockedEmail.includes(customer.email)) {
+      return res.status(403).json({
+        error: "Account cannot make purchase. Reach out to the admin.",
+      });
+    }
+
     // Step 2: Lock user profile to prevent concurrent transactions
     const lockUser = await prisma.user.update({
       where: { id: customerId },
