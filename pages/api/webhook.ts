@@ -57,6 +57,43 @@ export default async function webhook(
         },
       });
 
+      // Update the user's wallet balance
+      const updatedUser = await prisma.user.update({
+        where: { email: email },
+        data: {
+          balance: {
+            increment: creditableAmount,
+          },
+        },
+      });
+
+      // Create a transaction record
+      await prisma.transactions.create({
+        data: {
+          user_id: String(user.id),
+          type: "credit",
+          x_ref: String(id),
+          trans_type: "wallet_funding",
+          txf: String(generateRef("FUND", user.id)),
+          amount: creditableAmount,
+          amount_sent: amount,
+          balance_before: user.balance,
+          balance_after: updatedUser.balance,
+          status: "successful",
+          narration: `Wallet funding via Flutterwave (${currency})`,
+        },
+      });
+
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+          "New Wallet Funding"
+        );
+      } catch (emailError) {
+        console.error("Wallet funding:", emailError);
+      }
+
       if (!checkUserTransaction) {
         // Check if user was invited
         if (user.invited_by !== "" && user.invited_by !== "Radius") {
@@ -105,43 +142,6 @@ export default async function webhook(
             }
           }
         }
-      }
-
-      // Update the user's wallet balance
-      const updatedUser = await prisma.user.update({
-        where: { email: email },
-        data: {
-          balance: {
-            increment: creditableAmount,
-          },
-        },
-      });
-
-      // Create a transaction record
-      await prisma.transactions.create({
-        data: {
-          user_id: String(user.id),
-          type: "credit",
-          x_ref: String(id),
-          trans_type: "wallet_funding",
-          txf: String(generateRef("FUND", user.id)),
-          amount: creditableAmount,
-          amount_sent: amount,
-          balance_before: user.balance,
-          balance_after: updatedUser.balance,
-          status: "successful",
-          narration: `Wallet funding via Flutterwave (${currency})`,
-        },
-      });
-
-      try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
-          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
-          "New Wallet Funding"
-        );
-      } catch (emailError) {
-        console.error("Wallet funding:", emailError);
       }
 
       return res
