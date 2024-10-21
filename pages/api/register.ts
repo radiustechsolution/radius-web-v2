@@ -65,17 +65,19 @@ export default async function handler(
     if (existingEmail) {
       return res.status(400).json({ error: "Email already exists" });
     }
-
-    let invited_code = promo_code;
+    const user_name = promo_code.toLowerCase();
+    let invited_code = promo_code.toLowerCase();
 
     // Resolve promo code
     const promocode = await prisma.user.findFirst({
-      where: { username: promo_code },
+      where: { username: user_name },
     });
 
     if (!promocode) {
-      invited_code = "Radius";
+      invited_code = "radius";
     }
+
+    const user_n = username.toLowerCase();
 
     // Create the user in the database
     const user: any = await prisma.user.create({
@@ -83,7 +85,7 @@ export default async function handler(
         first_name,
         last_name,
         email,
-        username,
+        username: user_n,
         phone_number,
         invited_by: invited_code,
         promo_code: randomPromoCode,
