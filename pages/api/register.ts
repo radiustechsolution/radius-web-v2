@@ -95,7 +95,7 @@ export default async function handler(
     try {
       await sendEmail(
         "xeonncodes@gmail.com",
-        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}`,
+        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
         "New Customer Registration"
       );
 
