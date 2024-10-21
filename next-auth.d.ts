@@ -8,7 +8,9 @@ declare module "next-auth" {
       last_name: string;
       email?: string | null;
       image?: string | null;
+      user_data?: any | null;
       balance?: any | null;
+      promo_code?: any | null;
       xagonn?: any | null;
       username?: string | null;
       account_number?: string | null;

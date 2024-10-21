@@ -23,6 +23,7 @@ export default async function handler(
     username: Joi.string().required(),
     phone_number: Joi.string().required(),
     password: Joi.string().min(6).required(),
+    promo_code: Joi.string().min(6).required(),
   });
 
   const { error } = schema.validate(req.body);
@@ -30,8 +31,15 @@ export default async function handler(
     return res.status(400).json({ error: error.details[0].message });
   }
 
-  const { first_name, last_name, email, username, phone_number, password } =
-    req.body;
+  const {
+    first_name,
+    last_name,
+    email,
+    username,
+    phone_number,
+    password,
+    promo_code,
+  } = req.body;
 
   const randomToken = randomBytes(16).toString("hex");
   const randomPromoCode: string = String(generateSixDigitNumber());
@@ -58,6 +66,17 @@ export default async function handler(
       return res.status(400).json({ error: "Email already exists" });
     }
 
+    let invited_code = promo_code;
+
+    // Resolve promo code
+    const promocode = await prisma.user.findFirst({
+      where: { username: promo_code },
+    });
+
+    if (!promocode) {
+      invited_code = "Radius";
+    }
+
     // Create the user in the database
     const user: any = await prisma.user.create({
       data: {
@@ -66,7 +85,7 @@ export default async function handler(
         email,
         username,
         phone_number,
-        invited_by: "",
+        invited_by: invited_code,
         promo_code: randomPromoCode,
         password: hashedPassword,
         token: hashedToken,

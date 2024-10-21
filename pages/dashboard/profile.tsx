@@ -7,8 +7,14 @@ import { siteConfig } from "@/config/site";
 const ProfilePage = () => {
   const { data: session } = useSession();
 
-  const { first_name, last_name, email, phone_number, username } =
-    session?.user || {};
+  const {
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    username,
+    user_data,
+  }: any = session?.user || {};
 
   const handleLogout = async () => {
     await signOut({ redirect: true, callbackUrl: siteConfig.paths.signin });
@@ -57,6 +63,12 @@ const ProfilePage = () => {
             <div className="flex justify-between items-center opacity-80">
               <p className="text-sm">Username</p>
               <p className="font-medium opacity-90 text-[14px]">{username}</p>
+            </div>
+            <div className="flex justify-between items-center opacity-80">
+              <p className="text-sm">Promo Code</p>
+              <p className="font-medium opacity-90 text-[14px]">
+                {session?.user.username}
+              </p>
             </div>
           </div>
         </div>

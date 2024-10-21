@@ -39,6 +39,7 @@ export default NextAuth({
                 token: user.token,
                 balance: user.balance,
                 created_at: user.created_at,
+                user_data: user,
                 phone_number: user.phone_number,
                 account_number: account_number,
                 account_name: account_name,
@@ -52,6 +53,7 @@ export default NextAuth({
                 email: user.email,
                 username: user.username,
                 token: user.token,
+                user_data: user,
                 balance: user.balance,
                 created_at: user.created_at,
                 phone_number: user.phone_number,
@@ -84,6 +86,7 @@ export default NextAuth({
                 phone_number: user.phone_number,
                 token: user.token,
                 balance: user.balance,
+                user_data: user,
                 created_at: user.created_at,
                 account_number: account_number,
                 account_name: account_name,
@@ -98,6 +101,7 @@ export default NextAuth({
                 username: user.username,
                 phone_number: user.phone_number,
                 token: user.token,
+                user_data: user,
                 balance: user.balance,
                 created_at: user.created_at,
               };
@@ -123,6 +127,7 @@ export default NextAuth({
       session.user.token = token.token;
       session.user.account_type = token.account_type;
       session.user.username = token.username;
+      session.user.user_data = token.user_data;
       session.user.phone_number = token.phone_number;
       session.user.created_at = token.created_at;
       session.user.account_name = token.account_name;
@@ -138,6 +143,7 @@ export default NextAuth({
         token.balance = user.balance;
         token.email = user.email;
         token.token = user.token;
+        token.user_data = user.user_data;
         token.username = user.username;
         token.status = user.status;
         token.phone_number = user.phone_number;

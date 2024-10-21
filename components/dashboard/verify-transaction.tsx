@@ -44,6 +44,11 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
   }));
 
   const VerifyPin = async () => {
+    if (!pin) {
+      return toast.error("Enter your pin", {
+        toastId: "mlkssk",
+      });
+    }
     setIsLoading(true);
     try {
       // API call to buy airtime
@@ -94,6 +99,8 @@ export const VerifyTransaction = forwardRef((props: Types, ref) => {
               {props.children}
               <div className="flex border border-gray-300 mt-2 rounded-md items-center">
                 <input
+                  maxLength={4}
+                  minLength={4}
                   type={!eye ? "password" : "text"}
                   className="bg-transparent px-5 outline-none h-[47px] placeholder-gray-500  basis-[89%] w-[100%]"
                   placeholder="Pin"

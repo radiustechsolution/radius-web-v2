@@ -31,6 +31,7 @@ module.exports = {
             bordercolor: "#EBEBEB",
             primarymodecolor: siteConfig.siteColors.primary,
             primarymodecolorgray: siteConfig.siteColors.primary,
+            iconBg: "#dbeafe",
           },
         },
         dark: {
@@ -41,6 +42,7 @@ module.exports = {
             bordercolor: "#3d3d3dbb",
             primarymodecolor: "#ffffff",
             primarymodecolorgray: "#d1d5db",
+            iconBg: "#dbeafe3e",
           },
         },
       },

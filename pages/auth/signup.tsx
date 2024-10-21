@@ -28,6 +28,8 @@ const SignUpPage = () => {
     const phone_number = formData.get("phone_number");
     const password = formData.get("password");
     const username = formData.get("username");
+    const p_code = formData.get("promo_code");
+    const promo_code = p_code ? p_code : "radius";
 
     const res = await fetch("/api/register", {
       method: "POST",
@@ -41,6 +43,7 @@ const SignUpPage = () => {
         email,
         password,
         username,
+        promo_code,
       }),
     });
 
@@ -200,6 +203,15 @@ const SignUpPage = () => {
               />
             )}
           </div>
+
+          {/* Promo Code */}
+          <input
+            type="text"
+            className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
+            placeholder="Promo Code"
+            name="promo_code"
+            disabled={loading}
+          />
 
           <Button
             type="submit"
