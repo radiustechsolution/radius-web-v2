@@ -103,7 +103,7 @@ export default async function webhook(
           // Resolve Referral
           const referral = await prisma.user.findFirst({
             where: {
-              username: String(user.username),
+              username: String(user.invited_by),
             },
           });
 
