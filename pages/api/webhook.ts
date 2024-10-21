@@ -1,5 +1,6 @@
+// pages/api/webhook.ts
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
@@ -10,30 +11,21 @@ export default async function webhook(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
-
   try {
-    // Validate the webhook signature from Flutterwave
-    // const secretHash = process.env.FLUTTERWAVE_SECRET_HASH;
-    // const signature = req.headers["verif-hash"];
-
-    // if (!signature || signature !== secretHash) {
-    //   return res.status(403).json({ message: "Unauthorized" });
-    // }
+    // Log the entire payload
+    console.log("Flutterwave webhook payload:", req.body);
 
     const event = req.body;
 
-    console.log("Flutterwave webhook payload:", event);
-
+    // Extract the relevant details from the event payload
     const { status, id, tx_ref, app_fee, flw_ref, amount, customer, currency } =
       event.data;
-    const { email } = customer;
+
+    const { email, id: user_id } = customer;
 
     if (status === "successful") {
-      // Check if transaction already exists
-      const transactionExists = await prisma.transactions.findFirst({
+      // Check if id already exist
+      const transaction = await prisma.transactions.findFirst({
         where: {
           x_ref: String(id),
           trans_type: "wallet_funding",
@@ -41,12 +33,13 @@ export default async function webhook(
         },
       });
 
-      if (transactionExists) {
-        return res.status(400).json({ message: "Transaction already exists" });
+      if (transaction) {
+        return res.status(500).json({ message: "Transaction already exist" });
       }
 
+      // Find the user in the database using their email or customer ID
       const user = await prisma.user.findUnique({
-        where: { email },
+        where: { email: email },
       });
 
       if (!user) {
@@ -55,7 +48,8 @@ export default async function webhook(
 
       const creditableAmount = amount - app_fee;
 
-      const firstTransaction = await prisma.transactions.findFirst({
+      // check if this is users first time funding
+      const checkUserTransaction = await prisma.transactions.findFirst({
         where: {
           user_id: String(user.id),
           trans_type: "wallet_funding",
@@ -63,46 +57,59 @@ export default async function webhook(
         },
       });
 
-      if (!firstTransaction && user.invited_by) {
-        const referBonus = creditableAmount * 0.15;
-        const referral = await prisma.user.findFirst({
-          where: { username: user.invited_by },
-        });
+      if (!checkUserTransaction) {
+        // Check if user was invited
+        if (user.invited_by !== "" && user.invited_by !== "Radius") {
+          // Get 15 percent
+          const referBonus = creditableAmount * 0.15;
 
-        if (referral) {
-          const updatedReferral = await prisma.user.update({
-            where: { username: user.invited_by },
-            data: {
-              balance: {
-                increment: referBonus,
+          // Resolve Referral
+          const referral = await prisma.user.findFirst({
+            where: {
+              username: String(user.username),
+            },
+          });
+
+          if (referral) {
+            const updateReferral = await prisma.user.update({
+              where: { username: String(user.invited_by) },
+              data: {
+                balance: {
+                  increment: referBonus,
+                },
               },
-            },
-          });
+            });
 
-          await prisma.transactions.create({
-            data: {
-              user_id: String(referral.id),
-              type: "credit",
-              trans_type: "referral",
-              txf: generateRef("RB", user.id),
-              amount: referBonus,
-              balance_before: referral.balance,
-              balance_after: updatedReferral.balance,
-              status: "successful",
-              narration: "Referral bonus",
-            },
-          });
+            await prisma.transactions.create({
+              data: {
+                user_id: String(referral.id),
+                type: "credit",
+                trans_type: "referral",
+                txf: String(generateRef("RB", user.id)),
+                amount: referBonus,
+                balance_before: referral.balance,
+                balance_after: updateReferral.balance,
+                status: "successful",
+                narration: "Referral bonus",
+              },
+            });
 
-          await sendEmail(
-            referral.email,
-            `Your account has been credited with N${referBonus} as referral bonus.`,
-            "Referral Bonus"
-          );
+            try {
+              await sendEmail(
+                referral.email,
+                `Congratulations. Your radius account has been credited with the sum of Amount: ${referBonus} from your referred first wallet deposit.`,
+                "Referring Bonus Received!"
+              );
+            } catch (emailError) {
+              console.error("Referal funding bonus error:", emailError);
+            }
+          }
         }
       }
 
+      // Update the user's wallet balance
       const updatedUser = await prisma.user.update({
-        where: { email },
+        where: { email: email },
         data: {
           balance: {
             increment: creditableAmount,
@@ -110,13 +117,14 @@ export default async function webhook(
         },
       });
 
+      // Create a transaction record
       await prisma.transactions.create({
         data: {
           user_id: String(user.id),
           type: "credit",
           x_ref: String(id),
           trans_type: "wallet_funding",
-          txf: generateRef("FUND", user.id),
+          txf: String(generateRef("FUND", user.id)),
           amount: creditableAmount,
           amount_sent: amount,
           balance_before: user.balance,
@@ -126,11 +134,15 @@ export default async function webhook(
         },
       });
 
-      await sendEmail(
-        "xeonncodes@gmail.com",
-        `Wallet funded: ${user.first_name} ${user.last_name}, Amount: ${creditableAmount}`,
-        "New Wallet Funding"
-      );
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+          "New Wallet Funding"
+        );
+      } catch (emailError) {
+        console.error("Wallet funding:", emailError);
+      }
 
       return res
         .status(200)
@@ -139,7 +151,7 @@ export default async function webhook(
       return res.status(400).json({ message: "Transaction not successful" });
     }
   } catch (error) {
-    console.error("Error processing webhook:", error);
+    console.error("Error handling webhook:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 }
