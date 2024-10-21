@@ -100,6 +100,12 @@ export default async function handler(
       );
 
       await sendEmail(
+        promocode?.email,
+        `Congratulations. You've successfully invited a new customer to Radius. Name: ${first_name} ${last_name}, You will get 15% of this user first deposit. (Capped at N500)`,
+        "New Invited Radius User"
+      );
+
+      await sendEmail(
         email,
         "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
         "Welcome to Radius"
