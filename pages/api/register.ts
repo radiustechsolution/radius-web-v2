@@ -23,7 +23,7 @@ export default async function handler(
     username: Joi.string().required(),
     phone_number: Joi.string().required(),
     password: Joi.string().min(6).required(),
-    promo_code: Joi.string().min(6).required(),
+    promo_code: Joi.string(),
   });
 
   const { error } = schema.validate(req.body);
