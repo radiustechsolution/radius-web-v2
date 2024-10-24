@@ -25,10 +25,8 @@ export default NextAuth({
           });
 
           // Throw an error if email is not verified
-          if (user && user.email_v_status === false) {
-            throw new Error(
-              "Email not verified. Please verify your email before logging in."
-            );
+          if (user && user.email_verified !== 1) {
+            throw new Error("emailnotverified");
           }
 
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
@@ -79,10 +77,8 @@ export default NextAuth({
           });
 
           // Throw an error if email is not verified
-          if (user && user.email_v_status === false) {
-            throw new Error(
-              "Email not verified. Please verify your email before logging in."
-            );
+          if (user && user.email_verified !== 1) {
+            throw new Error("emailnotverified");
           }
 
           if (user && credentials.xagonn === "sampleregex") {

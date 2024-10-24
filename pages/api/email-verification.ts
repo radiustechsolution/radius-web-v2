@@ -42,7 +42,7 @@ export default async function handler(
     // Clear the OTP
     await prisma.user.update({
       where: { email: email },
-      data: { otp: null, email_v_status: true },
+      data: { otp: null, email_verified: 1 },
     });
 
     await sendEmail(

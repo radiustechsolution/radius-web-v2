@@ -20,6 +20,7 @@ model user {
   username          String    @unique
   email             String    @unique
   email_v_status    Boolean?  @default(false)
+  email_verified    Int?      @default(0)
   otp               String?
   phone_number      String    @unique
   password          String

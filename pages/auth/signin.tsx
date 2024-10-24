@@ -33,6 +33,7 @@ const SigninPage = () => {
       setLoading(false);
       router.push(siteConfig.paths.dashboard);
     } else {
+      console.log(res?.error);
       if (res?.error === "emailnotverified") {
         const requestOtp = await fetch("/api/request-otp", {
           method: "POST",
