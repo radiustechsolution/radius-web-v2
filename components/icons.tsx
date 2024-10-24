@@ -96,7 +96,7 @@ export const MoonFilledIcon = ({
 }: IconSvgProps) => (
   <svg
     aria-hidden="true"
-    focusable="false"
+    // focusable="false"
     height={size || height}
     role="presentation"
     viewBox="0 0 24 24"
@@ -118,7 +118,7 @@ export const SunFilledIcon = ({
 }: IconSvgProps) => (
   <svg
     aria-hidden="true"
-    focusable="false"
+    // focusable="false"
     height={size || height}
     role="presentation"
     viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ export const HeartFilledIcon = ({
 }: IconSvgProps) => (
   <svg
     aria-hidden="true"
-    focusable="false"
+    // focusable="false"
     height={size || height}
     role="presentation"
     viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ export const SearchIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
-    focusable="false"
+    // focusable="false"
     height="1em"
     role="presentation"
     viewBox="0 0 24 24"
