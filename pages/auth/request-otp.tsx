@@ -34,10 +34,10 @@ const SigninPage = () => {
       const response = await fetch("/api/request-otp", {
         method: "POST",
         body: JSON.stringify({
-          email: email, // Extracted from form
+          email: email,
         }),
         headers: {
-          "Content-Type": "application/json", // Specify the content type as JSON
+          "Content-Type": "application/json",
         },
       });
 

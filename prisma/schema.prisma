@@ -19,6 +19,7 @@ model user {
   last_name         String
   username          String    @unique
   email             String    @unique
+  email_v_status    Boolean?  @default(false)
   otp               String?
   phone_number      String    @unique
   password          String

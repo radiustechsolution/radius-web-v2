@@ -17,6 +17,7 @@ const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
   const [eye, setEye] = useState(false);
 
+  //
   const register = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -46,10 +47,23 @@ const SignUpPage = () => {
         promo_code,
       }),
     });
-
     const response = await res.json();
-
     if (res.ok) {
+      const requestOtp = await fetch("/api/request-otp", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (requestOtp.ok) {
+        router.push(`${siteConfig.paths.emailVerification}?mail=${email}`);
+      } else {
+        router.push(siteConfig.paths.signin);
+      }
     } else {
       setLoading(false);
       toast(response?.error || "Error during registration");

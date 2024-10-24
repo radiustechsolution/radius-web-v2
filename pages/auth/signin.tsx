@@ -14,6 +14,7 @@ const SigninPage = () => {
   // State
   const [loading, setLoading] = useState(false);
 
+  // Login Function
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -30,18 +31,35 @@ const SigninPage = () => {
 
     if (res && !res.error) {
       setLoading(false);
-
       router.push(siteConfig.paths.dashboard);
     } else {
-      //   console.log(res);
-      setLoading(false);
+      if (res?.error === "emailnotverified") {
+        const requestOtp = await fetch("/api/request-otp", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      toast(
-        (res?.error == "CredentialsSignin" &&
-          "Email or password is incorrect") ||
-          "Login failed",
-        { toastId: "failedlogin" }
-      );
+        if (requestOtp.ok) {
+          router.push(`${siteConfig.paths.emailVerification}?mail=${email}`);
+          setLoading(false);
+        } else {
+          router.push(siteConfig.paths.signin);
+          setLoading(false);
+        }
+      } else {
+        // Handle different error types (email not verified, wrong credentials, etc.)
+        const errorMessage =
+          (res?.error === "CredentialsSignin" &&
+            "Email or password is incorrect") ||
+          "Login failed";
+        toast(errorMessage, { toastId: "failedlogin" });
+        setLoading(false);
+      }
     }
   };
 
@@ -84,6 +102,7 @@ const SigninPage = () => {
             Sign In
           </Button>
         </form>
+
         <p className="text-gray-600 text-sm">
           Don&lsquo;t have an account?{" "}
           <Link

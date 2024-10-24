@@ -32,6 +32,7 @@ export const siteConfig = {
     notification: "/dashboard/notification",
     requestotp: "/auth/request-otp",
     resetpassword: "/auth/reset-password",
+    emailVerification: "/auth/verify-otp",
     error: "/",
   },
 };

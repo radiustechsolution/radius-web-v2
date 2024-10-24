@@ -1,3 +1,4 @@
+import { sendEmail } from "@/lib/sendmail";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -14,7 +15,7 @@ export default async function handler(
     return res.status(400).json({ message: "Email not provided." });
   }
 
-  if (!otp || !password) {
+  if (!otp || !email) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -33,11 +34,28 @@ export default async function handler(
       return res.status(400).json({ message: "Invalid OTP." });
     }
 
-    // Update the user's password in the database
+    // Resolve promo code
+    const promocode = await prisma.user.findFirst({
+      where: { username: user.invited_by },
+    });
+
+    // Clear the OTP
     await prisma.user.update({
       where: { email: email },
-      data: { otp: null }, // Clear the OTP after resetting the password
+      data: { otp: null, email_v_status: true },
     });
+
+    await sendEmail(
+      promocode?.email,
+      `Congratulations. You've successfully invited a new customer to Radius. Name: ${user.first_name} ${user.last_name}, You will get 15% of this user first deposit. (Capped at N500)`,
+      "New Invited Radius User"
+    );
+
+    await sendEmail(
+      email,
+      "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
+      "Welcome to Radius"
+    );
 
     return res.status(200).json({
       message: "Email verified successfully.",

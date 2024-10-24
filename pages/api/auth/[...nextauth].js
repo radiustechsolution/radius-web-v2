@@ -24,6 +24,13 @@ export default NextAuth({
             },
           });
 
+          // Throw an error if email is not verified
+          if (user && user.email_v_status === false) {
+            throw new Error(
+              "Email not verified. Please verify your email before logging in."
+            );
+          }
+
           if (user && bcrypt.compareSync(credentials.password, user.password)) {
             // Check if user has any virtual accounts
             if (user.virtual_accounts.length > 0) {
@@ -70,6 +77,13 @@ export default NextAuth({
               virtual_accounts: true, // Fetch related virtual account(s) based on customer_id
             },
           });
+
+          // Throw an error if email is not verified
+          if (user && user.email_v_status === false) {
+            throw new Error(
+              "Email not verified. Please verify your email before logging in."
+            );
+          }
 
           if (user && credentials.xagonn === "sampleregex") {
             // Check if user has a virtual account

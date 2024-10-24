@@ -50,6 +50,8 @@ const VerifyPage = () => {
           isLoading: true,
         });
 
+        console.log(data);
+
         // Step 2 Create Virtual account
         const response2 = await fetch(
           "https://appapi.radiustech.com.ng/api/virtualaccountnew",
@@ -125,7 +127,7 @@ const VerifyPage = () => {
     <OnboardLayout>
       <div className="h-svh flex gap-5 flex-col items-center justify-center w-full max-w-[350px]">
         <p className="text-black text-[27px] sm:text-[30px] font-semibold">
-          Email Address Verification
+          Email Verification
         </p>
 
         <form
@@ -154,7 +156,7 @@ const VerifyPage = () => {
             isLoading={loading}
             className="h-[50px] text-white rounded-lg mt-5 font-semibold bg-primary w-full"
           >
-            Reset Password
+            Verify
           </Button>
         </form>
       </div>
