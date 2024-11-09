@@ -98,7 +98,11 @@ export default async function webhook(
         // Check if user was invited
         if (user.invited_by !== "" && user.invited_by !== "Radius") {
           // Get 15 percent
-          const referBonus = creditableAmount * 0.15;
+          let referBonus = creditableAmount * 0.15;
+
+          if (referBonus > 200) {
+            referBonus = 200;
+          }
 
           // Resolve Referral
           const referral = await prisma.user.findFirst({
