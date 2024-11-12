@@ -43,7 +43,7 @@ const ProfitPage = () => {
           ) : (
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-700 mb-4">
-                Last 5 Days' Profits
+                Last 5 Days&apos; Profits
               </h3>
 
               {profits.length === 0 ? (
