@@ -35,4 +35,5 @@ export const siteConfig = {
     emailVerification: "/auth/verify-otp",
     error: "/",
   },
+  adminEmail: "radiustechsolution@gmail.com",
 };
