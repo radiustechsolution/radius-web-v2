@@ -139,7 +139,7 @@ export default async function handler(
           balance_before: balance,
           balance_after: updatedUser.balance,
           status: "pending",
-          narration: `N${amount} airtime processed`,
+          narration: `N${amount} airtime processing`,
           created_at: currentTime,
         },
       });
@@ -193,6 +193,13 @@ export default async function handler(
           console.error("Email sending failed:", emailError);
         }
       }
+      await prisma.transactions.update({
+        where: { txf: transactionReference },
+        data: {
+          status: "failed",
+          narration: `N${amount} airtime`,
+        },
+      });
       throw new Error("Airtime purchase failed. Try again!");
     }
 
@@ -208,6 +215,7 @@ export default async function handler(
         amount_sent: new Decimal(airtimeData.amount),
         profit: profit,
         status: "successful",
+        narration: `N${amount} airtime`,
       },
     });
 
