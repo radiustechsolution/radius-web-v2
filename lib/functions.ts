@@ -67,3 +67,8 @@ export const GetCurrentTime = () => {
   const nigeriaTime = new Date(date.getTime() + 1 * 60 * 60 * 1000);
   return nigeriaTime;
 };
+
+// Capitalize first letter
+export const capitalizeFirstLetter = (status: string) => {
+  return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+};

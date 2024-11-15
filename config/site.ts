@@ -34,6 +34,7 @@ export const siteConfig = {
     resetpassword: "/auth/reset-password",
     emailVerification: "/auth/verify-otp",
     error: "/",
+    resolve_transaction: "/dashboard/transaction",
   },
   adminEmail: "radiustechsolution@gmail.com",
 };

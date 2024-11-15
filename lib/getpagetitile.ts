@@ -8,6 +8,7 @@ const GetPageTitle = () => {
   const routeMappings: any = {
     "/dashboard/airtime": "Airtime",
     "/dashboard/data": "Data Bundle",
+    "/dashboard/transaction": "Details",
     "/dashboard/cable": "Cable",
     "/dashboard/power": "Power",
     "/dashboard/loan": "Loan",

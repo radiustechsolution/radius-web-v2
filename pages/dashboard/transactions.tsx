@@ -3,12 +3,14 @@ import { Spinner } from "@nextui-org/spinner";
 import DashboardLayout from "@/layouts/dashboard";
 import { useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
-import { title } from "@/components/primitives";
+import { useRouter } from "next/router";
+import { siteConfig } from "@/config/site";
 
 const HistoryPage = () => {
   const { data: session } = useSession();
   const [transactions, setTransactions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTransactionHistory = async () => {
@@ -51,8 +53,14 @@ const HistoryPage = () => {
               ) : (
                 transactions?.map((transaction) => (
                   <div
+                    onClick={() =>
+                      router.push(
+                        `${siteConfig.paths.resolve_transaction}?id=${transaction?.id}`
+                      )
+                    }
+                    role="presentation"
                     key={transaction?.txf}
-                    className="px-3 rounded-md py-2 flex bg-card items-center justify-between"
+                    className="px-3 cursor-pointer rounded-md py-2 flex bg-card items-center justify-between"
                   >
                     <div className="flex items-center gap-2">
                       <div
