@@ -80,7 +80,7 @@ export default async function webhook(
           balance_before: user.balance,
           balance_after: updatedUser.balance,
           status: "successful",
-          narration: `Wallet funding via Flutterwave (${currency})`,
+          narration: `Wallet funding (${currency})`,
         },
       });
 
