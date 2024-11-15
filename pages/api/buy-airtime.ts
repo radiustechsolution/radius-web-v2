@@ -156,43 +156,43 @@ export default async function handler(
 
     const airtimeData = await airtimeResponse.json();
     if (airtimeData.status != "ORDER_RECEIVED") {
-      if (airtimeData.status == "INSUFFICIENT_BALANCE") {
-        await prisma.user.update({
-          where: { id: customerId },
-          data: {
-            balance: { increment: chargeAmount },
-          },
-        });
-        await prisma.transactions.update({
-          where: { txf: transactionReference },
-          data: {
-            amount_sent: 0,
-            balance_after: balance,
-            status: "failed",
-          },
-        });
+      // if (airtimeData.status == "INSUFFICIENT_BALANCE") {
+      await prisma.user.update({
+        where: { id: customerId },
+        data: {
+          balance: { increment: chargeAmount },
+        },
+      });
+      await prisma.transactions.update({
+        where: { txf: transactionReference },
+        data: {
+          amount_sent: 0,
+          balance_after: balance,
+          status: "failed",
+        },
+      });
 
-        try {
-          await sendEmail(
-            "xeonncodes@gmail.com",
-            "Customer transaction failed while purchasing N" +
-              chargeAmount +
-              " airtime. Email: " +
-              lockUser.email +
-              " Network: " +
-              merchant +
-              ", Error: " +
-              airtimeData?.status +
-              " Customer Name: " +
-              lockUser.first_name +
-              " " +
-              lockUser.last_name,
-            "Failed Transaction"
-          );
-        } catch (emailError) {
-          console.error("Email sending failed:", emailError);
-        }
+      try {
+        await sendEmail(
+          "xeonncodes@gmail.com",
+          "Customer transaction failed while purchasing N" +
+            chargeAmount +
+            " airtime. Email: " +
+            lockUser.email +
+            " Network: " +
+            merchant +
+            ", Error: " +
+            airtimeData?.status +
+            " Customer Name: " +
+            lockUser.first_name +
+            " " +
+            lockUser.last_name,
+          "Failed Transaction"
+        );
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
       }
+      // }
       throw new Error("Airtime purchase failed. Try again!");
     }
 
