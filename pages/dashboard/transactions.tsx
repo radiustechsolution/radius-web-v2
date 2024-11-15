@@ -75,7 +75,9 @@ const HistoryPage = () => {
                       </div>
                       <div>
                         <p className="text-[14px] font-medium">
-                          {transaction?.trans_type.toUpperCase()}{" "}
+                          {transaction?.trans_type == "wallet_funding"
+                            ? "Wallet Funding"
+                            : transaction?.trans_type.toUpperCase()}{" "}
                           {transaction?.merchant != "" &&
                             transaction?.merchant != null &&
                             "(" + transaction?.merchant + ")"}
