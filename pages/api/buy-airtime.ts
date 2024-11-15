@@ -169,6 +169,7 @@ export default async function handler(
             amount_sent: 0,
             balance_after: balance,
             status: "failed",
+            narration: `N${amount} ${merchant} airtime`,
           },
         });
 
@@ -198,6 +199,14 @@ export default async function handler(
         data: {
           status: "failed",
           narration: `N${amount} ${merchant} airtime`,
+          amount_sent: 0,
+        },
+      });
+
+      await prisma.user.update({
+        where: { id: customerId },
+        data: {
+          balance: { increment: chargeAmount },
         },
       });
       throw new Error("Airtime purchase failed. Try again!");
