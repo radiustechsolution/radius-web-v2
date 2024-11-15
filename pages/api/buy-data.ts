@@ -230,6 +230,7 @@ export default async function handler(
         amount_sent: new Decimal(databundleData.plan_amount),
         profit: profit,
         status: "successful",
+        narration: `${product_name}`,
       },
     });
 
