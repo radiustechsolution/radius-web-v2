@@ -139,7 +139,7 @@ export default async function handler(
           balance_before: balance,
           balance_after: updatedUser.balance,
           status: "pending",
-          narration: `N${amount} airtime processing`,
+          narration: `N${amount} airtime processed`,
           created_at: currentTime,
         },
       });
