@@ -197,7 +197,7 @@ export default async function handler(
         where: { txf: transactionReference },
         data: {
           status: "failed",
-          narration: `N${amount} airtime`,
+          narration: `N${amount} ${merchant} airtime`,
         },
       });
       throw new Error("Airtime purchase failed. Try again!");
@@ -215,7 +215,7 @@ export default async function handler(
         amount_sent: new Decimal(airtimeData.amount),
         profit: profit,
         status: "successful",
-        narration: `N${amount} airtime`,
+        narration: `N${amount} ${merchant} airtime`,
       },
     });
 
