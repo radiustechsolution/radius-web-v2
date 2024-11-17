@@ -11,19 +11,19 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // Get today's date and the last 5 days
+    // Get today's date and the last 30 days
     const today = new Date();
     today.setHours(today.getHours() - 1); // Reduce the time by 1 hour
 
     const fiveDaysAgo = new Date(today);
-    fiveDaysAgo.setDate(today.getDate() - 5); // Set five days ago from today
+    fiveDaysAgo.setDate(today.getDate() - 30); // Set five days ago from today
     fiveDaysAgo.setHours(fiveDaysAgo.getHours() - 1); // Reduce the time by 1 hour for fiveDaysAgo
 
-    // Fetch transactions within the last 5 days
+    // Fetch transactions within the last 30 days
     const transactions = await prisma.transactions.findMany({
       where: {
         created_at: {
-          gte: fiveDaysAgo, // Fetch transactions from 5 days ago until now
+          gte: fiveDaysAgo, // Fetch transactions from 30 days ago until now
         },
       },
     });
