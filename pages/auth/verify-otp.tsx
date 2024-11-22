@@ -73,10 +73,6 @@ const VerifyPage = () => {
         );
         const json = await response2.json();
         if (response2.ok) {
-          await sendWhatsappMessage(
-            `Sucessful customer registration. Wallet generated successfully.`
-          );
-
           const { account_number, bank_name } = json.data;
           // Add Generated Wallet
           const response3 = await fetch("/api/generate-wallet", {
@@ -93,6 +89,10 @@ const VerifyPage = () => {
               "Content-Type": "application/json",
             },
           });
+
+          await sendWhatsappMessage(
+            `Sucessful customer registration. Wallet generated successfully.`
+          );
 
           if (response3.ok) {
             // Step 2: Automatically log the user in after registration
