@@ -9,9 +9,8 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const accountSid =
-    process.env.TWILIO_ACCOUNT_SID || "AC4aa7b8a7a414879d25535dd6c33f063f";
-  const authToken = process.env.TWILIO_AUTH_TOKEN || "[AuthToken]";
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
 
   const client = twilio(accountSid, authToken);
 
@@ -21,7 +20,7 @@ export default async function handler(
     const message = await client.messages.create({
       to: `whatsapp:${to}`,
       from: "whatsapp:+14155238886", // Twilio's WhatsApp sandbox number
-      contentSid: contentSid || "HXb5b62575e6e4ff6129ad7c8efe1f983e",
+      contentSid: contentSid,
       contentVariables: JSON.stringify(
         contentVariables || { "1": "12/1", "2": "3pm" }
       ),
