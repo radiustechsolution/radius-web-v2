@@ -11,10 +11,12 @@ import { useRouter } from "next/router";
 import WhatsAppCard from "@/components/dashboard/whatsapp-group";
 import CheckProfitCard from "@/components/dashboard/CheckProfit";
 import { siteConfig } from "@/config/site";
+import { useTheme } from "next-themes";
 
 const DashboardPage = () => {
   const router = useRouter();
   const { data: session, update, status } = useSession();
+  const theme = useTheme();
 
   const [loading, setLoading] = useState(false);
 
@@ -75,8 +77,8 @@ const DashboardPage = () => {
           <div className="bg-card px-3 rounded-lg py-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="p-2 bg-blue-100 sborder-[0.5px] border-blue-200 border rounded-full">
-                  <GrAnnounce className="text-primary" />
+                <div className="p-2 bg-iconBg  border-blue-200 border rounded-full">
+                  <GrAnnounce className="text-serviceIconColor" />
                 </div>
                 <div className=" leading-4">
                   <h1 className="text-[14px] font-medium">
@@ -106,7 +108,7 @@ const DashboardPage = () => {
 
         {loading && (
           <div className="fixed left-0 top-0 w-full z-50 bg-[#36363690] flex items-center justify-center h-svh">
-            <Spinner color="white" />
+            <Spinner color={theme.theme === "dark" ? "white" : "primary"} />
           </div>
         )}
       </section>

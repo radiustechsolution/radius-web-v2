@@ -21,9 +21,9 @@ const CheckProfitCard = () => {
         <div
           role="presentation"
           onClick={handleCheck} // Trigger WhatsApp invite link
-          className="rounded-lg bg-blue-50 flex items-center gap-1 px-[14px] py-[7px] cursor-pointer"
+          className="rounded-lg bg-iconBg  flex items-center gap-1 px-[14px] py-[7px] cursor-pointer"
         >
-          <p className="text-[12px] text-blue-500 font-medium">Check</p>
+          <p className="text-[12px] text-serviceIconColor font-medium">Check</p>
         </div>
       </div>
     </div>
