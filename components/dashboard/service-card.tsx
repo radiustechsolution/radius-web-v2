@@ -68,7 +68,7 @@ export const ServicesCard = () => (
         key={d.id}
         className="gap-1 flex flex-col items-center"
       >
-        <div className="p-[9px] border-[0.5px] border-blue-200  rounded-full">
+        <div className="p-[9px] bg-serviceIconBg border-[0.5px] border-blue-200  rounded-full">
           {d.icon}
         </div>
         <p className="text-[12px] opacity-60">{d.title}</p>

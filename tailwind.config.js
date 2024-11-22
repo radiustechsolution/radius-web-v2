@@ -46,7 +46,7 @@ module.exports = {
             primarymodecolor: "#ffffff",
             primarymodecolorgray: "#d1d5db",
             iconBg: "#dbeafe3e",
-            serviceIconBg: "#ffffff",
+            serviceIconBg: siteConfig.siteColors.cardDarkColor,
             serviceIconColor: "#ffffff",
             promoCodeDisplayBg: siteConfig.siteColors.cardDarkColor,
           },
