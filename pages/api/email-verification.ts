@@ -57,10 +57,6 @@ export default async function handler(
       //   "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
       //   "Welcome to Radius"
       // );
-
-      await sendWhatsappMessage(
-        `Sucessful customer registration. Wallet generated successfully.`
-      );
     } catch (error) {}
 
     return res.status(200).json({

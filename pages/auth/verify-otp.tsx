@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/button";
 import OnboardLayout from "@/layouts/onboarding";
 import { siteConfig } from "@/config/site";
 import { signIn } from "next-auth/react";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 
 const VerifyPage = () => {
   // Hooks
@@ -72,6 +73,10 @@ const VerifyPage = () => {
         );
         const json = await response2.json();
         if (response2.ok) {
+          await sendWhatsappMessage(
+            `Sucessful customer registration. Wallet generated successfully.`
+          );
+
           const { account_number, bank_name } = json.data;
           // Add Generated Wallet
           const response3 = await fetch("/api/generate-wallet", {
