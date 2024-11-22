@@ -90,10 +90,6 @@ const VerifyPage = () => {
             },
           });
 
-          await sendWhatsappMessage(
-            `Sucessful customer registration. Wallet generated successfully.`
-          );
-
           if (response3.ok) {
             // Step 2: Automatically log the user in after registration
             // const signInRes = await signIn("credentials", {
@@ -101,6 +97,10 @@ const VerifyPage = () => {
             //   email,
             //   password,
             // });
+
+            await sendWhatsappMessage(
+              `Sucessful customer registration. Wallet generated successfully.`
+            );
             const signInRes = await signIn("credentials", {
               redirect: false,
               email,
