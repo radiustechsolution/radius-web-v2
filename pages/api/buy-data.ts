@@ -1,6 +1,7 @@
 import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
 import { blockedEmail } from "@/lib/object";
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import dataPlans from "@/util/dataplan";
 import { PrismaClient } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
@@ -127,10 +128,13 @@ export default async function handler(
     const balance = await getCustomerBalance(customerId);
     if (balance < plan_amount) {
       try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
-          `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `,
-          "Failed Transaction"
+        // await sendEmail(
+        //   "xeonncodes@gmail.com",
+        //   `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `,
+        //   "Failed Transaction"
+        // );
+        await sendWhatsappMessage(
+          `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `
         );
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
@@ -207,10 +211,13 @@ export default async function handler(
       });
 
       try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
-          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
-          "Failed Transaction"
+        // await sendEmail(
+        //   "xeonncodes@gmail.com",
+        //   `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        //   "Failed Transaction"
+        // );
+        await sendWhatsappMessage(
+          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
         );
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
@@ -235,17 +242,20 @@ export default async function handler(
     });
 
     try {
-      await sendEmail(
-        "xeonncodes@gmail.com",
-        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
-        "Successful Data Purchase"
+      // await sendEmail(
+      //   "xeonncodes@gmail.com",
+      //   `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+      //   "Successful Data Purchase"
+      // );
+      await sendWhatsappMessage(
+        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
       );
 
-      await sendEmail(
-        lockUser.email,
-        `Hello ${lockUser.username},\n\nThank you for choosing Radius! Your purchase of ${product_name} was successful.\n\nDetails:\nPlan Amount: ${plan_amount}\nNetwork: ${merchant}\nNew Balance: ${balance}\n\nWe’re thrilled to have you with us and look forward to serving you again. Enjoy your purchase, and don’t hesitate to come back for more amazing deals!\n\nBest regards,\nThe Radius Team`,
-        "Your Purchase was Successful!"
-      );
+      // await sendEmail(
+      //   lockUser.email,
+      //   `Hello ${lockUser.username},\n\nThank you for choosing Radius! Your purchase of ${product_name} was successful.\n\nDetails:\nPlan Amount: ${plan_amount}\nNetwork: ${merchant}\nNew Balance: ${balance}\n\nWe’re thrilled to have you with us and look forward to serving you again. Enjoy your purchase, and don’t hesitate to come back for more amazing deals!\n\nBest regards,\nThe Radius Team`,
+      //   "Your Purchase was Successful!"
+      // );
     } catch (emailError) {
       console.error("Data purchase failed:", emailError);
     }

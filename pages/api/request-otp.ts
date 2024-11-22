@@ -1,5 +1,6 @@
 import { generateOTP } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -39,12 +40,16 @@ export default async function handler(
       data: { otp: hashedOtp }, // Save the hashed OTP
     });
 
-    // Send OTP via email
-    await sendEmail(
-      email,
-      `Your OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
-      "OTP from Radius"
-    );
+    try {
+      // Send OTP via email
+      // await sendEmail(
+      //   email,
+      //   `Your OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
+      //   "OTP from Radius"
+      // );
+
+      await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);
+    } catch (error) {}
 
     return res.status(200).json({ message: "OTP Sent! Check your email." });
   } catch (error) {

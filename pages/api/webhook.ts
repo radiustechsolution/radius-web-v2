@@ -4,6 +4,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 
 const prisma = new PrismaClient();
 
@@ -85,10 +86,13 @@ export default async function webhook(
       });
 
       try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
-          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
-          "New Wallet Funding"
+        // await sendEmail(
+        //   "xeonncodes@gmail.com",
+        //   `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+        //   "New Wallet Funding"
+        // );
+        await sendWhatsappMessage(
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`
         );
       } catch (emailError) {
         console.error("Wallet funding:", emailError);
@@ -136,11 +140,11 @@ export default async function webhook(
             });
 
             try {
-              await sendEmail(
-                referral.email,
-                `Congratulations. Your radius account has been credited with the sum of Amount: ${referBonus} from your referred first wallet deposit.`,
-                "Referring Bonus Received!"
-              );
+              // await sendEmail(
+              //   referral.email,
+              //   `Congratulations. Your radius account has been credited with the sum of Amount: ${referBonus} from your referred first wallet deposit.`,
+              //   "Referring Bonus Received!"
+              // );
             } catch (emailError) {
               console.error("Referal funding bonus error:", emailError);
             }

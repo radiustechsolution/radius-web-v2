@@ -5,6 +5,7 @@ import { randomBytes } from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 
 const prisma = new PrismaClient();
 
@@ -95,10 +96,15 @@ export default async function handler(
     });
 
     try {
-      await sendEmail(
-        "xeonncodes@gmail.com",
-        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
-        "New Customer Registration"
+      // await sendEmail(
+      //   "xeonncodes@gmail.com",
+      //   `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
+      //   "New Customer Registration"
+      // );
+      await sendWhatsappMessage(
+        // "xeonncodes@gmail.com",
+        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`
+        // "New Customer Registration"
       );
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
