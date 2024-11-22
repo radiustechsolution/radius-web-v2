@@ -219,6 +219,24 @@ export default async function handler(
         } catch (emailError) {
           console.error("Email sending failed:", emailError);
         }
+      } else {
+        await sendWhatsappMessage(
+          "Customer transaction failed while purchasing N" +
+            chargeAmount +
+            " airtime. Email: " +
+            lockUser.email +
+            " Network: " +
+            merchant +
+            ", Error: " +
+            airtimeData?.status +
+            " Customer Name: " +
+            lockUser.first_name +
+            " " +
+            lockUser.last_name +
+            ", Customer Phone Number" +
+            lockUser.phone_number +
+            ". This customer has not been refunded. Call the user"
+        );
       }
       throw new Error("Airtime purchase failed. Try again!");
     }
@@ -228,7 +246,7 @@ export default async function handler(
     );
 
     // Step 6: Update transaction status on successful airtime purchase
-    await prisma.transactions.update({
+    const transactionUpdated = await prisma.transactions.update({
       where: { txf: transactionReference },
       data: {
         x_ref: airtimeData.orderid,
@@ -246,7 +264,7 @@ export default async function handler(
       // );
 
       await sendWhatsappMessage(
-        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
+        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`
       );
 
       // await sendEmail(

@@ -230,7 +230,7 @@ export default async function handler(
     );
 
     // Step 7: Update transaction status on successful data purchase
-    await prisma.transactions.update({
+    const transactionUpdated = await prisma.transactions.update({
       where: { txf: transactionReference },
       data: {
         x_ref: databundleData.ident,
@@ -248,7 +248,7 @@ export default async function handler(
       //   "Successful Data Purchase"
       // );
       await sendWhatsappMessage(
-        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
+        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`
       );
 
       // await sendEmail(
