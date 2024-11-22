@@ -63,7 +63,7 @@ export default function TransactionResolve() {
                 </div>
               ) : (
                 <div className="p-4 flex flex-col gap-4">
-                  <div className="bg-white p-3 rounded-lg gap-2 flex flex-col items-center">
+                  <div className="bg-card p-3 rounded-lg gap-2 flex flex-col items-center">
                     <p className="text-[15px]">{transaction.narration}</p>
                     <p className="font-bold text-[30px]">
                       ₦{transaction.amount}

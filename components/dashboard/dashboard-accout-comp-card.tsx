@@ -13,7 +13,7 @@ type Types = {
 export const DashboardAccountCompCard = ({ balance }: Types) => {
   const { data: session } = useSession();
   return (
-    <div className="rounded-xl bg-iconBg">
+    <div className="rounded-xl bg-promoCodeDisplayBg">
       <div className="rounded-xl flex flex-col gap-[10px] bg-primary p-4">
         {/* Card Top */}
         <div className="flex items-center justify-between">

@@ -32,17 +32,15 @@ const ProfitPage = () => {
       <section className="w-full max-w-[900px] mx-auto flex flex-col gap-6">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-4 overflow-auto scrollbar-hide">
-          <h2 className="text-3xl font-semibold text-gray-800">
-            Profit Summary
-          </h2>
+          <h2 className="text-3xl font-semibold">Profit Summary</h2>
 
           {loading ? (
             <div className="text-center">
               <p>Loading</p>
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-gray-700 mb-4">
+            <div className="bg-card p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">
                 Last 5 Days&apos; Profits
               </h3>
 
@@ -53,7 +51,7 @@ const ProfitPage = () => {
                   {profits.map((profit) => (
                     <li
                       key={profit.date}
-                      className="flex justify-between items-center text-gray-600"
+                      className="flex justify-between items-center"
                     >
                       <span className="text-sm">{profit.date}</span>
                       <span className="text-lg font-medium text-green-600">
