@@ -1,4 +1,5 @@
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -45,17 +46,22 @@ export default async function handler(
       data: { otp: null, email_verified: 1 },
     });
 
-    await sendEmail(
-      promocode?.email,
-      `Congratulations. You've successfully invited a new customer to Radius. Name: ${user.first_name} ${user.last_name}, You will get 15% of this user first deposit. (Capped at N500)`,
-      "New Invited Radius User"
-    );
+    try {
+      // await sendEmail(
+      //   promocode?.email,
+      //   `Congratulations. You've successfully invited a new customer to Radius. Name: ${user.first_name} ${user.last_name}, You will get 15% of this user first deposit. (Capped at N500)`,
+      //   "New Invited Radius User"
+      // );
+      // await sendEmail(
+      //   email,
+      //   "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
+      //   "Welcome to Radius"
+      // );
 
-    await sendEmail(
-      email,
-      "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
-      "Welcome to Radius"
-    );
+      await sendWhatsappMessage(
+        `Sucessful customer registration. Wallet generated successfully.`
+      );
+    } catch (error) {}
 
     return res.status(200).json({
       message: "Email verified successfully.",
