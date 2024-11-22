@@ -1,6 +1,7 @@
 import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
 import { blockedEmail } from "@/lib/object";
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { PrismaClient } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -91,8 +92,21 @@ export default async function handler(
     const balance = await getCustomerBalance(customerId);
     if (balance < chargeAmount) {
       try {
-        await sendEmail(
-          "xeonncodes@gmail.com",
+        // await sendEmail(
+        //   "xeonncodes@gmail.com",
+        //   "Customer transaction failed while purchasing N" +
+        //     chargeAmount +
+        //     " airtime. Name: " +
+        //     lockUser.first_name +
+        //     " " +
+        //     lockUser.last_name +
+        //     " Network: " +
+        //     merchant +
+        //     ", Error: " +
+        //     "Customer balance is insufficient",
+        //   "Failed Transaction"
+        // );
+        await sendWhatsappMessage(
           "Customer transaction failed while purchasing N" +
             chargeAmount +
             " airtime. Name: " +
@@ -102,8 +116,7 @@ export default async function handler(
             " Network: " +
             merchant +
             ", Error: " +
-            "Customer balance is insufficient",
-          "Failed Transaction"
+            "Customer balance is insufficient"
         );
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
@@ -173,8 +186,23 @@ export default async function handler(
         });
 
         try {
-          await sendEmail(
-            "xeonncodes@gmail.com",
+          // await sendEmail(
+          //   "xeonncodes@gmail.com",
+          //   "Customer transaction failed while purchasing N" +
+          //     chargeAmount +
+          //     " airtime. Email: " +
+          //     lockUser.email +
+          //     " Network: " +
+          //     merchant +
+          //     ", Error: " +
+          //     airtimeData?.status +
+          //     " Customer Name: " +
+          //     lockUser.first_name +
+          //     " " +
+          //     lockUser.last_name,
+          //   "Failed Transaction"
+          // );
+          await sendWhatsappMessage(
             "Customer transaction failed while purchasing N" +
               chargeAmount +
               " airtime. Email: " +
@@ -186,8 +214,7 @@ export default async function handler(
               " Customer Name: " +
               lockUser.first_name +
               " " +
-              lockUser.last_name,
-            "Failed Transaction"
+              lockUser.last_name
           );
         } catch (emailError) {
           console.error("Email sending failed:", emailError);
@@ -212,16 +239,21 @@ export default async function handler(
     });
 
     try {
-      await sendEmail(
-        "xeonncodes@gmail.com",
-        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
-        "Successful airtime Purchase"
+      // await sendEmail(
+      //   "xeonncodes@gmail.com",
+      //   `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+      //   "Successful airtime Purchase"
+      // );
+
+      await sendWhatsappMessage(
+        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
       );
-      await sendEmail(
-        lockUser.email,
-        `Hello ${lockUser.username}, Great news! Your airtime purchase of ₦${amount} was successful. You saved ₦${amount - chargeAmount} using Radius for this purchase. Details: Network: ${merchant}. Thank you for trusting us. We’re excited to continue serving you with more seamless and rewarding experiences! Warm regards, The Radius Team`,
-        "Your Airtime Purchase was Successful!"
-      );
+
+      // await sendEmail(
+      //   lockUser.email,
+      //   `Hello ${lockUser.username}, Great news! Your airtime purchase of ₦${amount} was successful. You saved ₦${amount - chargeAmount} using Radius for this purchase. Details: Network: ${merchant}. Thank you for trusting us. We’re excited to continue serving you with more seamless and rewarding experiences! Warm regards, The Radius Team`,
+      //   "Your Airtime Purchase was Successful!"
+      // );
     } catch (emailError) {
       console.error("Airtime purchase failed:", emailError);
     }
