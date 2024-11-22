@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Spinner } from "@nextui-org/spinner"; // Use a spinner to show loading state
 import ServicesPageLayout from "@/layouts/servicespages";
 import { capitalizeFirstLetter } from "@/lib/functions";
+import { useTheme } from "next-themes";
 
 export default function TransactionResolve() {
   const { data: session } = useSession();
@@ -38,6 +39,7 @@ export default function TransactionResolve() {
       fetchTransactionDetails();
     }
   }, [id, session]);
+  const theme = useTheme();
 
   return (
     <ServicesPageLayout>
@@ -45,7 +47,10 @@ export default function TransactionResolve() {
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
           {loading ? (
-            <Spinner /> // Show loading spinner while fetching data
+            <Spinner
+              color={theme.theme === "dark" ? "white" : "primary"}
+              className="text-serviceIconColor"
+            /> // Show loading spinner while fetching data
           ) : (
             <div className="space-y-4">
               {error ? (
@@ -75,7 +80,43 @@ export default function TransactionResolve() {
                     </p>
                   </div>
 
-                  {/* <div className="bg-white p-3 rounded-lg gap-2 flex flex-col items-center"></div> */}
+                  <div className="bg-card p-3 gap-4 rounded-lg flex flex-col items-center">
+                    <div className="w-full flex items-center justify-between">
+                      <p className="text-left w-max">Narration:</p>
+                      <p className="font-medium text-right">
+                        {transaction.narration}
+                      </p>
+                    </div>
+                    {transaction.type == "debit" && (
+                      <div className="w-full flex items-center justify-between">
+                        <p className="text-left w-max">Beneficiary:</p>
+                        <p className="font-medium text-right">
+                          {transaction.beneficiary}
+                        </p>
+                      </div>
+                    )}
+                    <div className="w-full flex items-center justify-between">
+                      <p className="text-left w-max">Transaction ID:</p>
+                      <p className="font-medium text-right">
+                        {transaction.txf}
+                      </p>
+                    </div>
+                    <div className="w-full flex items-center justify-between">
+                      <p className="text-left w-max">Date & Time:</p>
+                      <p className="font-medium text-right">
+                        {new Date(
+                          new Date(transaction?.created_at).setHours(
+                            new Date(transaction?.created_at).getHours() - 1
+                          )
+                        ).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="px-4 text-[13px] text-center">
+                    Thank you for using Radius always for your everyday surfing
+                    needs.
+                  </p>
                 </div>
               )}
             </div>

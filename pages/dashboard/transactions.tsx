@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { formatCurrency } from "@/lib/functions";
 import { useRouter } from "next/router";
 import { siteConfig } from "@/config/site";
+import { useTheme } from "next-themes";
 
 const HistoryPage = () => {
   const { data: session } = useSession();
@@ -30,13 +31,15 @@ const HistoryPage = () => {
     }
   }, [session?.user.email]);
 
+  const theme = useTheme();
+
   return (
     <DashboardLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-0 overflow-auto scrollbar-hide">
           {loading ? (
-            <Spinner /> // Show loading spinner while fetching data
+            <Spinner color={theme.theme === "dark" ? "white" : "primary"} /> // Show loading spinner while fetching data
           ) : (
             <div className="space-y-4">
               {transactions?.length === 0 ? (
