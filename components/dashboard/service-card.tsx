@@ -23,16 +23,16 @@ const ServiceObject = [
     path: siteConfig.paths.databundle,
   },
   {
-    id: 2,
-    title: "Cable",
-    icon: <IoIosTv size={17} className="text-serviceIconColor" />,
-    path: siteConfig.paths.cable,
-  },
-  {
     id: 3,
     title: "Power",
     icon: <ImPower size={17} className="text-serviceIconColor" />,
     path: siteConfig.paths.power,
+  },
+  {
+    id: 2,
+    title: "Cable",
+    icon: <IoIosTv size={17} className="text-serviceIconColor" />,
+    path: siteConfig.paths.cable,
   },
   {
     id: 4,

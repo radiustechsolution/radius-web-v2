@@ -14,7 +14,7 @@ const CheckProfitCard = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="leading-4">
-            <h1 className="text-[14px] font-medium">Previous 5 Days Profit</h1>
+            <h1 className="text-[14px] font-medium">Previous 30 Days Profit</h1>
             <p className="text-[11px] opacity-65">Check the sales on Radius</p>
           </div>
         </div>

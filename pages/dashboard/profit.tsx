@@ -18,6 +18,7 @@ const ProfitPage = () => {
         const data = await response.json();
         setProfits(data);
       } catch (error) {
+        setProfits([]);
         console.error("Error fetching profit data:", error);
       } finally {
         setLoading(false);
@@ -41,7 +42,7 @@ const ProfitPage = () => {
           ) : (
             <div className="bg-card p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-4">
-                Last 5 Days&apos; Profits
+                Last 30 Days&apos; Profits
               </h3>
 
               {profits.length === 0 ? (
