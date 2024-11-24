@@ -42,11 +42,11 @@ export default async function handler(
 
     try {
       // Send OTP via email
-      // await sendEmail(
-      //   email,
-      //   `Your OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
-      //   "OTP from Radius"
-      // );
+      await sendEmail(
+        email,
+        `Your Radius OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
+        "OTP from Radius"
+      );
 
       await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);
     } catch (error) {}
