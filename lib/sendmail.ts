@@ -2,7 +2,7 @@
 export const sendEmail = async (mail_to: any, message: any, subject: any) => {
   try {
     const response = await fetch(
-      `https://appapi.radiustech.com.ng/api/sendemail?mail_to=${mail_to}&message=${message}&subject=${subject}`,
+      `https://aortadev.website/v1/sendemail?mail_to=${mail_to}&message=${message}&subject=${subject}`,
       {
         method: "GET",
         headers: {
