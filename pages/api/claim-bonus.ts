@@ -57,7 +57,7 @@ export default async function claimBonus(
 
       return res
         .status(400)
-        .json({ message: "Purchase a product to continue claiming." });
+        .json({ message: "Purchase a product to continue getting bonus" });
     }
 
     // Get daily bonus amount from the admin table
