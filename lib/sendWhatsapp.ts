@@ -5,20 +5,17 @@ export const sendWhatsappMessage = async (message: any) => {
       `https://api.callmebot.com/whatsapp.php?phone=2348168208565&text=${message}&apikey=1854137`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
       }
     );
 
-    const data = await response.json();
+    // const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || "Something went wrong");
+      console.log(response);
+      return console.log("Error sending whatsapp message");
     }
 
-    return data;
+    return;
   } catch (error) {
     console.error("Whatsapp message sending failed:", error);
     throw error;

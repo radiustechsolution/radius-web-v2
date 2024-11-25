@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../lib/prisma"; // Assuming your Prisma client is set up in /lib/prisma
+import prisma from "../../lib/prisma"; // Assuming Prisma client is set up in /lib/prisma
 
 type ProfitData = {
   date: string;
   profit: number;
-  bonusClaimed: number; // Add a field for bonus claimed
+  bonusClaimed: number;
 };
 
 export default async function handler(
@@ -14,18 +14,25 @@ export default async function handler(
   try {
     // Get today's date and the last 30 days
     const today = new Date();
-    today.setHours(today.getHours() - 1); // Reduce the time by 1 hour
+    today.setHours(today.getHours() - 1);
 
     const thirtyDaysAgo = new Date(today);
-    thirtyDaysAgo.setDate(today.getDate() - 30); // Set 30 days ago from today
-    thirtyDaysAgo.setHours(thirtyDaysAgo.getHours() - 1); // Reduce the time by 1 hour for thirtyDaysAgo
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    thirtyDaysAgo.setHours(thirtyDaysAgo.getHours() - 1);
 
     // Fetch all transactions within the last 30 days
     const transactions = await prisma.transactions.findMany({
       where: {
         created_at: {
-          gte: thirtyDaysAgo, // Fetch transactions from 30 days ago until now
+          gte: thirtyDaysAgo,
         },
+      },
+    });
+
+    // Fetch total customer balances
+    const totalCustomersBalance = await prisma.user.aggregate({
+      _sum: {
+        balance: true, // Assuming customers have a 'balance' field
       },
     });
 
@@ -34,35 +41,33 @@ export default async function handler(
       {};
 
     transactions.forEach((transaction) => {
-      const date = transaction.created_at.toISOString().split("T")[0]; // Format date as YYYY-MM-DD
+      const date = transaction.created_at.toISOString().split("T")[0];
 
-      // Initialize the date entry if it doesn't exist
       if (!profitByDate[date]) {
         profitByDate[date] = { profit: 0, bonus: 0 };
       }
 
-      // Sum profits for each date
       profitByDate[date].profit += parseFloat(transaction.profit.toString());
 
-      // Check if the transaction is a daily bonus
       if (transaction.trans_type === "daily_bonus") {
-        profitByDate[date].bonus += parseFloat(transaction.amount.toString()); // Sum bonuses
+        profitByDate[date].bonus += parseFloat(transaction.amount.toString());
       }
     });
 
-    // Format the result into an array
     const formattedProfits: ProfitData[] = Object.keys(profitByDate).map(
       (date) => ({
         date,
         profit: profitByDate[date].profit,
-        bonusClaimed: profitByDate[date].bonus, // Include the bonus claimed for the day
+        bonusClaimed: profitByDate[date].bonus,
       })
     );
 
-    // Sort the results by date in descending order
     formattedProfits.sort((a, b) => (a.date > b.date ? -1 : 1));
 
-    res.status(200).json(formattedProfits);
+    res.status(200).json({
+      profits: formattedProfits,
+      totalCustomersBalance: totalCustomersBalance._sum.balance || 0, // Return total balance
+    });
   } catch (error) {
     console.error("Error fetching profits:", error);
     res.status(500).json({ error: "Internal server error" });
