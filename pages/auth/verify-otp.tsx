@@ -113,21 +113,21 @@ const VerifyPage = () => {
               "New Customer Wallet Generated"
             );
 
-            toast.success("Nice one");
-            // const signInRes = await signIn("credentials", {
-            //   redirect: false,
-            //   email,
-            //   xagonn: "sampleregex",
-            // });
-            // toast.dismiss();
-            // if (signInRes && !signInRes.error) {
-            //   router.push(siteConfig.paths.dashboard);
-            //   setLoading(false);
-            // } else {
-            //   setLoading(false);
-            //   toast("Login failed after registration");
-            // }
-            //
+            const signInRes = await signIn("credentials", {
+              redirect: false,
+              email,
+              xagonn: "sampleregex",
+            });
+
+            if (signInRes && !signInRes.error) {
+              router.push(siteConfig.paths.dashboard);
+              toast.dismiss();
+              setLoading(false);
+            } else {
+              toast.dismiss();
+              setLoading(false);
+              toast("Login failed after registration");
+            }
           } else {
           }
         }
