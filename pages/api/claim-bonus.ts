@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
+import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 
 const prisma = new PrismaClient();
 
@@ -34,28 +35,30 @@ export default async function claimBonus(
       return res.status(400).json({ message: "Bonus already claimed today." });
     }
 
-    // Check if user has made any purchase on the app.
-    // const check = await prisma.transactions.findFirst({
-    //   where: {
-    //     user_id: String(userId),
-    //     type: "debit",
-    //   },
-    // });
+    // Check if user has claimed bonus before
+    const checkBonusClaimBefore = await prisma.transactions.findFirst({
+      where: { user_id: String(user.id), trans_type: "daily_bonus" },
+    });
 
-    // if (!check) {
-    //   try {
-    //     await sendEmail(
-    //       "xeonncodes@gmail.com",
-    //       `Customer tried to claim bonus without buying a product. Customer ID: ${user.id}. Name: ${user.first_name} ${user.last_name}`,
-    //       "Daily Bonus Issue"
-    //     );
-    //   } catch (emailError) {
-    //     console.error("Failed daily bonus issue:", emailError);
-    //   }
-    //   return res
-    //     .status(403) // Changed to 403 Forbidden
-    //     .json({ message: "Purchase any product to start claiming." });
-    // }
+    // Check if user has bought
+    const checkPurchaseBefore = await prisma.transactions.findFirst({
+      where: {
+        user_id: String(userId),
+        type: "debit",
+      },
+    });
+
+    if (checkBonusClaimBefore && !checkPurchaseBefore) {
+      try {
+        sendWhatsappMessage(
+          `Customer tries to claim bonus again without purchasing a product. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`
+        );
+      } catch (error) {}
+
+      return res
+        .status(400)
+        .json({ message: "Purchase a product to continue claiming." });
+    }
 
     // Get daily bonus amount from the admin table
     const admin = await prisma.admin.findUnique({ where: { id: 1 } });
@@ -101,6 +104,10 @@ export default async function claimBonus(
     } catch (error) {
       console.error("Error creating transaction:", error);
     }
+
+    await sendWhatsappMessage(
+      `Daily bonus claim, Email: ${user.email}, Customer Name: ${user.first_name} ${user.last_name}, Balance after ${updatedUser.balance}`
+    );
 
     return res.status(200).json({
       message: "Bonus claimed successfully!",
