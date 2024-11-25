@@ -33,6 +33,13 @@ export default async function claimBonus(
     }
 
     if (user.last_bonus_claim === today) {
+      try {
+        await sendEmail(
+          siteConfig.adminEmail2,
+          `Customer tries to claim bonus twice today. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`,
+          "Daily Bonus Issue"
+        );
+      } catch (error) {}
       return res.status(400).json({ message: "Bonus already claimed today." });
     }
 
