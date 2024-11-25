@@ -4,6 +4,7 @@ import prisma from "../../lib/prisma"; // Assuming your Prisma client is set up 
 type ProfitData = {
   date: string;
   profit: number;
+  bonusClaimed: number; // Add a field for bonus claimed
 };
 
 export default async function handler(
@@ -15,33 +16,46 @@ export default async function handler(
     const today = new Date();
     today.setHours(today.getHours() - 1); // Reduce the time by 1 hour
 
-    const fiveDaysAgo = new Date(today);
-    fiveDaysAgo.setDate(today.getDate() - 30); // Set five days ago from today
-    fiveDaysAgo.setHours(fiveDaysAgo.getHours() - 1); // Reduce the time by 1 hour for fiveDaysAgo
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30); // Set 30 days ago from today
+    thirtyDaysAgo.setHours(thirtyDaysAgo.getHours() - 1); // Reduce the time by 1 hour for thirtyDaysAgo
 
-    // Fetch transactions within the last 30 days
+    // Fetch all transactions within the last 30 days
     const transactions = await prisma.transactions.findMany({
       where: {
         created_at: {
-          gte: fiveDaysAgo, // Fetch transactions from 30 days ago until now
+          gte: thirtyDaysAgo, // Fetch transactions from 30 days ago until now
         },
       },
     });
 
-    // Group and sum the profits by date
-    const profitByDate: { [key: string]: number } = {};
+    // Group and sum the profits and bonuses by date
+    const profitByDate: { [key: string]: { profit: number; bonus: number } } =
+      {};
 
     transactions.forEach((transaction) => {
       const date = transaction.created_at.toISOString().split("T")[0]; // Format date as YYYY-MM-DD
-      profitByDate[date] =
-        (profitByDate[date] || 0) + parseFloat(transaction.profit.toString()); // Sum profits for each date
+
+      // Initialize the date entry if it doesn't exist
+      if (!profitByDate[date]) {
+        profitByDate[date] = { profit: 0, bonus: 0 };
+      }
+
+      // Sum profits for each date
+      profitByDate[date].profit += parseFloat(transaction.profit.toString());
+
+      // Check if the transaction is a daily bonus
+      if (transaction.trans_type === "daily_bonus") {
+        profitByDate[date].bonus += parseFloat(transaction.amount.toString()); // Sum bonuses
+      }
     });
 
     // Format the result into an array
     const formattedProfits: ProfitData[] = Object.keys(profitByDate).map(
       (date) => ({
         date,
-        profit: profitByDate[date],
+        profit: profitByDate[date].profit,
+        bonusClaimed: profitByDate[date].bonus, // Include the bonus claimed for the day
       })
     );
 

@@ -5,20 +5,41 @@ import { ComingSoonComp } from "@/components/coming-soon";
 type ProfitData = {
   date: string;
   profit: number;
+  bonusClaimed: number; // Assuming this field represents the bonus claimed
 };
 
 const ProfitPage = () => {
   const [profits, setProfits] = useState<ProfitData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [yesterdayBonus, setYesterdayBonus] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProfits = async () => {
       try {
         const response = await fetch("/api/profit");
-        const data = await response.json();
+        const data: ProfitData[] = await response.json();
         setProfits(data);
+
+        // Calculate yesterday's date
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+
+        const yesterdayDateString = yesterday.toISOString().slice(0, 10);
+
+        // Find yesterday's bonus claimed
+        const yesterdayData = data.find(
+          (profit) => profit.date === yesterdayDateString
+        );
+
+        if (yesterdayData) {
+          setYesterdayBonus(yesterdayData.bonusClaimed);
+        } else {
+          setYesterdayBonus(0); // Default to 0 if no data found for yesterday
+        }
       } catch (error) {
         setProfits([]);
+        setYesterdayBonus(null);
         console.error("Error fetching profit data:", error);
       } finally {
         setLoading(false);
@@ -41,6 +62,17 @@ const ProfitPage = () => {
             </div>
           ) : (
             <div className="bg-card p-6 rounded-lg shadow-md">
+              <div className="mb-5">
+                <p className="text-xl font-semibold mb-2">
+                  Yesterday&apos;s Bonus Claimed
+                </p>
+                <p className="text-red-500 text-lg">
+                  {yesterdayBonus !== null
+                    ? `₦${yesterdayBonus.toFixed(2)}`
+                    : "No data available"}
+                </p>
+              </div>
+
               <h3 className="text-xl font-semibold mb-4">
                 Last 30 Days&apos; Profits
               </h3>
