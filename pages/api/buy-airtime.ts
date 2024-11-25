@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
 import { blockedEmail } from "@/lib/object";
 import { sendEmail } from "@/lib/sendmail";
@@ -274,14 +275,14 @@ export default async function handler(
 
     try {
       await sendEmail(
-        "xeonncodes@gmail.com",
+        siteConfig.adminEmail2,
         `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
         "Successful airtime Purchase"
       );
 
-      // await sendWhatsappMessage(
-      //   `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`
-      // );
+      await sendWhatsappMessage(
+        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`
+      );
 
       // await sendEmail(
       //   lockUser.email,

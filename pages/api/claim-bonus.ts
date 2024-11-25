@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
+import { siteConfig } from "@/config/site";
 
 const prisma = new PrismaClient();
 
@@ -52,6 +53,11 @@ export default async function claimBonus(
       try {
         sendWhatsappMessage(
           `Customer tries to claim bonus again without purchasing a product. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`
+        );
+        await sendEmail(
+          siteConfig.adminEmail2,
+          `Customer tries to claim bonus again without purchasing a product. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`,
+          "Daily Bonus Issue"
         );
       } catch (error) {}
 
@@ -107,6 +113,12 @@ export default async function claimBonus(
 
     await sendWhatsappMessage(
       `Daily bonus claim, Email: ${user.email}, Customer Name: ${user.first_name} ${user.last_name}, Balance after ${updatedUser.balance}`
+    );
+
+    await sendEmail(
+      siteConfig.adminEmail2,
+      `Daily bonus claim, Email: ${user.email}, Customer Name: ${user.first_name} ${user.last_name}, Balance after ${updatedUser.balance}`,
+      "Daily Bonus"
     );
 
     return res.status(200).json({
