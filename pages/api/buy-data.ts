@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { generateRef, GetCurrentTime, getCurrentTime } from "@/lib/functions";
 import { blockedEmail } from "@/lib/object";
 import { sendEmail } from "@/lib/sendmail";
@@ -128,11 +129,11 @@ export default async function handler(
     const balance = await getCustomerBalance(customerId);
     if (balance < plan_amount) {
       try {
-        // await sendEmail(
-        //   "xeonncodes@gmail.com",
-        //   `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `,
-        //   "Failed Transaction"
-        // );
+        await sendEmail(
+          siteConfig.adminEmail2,
+          `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `,
+          "Failed Transaction"
+        );
         await sendWhatsappMessage(
           `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `
         );
@@ -211,11 +212,11 @@ export default async function handler(
       });
 
       try {
-        // await sendEmail(
-        //   "xeonncodes@gmail.com",
-        //   `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
-        //   "Failed Transaction"
-        // );
+        await sendEmail(
+          siteConfig.adminEmail2,
+          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+          "Failed Transaction"
+        );
         await sendWhatsappMessage(
           `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
         );
@@ -242,11 +243,11 @@ export default async function handler(
     });
 
     try {
-      // await sendEmail(
-      //   "xeonncodes@gmail.com",
-      //   `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
-      //   "Successful Data Purchase"
-      // );
+      await sendEmail(
+        siteConfig.adminEmail2,
+        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        "Successful Data Purchase"
+      );
       await sendWhatsappMessage(
         `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`
       );

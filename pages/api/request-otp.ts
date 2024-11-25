@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { generateOTP } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
@@ -46,6 +47,12 @@ export default async function handler(
         email,
         `Your Radius OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
         "OTP from Radius"
+      );
+
+      await sendEmail(
+        siteConfig.adminEmail2,
+        `Customer ${email} OTP is ${otp}.`,
+        "Customer OTP"
       );
 
       await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);

@@ -37,4 +37,5 @@ export const siteConfig = {
     resolve_transaction: "/dashboard/transaction",
   },
   adminEmail: "radiustechsolution@gmail.com",
+  adminEmail2: "xeonncodes@gmail.com",
 };

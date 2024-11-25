@@ -52,11 +52,11 @@ export default async function handler(
       //   `Congratulations. You've successfully invited a new customer to Radius. Name: ${user.first_name} ${user.last_name}, You will get 15% of this user first deposit. (Capped at N500)`,
       //   "New Invited Radius User"
       // );
-      // await sendEmail(
-      //   email,
-      //   "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
-      //   "Welcome to Radius"
-      // );
+      await sendEmail(
+        email,
+        "Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers!",
+        "Welcome to Radius"
+      );
     } catch (error) {}
 
     return res.status(200).json({
@@ -68,11 +68,13 @@ export default async function handler(
         phone_number: user.phone_number,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error verifying otp:", error);
-    return res
-      .status(500)
-      .json({ message: "An error occurred. Please try again later." });
+    return res.status(500).json({
+      message: error.message
+        ? `${error.message}`
+        : "An unexpected error occurred. Please try again.",
+    });
   } finally {
     await prisma.$disconnect();
   }

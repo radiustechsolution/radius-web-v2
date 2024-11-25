@@ -6,6 +6,7 @@ import OnboardLayout from "@/layouts/onboarding";
 import { siteConfig } from "@/config/site";
 import { signIn } from "next-auth/react";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
+import { sendEmail } from "@/lib/sendmail";
 
 const VerifyPage = () => {
   // Hooks
@@ -87,8 +88,12 @@ const VerifyPage = () => {
             }),
             headers: {
               "Content-Type": "application/json",
+              Accept: "application/json",
             },
           });
+
+          const json3 = await response3.json();
+          console.log(json3);
 
           if (response3.ok) {
             // Step 2: Automatically log the user in after registration
@@ -98,22 +103,30 @@ const VerifyPage = () => {
             //   password,
             // });
 
-            await sendWhatsappMessage(
-              `Sucessful customer registration. Wallet generated successfully.`
+            // await sendWhatsappMessage(
+            //   ``
+            // );
+
+            await sendEmail(
+              siteConfig.adminEmail2,
+              `Sucessful customer registration. Wallet generated successfully.`,
+              "New Customer Wallet Generated"
             );
-            const signInRes = await signIn("credentials", {
-              redirect: false,
-              email,
-              xagonn: "sampleregex",
-            });
-            toast.dismiss();
-            if (signInRes && !signInRes.error) {
-              router.push(siteConfig.paths.dashboard);
-              setLoading(false);
-            } else {
-              setLoading(false);
-              toast("Login failed after registration");
-            }
+
+            toast.success("Nice one");
+            // const signInRes = await signIn("credentials", {
+            //   redirect: false,
+            //   email,
+            //   xagonn: "sampleregex",
+            // });
+            // toast.dismiss();
+            // if (signInRes && !signInRes.error) {
+            //   router.push(siteConfig.paths.dashboard);
+            //   setLoading(false);
+            // } else {
+            //   setLoading(false);
+            //   toast("Login failed after registration");
+            // }
             //
           } else {
           }
@@ -121,8 +134,12 @@ const VerifyPage = () => {
       } else {
         toast.error(data.message || "Failed to reset password.");
       }
-    } catch (error) {
-      toast.error("An unexpected error occurred. Please try again.");
+    } catch (error: any) {
+      toast.error(
+        error.message
+          ? `${error.message}`
+          : "An unexpected error occurred. Please try again."
+      );
     } finally {
       setLoading(false);
     }

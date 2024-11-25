@@ -5,6 +5,7 @@ import crypto from "crypto";
 import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
+import { siteConfig } from "@/config/site";
 
 const prisma = new PrismaClient();
 
@@ -86,11 +87,11 @@ export default async function webhook(
       });
 
       try {
-        // await sendEmail(
-        //   "xeonncodes@gmail.com",
-        //   `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
-        //   "New Wallet Funding"
-        // );
+        await sendEmail(
+          siteConfig.adminEmail2,
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+          "New Wallet Funding"
+        );
         await sendWhatsappMessage(
           `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`
         );
