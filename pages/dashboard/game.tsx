@@ -76,7 +76,7 @@ const GamePage = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-lg text-gray-700 mb-4 text-center">
+          <p className="text-lg  mb-4 text-center">
             Guess a number between{" "}
             <span className="font-bold text-blue-500">1</span> and{" "}
             <span className="font-bold text-blue-500">10</span>:
@@ -93,13 +93,13 @@ const GamePage = () => {
             style={{ MozAppearance: "textfield" }} // Hide arrows on Firefox
             whileFocus={{ scale: 1.05 }}
           />
-          <style jsx>{`
+          {/* <style jsx>{`
             input[type="number"]::-webkit-outer-spin-button,
             input[type="number"]::-webkit-inner-spin-button {
               -webkit-appearance: none;
               margin: 0;
             }
-          `}</style>
+          `}</style> */}
 
           {/* Submit Button with Hover Effect */}
           <motion.button
