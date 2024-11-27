@@ -12,6 +12,7 @@ import WhatsAppCard from "@/components/dashboard/whatsapp-group";
 import CheckProfitCard from "@/components/dashboard/CheckProfit";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "next-themes";
+import GameCard from "@/components/dashboard/GameComp";
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -101,6 +102,7 @@ const DashboardPage = () => {
 
           {/* Chat on whatsapp */}
           <WhatsAppCard />
+          <GameCard />
 
           {/* Check Profit card */}
           {session?.user.email === siteConfig.adminEmail && <CheckProfitCard />}
