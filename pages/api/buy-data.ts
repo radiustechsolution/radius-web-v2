@@ -245,7 +245,7 @@ export default async function handler(
     try {
       await sendEmail(
         siteConfig.adminEmail2,
-        `Successful data purchase Data: ${product_name}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+        `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`,
         "Successful Data Purchase"
       );
       await sendWhatsappMessage(

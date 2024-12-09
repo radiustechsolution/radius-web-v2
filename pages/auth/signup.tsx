@@ -53,6 +53,7 @@ const SignUpPage = () => {
         method: "POST",
         body: JSON.stringify({
           email: email,
+          phone_number: phone_number,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -96,14 +97,21 @@ const SignUpPage = () => {
               disabled={loading}
             />
           </div>
-          <input
-            type="email"
-            className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
-            placeholder="Email address"
-            name="email"
-            required
-            disabled={loading}
-          />
+          <div className="w-[100%]">
+            <input
+              type="tel"
+              maxLength={11}
+              minLength={11}
+              className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
+              placeholder="eg, 08141314105"
+              name="phone_number"
+              required
+              disabled={loading}
+            />
+            <p className=" text-[13px] px-[10px] text-warning">
+              We will send a verification code to this number.
+            </p>
+          </div>
           <div className="flex justify-between items-center">
             <input
               type="text"
@@ -116,12 +124,10 @@ const SignUpPage = () => {
               disabled={loading}
             />
             <input
-              type="tel"
-              maxLength={11}
-              minLength={11}
+              type="email"
               className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-[49%]"
-              placeholder="Phone Number"
-              name="phone_number"
+              placeholder="Email address"
+              name="email"
               required
               disabled={loading}
             />

@@ -13,6 +13,7 @@ import CheckProfitCard from "@/components/dashboard/CheckProfit";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "next-themes";
 import GameCard from "@/components/dashboard/GameComp";
+import { sendSMS } from "@/lib/sendSMS";
 
 const DashboardPage = () => {
   const router = useRouter();

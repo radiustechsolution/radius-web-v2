@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { generateOTP } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
+import { sendSMS } from "@/lib/sendSMS";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
@@ -13,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email } = req.body;
+  const { email, phone_number } = req.body;
 
   // Basic validation for email
   if (!email) {
@@ -41,20 +42,33 @@ export default async function handler(
       data: { otp: hashedOtp }, // Save the hashed OTP
     });
 
-    try {
-      // Send OTP via email
-      await sendEmail(
-        email,
-        `Your Radius OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
-        "OTP from Radius"
-      );
+    // Format phone number to '234XXXXXXXXXX'
+    const phone = phone_number.startsWith("0")
+      ? `234${phone_number.substring(1)}`
+      : `234${phone_number}`;
 
+    try {
+      // Send OTP Email Customer
+      // await sendEmail(
+      //   email,
+      //   `Your Radius OTP is ${otp}. Do not share this with anyone. We will never ask you for your OTP.`,
+      //   "OTP from Radius"
+      // );
+
+      // Send Email Admin
       await sendEmail(
         siteConfig.adminEmail2,
         `Customer ${email} OTP is ${otp}.`,
         "Customer OTP"
       );
 
+      // Send sms alert
+      await sendSMS(
+        "Your Radius OTP is " +
+          otp +
+          " Do not share this with anyone. We will never ask you for your OTP.",
+        phone
+      );
       await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);
     } catch (error) {}
 

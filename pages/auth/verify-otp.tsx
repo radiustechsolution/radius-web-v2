@@ -170,7 +170,7 @@ const VerifyPage = () => {
           />
 
           <p className="text-gray-600 text-center text-sm">
-            Check your email (Inbox or Spam folder) for an OTP.
+            An OTP has been sent to your phone number.
           </p>
 
           <Button
