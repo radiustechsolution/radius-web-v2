@@ -43,6 +43,12 @@ export default async function handler(
       },
     });
 
+    if (!user) {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Email or password is incorrect" });
+    }
+
     await sendEmail(
       email,
       `Welcome back to Radius. Your OTP code is ${generateSixDigitNumber()}`, // Message with otp
