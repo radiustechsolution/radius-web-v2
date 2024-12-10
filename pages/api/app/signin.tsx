@@ -19,6 +19,7 @@ export default async function handler(
       return res.status(405).json({ message: "Method not allowed" });
     }
 
+    // Validate input
     const schema = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().min(6).required(),
@@ -33,13 +34,10 @@ export default async function handler(
 
     const { email, password } = req.body;
 
-    const randomToken = randomBytes(16).toString("hex");
-    const hashedPassword = bcrypt.hashSync(password, 10);
-
-    const user = await prisma.user.findFirst({
+    // Check if user exists
+    const user = await prisma.user.findUnique({
       where: {
         email,
-        password: hashedPassword,
       },
     });
 
@@ -49,20 +47,35 @@ export default async function handler(
         .json({ status: 400, message: "Email or password is incorrect" });
     }
 
+    // Compare password
+    const passwordValid = bcrypt.compareSync(password, user.password);
+
+    if (!passwordValid) {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Email or password is incorrect" });
+    }
+
+    // Generate a random token
+    const randomToken = randomBytes(16).toString("hex");
+
+    // Send OTP email
     await sendEmail(
       email,
-      `Welcome back to Radius. Your OTP code is ${generateSixDigitNumber()}`, // Message with otp
+      `Welcome back to Radius. Your OTP code is ${generateSixDigitNumber()}`,
       "Login Successful"
     );
 
     return res
       .status(200)
-      .json({ status: 200, message: "Successfully login", data: user });
+      .json({ status: 200, message: "Successfully logged in", data: user });
   } catch (error: any) {
-    return res.status(400).json({
-      status: 400,
+    return res.status(500).json({
+      status: 500,
       message: "Something went wrong!. Try again",
       error: error.message || "none",
     });
+  } finally {
+    await prisma.$disconnect();
   }
 }
