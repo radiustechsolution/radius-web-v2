@@ -1,4 +1,4 @@
-import { generateSixDigitNumber } from "@/lib/functions";
+import { generateOTP, generateSixDigitNumber } from "@/lib/functions";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
@@ -34,6 +34,8 @@ export default async function handler(
 
     const { email, password } = req.body;
 
+    const otp = generateOTP();
+
     // Check if user exists
     const user = await prisma.user.findUnique({
       where: {
@@ -59,10 +61,19 @@ export default async function handler(
     // Generate a random token
     const randomToken = randomBytes(16).toString("hex");
 
+    // Hash the OTP before saving it
+    const hashedOtp = bcrypt.hashSync(otp, 10); // 10 is the salt rounds for bcrypt
+
+    // Store hashed OTP in user record
+    await prisma.user.update({
+      where: { email: email },
+      data: { otp: hashedOtp }, // Save the hashed OTP
+    });
+
     // Send OTP email
     await sendEmail(
       email,
-      `Welcome back to Radius. Your OTP code is ${generateSixDigitNumber()}`,
+      `Welcome back to Radius. Your OTP code is ${otp}`,
       "Login Successful"
     );
 
