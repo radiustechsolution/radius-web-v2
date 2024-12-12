@@ -61,6 +61,7 @@ export default async function handler(
 
     return res.status(200).json({
       message: "Email verified successfully.",
+      status: 200,
       data: {
         first_name: user.first_name,
         last_name: user.last_name,
