@@ -24,8 +24,13 @@ export default async function handler(req: any, res: any) {
     // Decode the token using jwt.verify
     const decodedToken = jwt.verify(token, secret);
 
-    // Extract user ID or email from the decoded token
-    const userId = decodedToken.sub; // Assuming the token contains 'sub' as user ID
+    // Extract user ID from the decoded token and convert it to a number
+    const userId = Number(decodedToken.sub); // Convert 'sub' (userId) to a number
+
+    // Check if the conversion was successful
+    if (isNaN(userId)) {
+      return res.status(400).json({ status: 400, message: "Invalid user ID" });
+    }
 
     // Fetch user data from the database
     const user = await prisma.user.findUnique({
