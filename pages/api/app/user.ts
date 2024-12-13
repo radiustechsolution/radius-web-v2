@@ -14,6 +14,8 @@ export default async function handler(req: any, res: any) {
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(" ")[1]; // Extract the token after "Bearer"
 
+    console.log(token);
+
     // If token does not exist, return an unauthorized error
     if (!token) {
       return res
