@@ -9,13 +9,10 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ status: 405, message: "Method not allowed" });
   }
 
+  // Fetch the token from the request headers
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.split(" ")[1]; // Extract the token after "Bearer"
   try {
-    // Fetch the token from the request headers
-    const authHeader = req.headers.authorization;
-    const token = authHeader?.split(" ")[1]; // Extract the token after "Bearer"
-
-    console.log(token);
-
     // If token does not exist, return an unauthorized error
     if (!token) {
       return res
@@ -54,7 +51,7 @@ export default async function handler(req: any, res: any) {
     console.error(error);
     return res.status(500).json({
       status: 500,
-      message: "Internal server error",
+      message: "Internal server error " + token,
       error: error.message,
     });
   }
