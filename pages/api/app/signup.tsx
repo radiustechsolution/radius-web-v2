@@ -1,4 +1,4 @@
-import { generateSixDigitNumber } from "@/lib/functions";
+import { generateOTP, generateSixDigitNumber } from "@/lib/functions";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
@@ -78,9 +78,16 @@ export default async function handler(
     const promocode = await prisma.user.findFirst({
       where: { username: promo_code.toLowerCase() },
     });
+
     if (!promocode) {
       invited_code = "radius";
     }
+
+    // OTP
+    const otp = generateOTP();
+
+    // Hash the OTP before saving it
+    const hashedOtp = bcrypt.hashSync(otp, 10); // 10 is the salt rounds for bcrypt
 
     const user_n = username.toLowerCase();
 
@@ -91,6 +98,7 @@ export default async function handler(
         email,
         username: user_n,
         phone_number,
+        otp: hashedOtp,
         invited_by: invited_code,
         promo_code: randomPromoCode,
         password: hashedPassword,
@@ -98,11 +106,20 @@ export default async function handler(
       },
     });
 
-    await sendEmail(
-      "xeonncodes@gmail.com",
-      `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
-      "New Customer Registration"
-    );
+    try {
+      // Send OTP email
+      await sendEmail(
+        email,
+        `Welcome to Radius. We are glad you joined us. Feel free to use our help line should you have any question. Cheers! Your OTP code is ${otp}`,
+        "Welcome to Radius"
+      );
+
+      await sendEmail(
+        "xeonncodes@gmail.com",
+        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
+        "New Customer Registration"
+      );
+    } catch (error) {}
 
     return res
       .status(201)
