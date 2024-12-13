@@ -20,16 +20,16 @@ export default async function handler(req: any, res: any) {
         .json({ status: 401, message: "Unauthorized access" });
     }
 
-    // Decode the token using jwt.verify
-    const decodedToken = jwt.verify(token, secret);
+    // // Decode the token using jwt.verify
+    // const decodedToken = jwt.verify(token, secret);
 
-    // Extract user ID from the decoded token and convert it to a number
-    const userId = Number(decodedToken.sub); // Convert 'sub' (userId) to a number
+    // // Extract user ID from the decoded token and convert it to a number
+    // const userId = Number(decodedToken.sub); // Convert 'sub' (userId) to a number
 
-    // Check if the conversion was successful
-    if (isNaN(userId)) {
-      return res.status(400).json({ status: 400, message: "Invalid user ID" });
-    }
+    // // Check if the conversion was successful
+    // if (isNaN(userId)) {
+    //   return res.status(400).json({ status: 400, message: "Invalid user ID" });
+    // }
 
     // Fetch user data from the database
     const user = await prisma.user.findFirst({
