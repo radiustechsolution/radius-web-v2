@@ -119,7 +119,7 @@ export const dataplans_object = {
         },
         {
           PRODUCT_CODE: "23",
-          PRODUCT_ID: "11",
+          PRODUCT_ID: "291",
           PRODUCT_NAME: "5.0 GB - 30 days (SME)",
           PRODUCT_AMOUNT: 1285,
         },
@@ -478,7 +478,7 @@ const dataPlans: DataPlans = {
 
         {
           PRODUCT_CODE: "23",
-          PRODUCT_ID: "11",
+          PRODUCT_ID: "291",
           PRODUCT_NAME: "5.0 GB - 30 days (SME)",
           PRODUCT_AMOUNT: 1285,
         },
