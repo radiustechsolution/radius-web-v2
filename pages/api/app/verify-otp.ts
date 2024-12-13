@@ -63,10 +63,11 @@ export default async function handler(
       message: "Email verified successfully.",
       status: 200,
       data: {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        id: user.id,
-        phone_number: user.phone_number,
+        // first_name: user.first_name,
+        // last_name: user.last_name,
+        // id: user.id,
+        // phone_number: user.phone_number,
+        user,
       },
     });
   } catch (error: any) {
