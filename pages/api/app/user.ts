@@ -13,7 +13,9 @@ export default async function handler(req: any, res: any) {
 
   try {
     // Fetch the token from the request headers using next-auth's getToken utility
-    const token = await getToken({ req, secret });
+    // const token = await getToken({ req, secret });
+
+    const token = req.headers.authorization?.split(" ")[1]; // Extract the token after "Bearer"
 
     // If token does not exist, return an unauthorized error
     if (!token) {
@@ -22,7 +24,7 @@ export default async function handler(req: any, res: any) {
         .json({ status: 401, message: "Unauthorized access" });
     }
 
-    // Extract user ID or email from the token (depending on how your token is structured)
+    // Extract user Token or email from the token (depending on how your token is structured)
     const userId = token.sub; // This assumes the token contains the user's ID in the "sub" field
 
     // Fetch user data from the database
