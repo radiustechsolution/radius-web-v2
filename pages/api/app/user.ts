@@ -1,21 +1,18 @@
-// /pages/api/user.ts
-
 import prisma from "@/lib/prisma"; // Adjust this path based on your Prisma client location
-import { getToken } from "next-auth/jwt"; // Import the getToken method from next-auth/jwt
+import jwt from "jsonwebtoken"; // Import jwt to decode the token
 
-const secret = process.env.NEXTAUTH_SECRET; // Ensure you have this secret set in your environment variables
+const secret: any = process.env.NEXTAUTH_SECRET; // Ensure you have this secret set
 
 export default async function handler(req: any, res: any) {
-  // Ensure the request method is GET
+  // Ensure the request method is POST
   if (req.method !== "POST") {
     return res.status(405).json({ status: 405, message: "Method not allowed" });
   }
 
   try {
-    // Fetch the token from the request headers using next-auth's getToken utility
-    // const token = await getToken({ req, secret });
-
-    const token = req.headers.authorization?.split(" ")[1]; // Extract the token after "Bearer"
+    // Fetch the token from the request headers
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1]; // Extract the token after "Bearer"
 
     // If token does not exist, return an unauthorized error
     if (!token) {
@@ -24,12 +21,15 @@ export default async function handler(req: any, res: any) {
         .json({ status: 401, message: "Unauthorized access" });
     }
 
-    // Extract user Token or email from the token (depending on how your token is structured)
-    const userId = token.sub; // This assumes the token contains the user's ID in the "sub" field
+    // Decode the token using jwt.verify
+    const decodedToken = jwt.verify(token, secret);
+
+    // Extract user ID or email from the decoded token
+    const userId = decodedToken.sub; // Assuming the token contains 'sub' as user ID
 
     // Fetch user data from the database
-    const user = await prisma.user.findFirst({
-      where: { token: userId },
+    const user = await prisma.user.findUnique({
+      where: { id: userId }, // Assuming you use userId as primary key
     });
 
     // If the user does not exist, return a 404 error
@@ -43,10 +43,12 @@ export default async function handler(req: any, res: any) {
       message: "User fetched successfully",
       data: user,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ status: 500, message: "Internal server error" });
+    return res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
   }
 }
