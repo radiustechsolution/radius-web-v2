@@ -106,7 +106,7 @@ export default async function handler(
 
     return res
       .status(201)
-      .json({ status: 201, message: "User created successfully", data: user });
+      .json({ status: 200, message: "User created successfully", data: user });
   } catch (error: any) {
     return res.status(400).json({
       status: 400,
