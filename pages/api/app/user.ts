@@ -33,8 +33,8 @@ export default async function handler(req: any, res: any) {
     }
 
     // Fetch user data from the database
-    const user = await prisma.user.findUnique({
-      where: { id: userId }, // Assuming you use userId as primary key
+    const user = await prisma.user.findFirst({
+      where: { token: String(token) }, // Assuming you use userId as primary key
     });
 
     // If the user does not exist, return a 404 error
