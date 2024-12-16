@@ -69,12 +69,14 @@ export default async function handler(
       //     " Do not share this with anyone. We will never ask you for your OTP.",
       //   phone
       // );
-
       await sendEmail(
-        "xeonncodes@gmail.com",
-        `Customer reset password. OTP code is ${otp}, Email: ${email}`,
-        "Password reset OTP"
+        email,
+        "Your Radius OTP is " +
+          otp +
+          " Do not share this with anyone. We will never ask you for your OTP.",
+        "Your Radius OTP"
       );
+
       await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);
     } catch (error) {}
 
