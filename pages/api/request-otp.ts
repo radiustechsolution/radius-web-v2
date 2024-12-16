@@ -43,9 +43,9 @@ export default async function handler(
     });
 
     // Format phone number to '234XXXXXXXXXX'
-    const phone = userUser.phone_number.startsWith("0")
-      ? `234${phone_number.substring(1)}`
-      : `234${phone_number}`;
+    // const phone = userUser.phone_number.startsWith("0")
+    //   ? `234${phone_number.substring(1)}`
+    //   : `234${phone_number}`;
 
     try {
       // Send OTP Email Customer
@@ -63,12 +63,12 @@ export default async function handler(
       );
 
       // Send sms alert
-      await sendSMS(
-        "Your Radius OTP is " +
-          otp +
-          " Do not share this with anyone. We will never ask you for your OTP.",
-        phone
-      );
+      // await sendSMS(
+      //   "Your Radius OTP is " +
+      //     otp +
+      //     " Do not share this with anyone. We will never ask you for your OTP.",
+      //   phone
+      // );
       await sendWhatsappMessage(`Customer ${email} OTP is ${otp}.`);
     } catch (error) {}
 
