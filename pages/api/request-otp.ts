@@ -37,13 +37,13 @@ export default async function handler(
     const hashedOtp = bcrypt.hashSync(otp, 10); // 10 is the salt rounds for bcrypt
 
     // Store hashed OTP in user record
-    await prisma.user.update({
+    const userUser = await prisma.user.update({
       where: { email: email },
       data: { otp: hashedOtp }, // Save the hashed OTP
     });
 
     // Format phone number to '234XXXXXXXXXX'
-    const phone = phone_number.startsWith("0")
+    const phone = userUser.phone_number.startsWith("0")
       ? `234${phone_number.substring(1)}`
       : `234${phone_number}`;
 
