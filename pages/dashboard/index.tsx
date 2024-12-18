@@ -63,6 +63,7 @@ const DashboardPage = () => {
     }
   };
 
+
   return (
     <DashboardLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
