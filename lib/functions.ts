@@ -72,3 +72,24 @@ export const GetCurrentTime = () => {
 export const capitalizeFirstLetter = (status: string) => {
   return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
 };
+
+// Format phone number for SMS
+export const formatPhoneNumber = (phone_number: any) => {
+  // Ensure phone_number exists and is valid
+  if (!phone_number || phone_number.length < 10) {
+    throw new Error("Invalid phone number");
+  }
+
+  // If the phone number starts with "0", replace the leading "0" with "234"
+  if (phone_number.startsWith("0")) {
+    return `234${phone_number.substring(1)}`;
+  }
+
+  // If the phone number already starts with "234", return it as-is
+  if (phone_number.startsWith("234")) {
+    return phone_number;
+  }
+
+  // Otherwise, assume it's in local format without leading 0 and prepend "234"
+  return `234${phone_number}`;
+};

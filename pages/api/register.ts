@@ -101,9 +101,9 @@ export default async function handler(
         `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`,
         "New Customer Registration"
       );
-      await sendWhatsappMessage(
-        `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`
-      );
+      // await sendWhatsappMessage(
+      //   `New customer registration. Name: ${first_name} ${last_name} Email: ${email} Phone Number: ${phone_number}, Invited By: ${invited_code}`
+      // );
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
     }
