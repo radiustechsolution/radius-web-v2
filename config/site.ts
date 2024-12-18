@@ -6,7 +6,8 @@ export const siteConfig = {
   description:
     "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",
   siteColors: {
-    primary: "#0E14A2",
+    // primary: "#0E14A2",
+    primary: "#006858",
     cardLightColor: "#ffffff",
     cardDarkColor: "#171717",
     bgLightColor: "#F3F3F3",

@@ -17,6 +17,7 @@ import { FaSheetPlastic } from "react-icons/fa6";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { IoGiftOutline, IoGiftSharp } from "react-icons/io5";
 import { useSession } from "next-auth/react";
+import { SlideComponent } from "@/components/dashboard/SlideComponent";
 
 const MenuObj = [
   {
@@ -81,6 +82,8 @@ export default function DashboardLayout({
       </aside>
 
       <main className="flex-1 flex flex-col">
+        {/* Slide Comp */}
+        <SlideComponent />
         {/* Main Navbar */}
         <NavBar openNavBar={() => setIsOpen(!isOpen)} />
         <div className="flex-1 p-2 overflow-auto flex flex-col items-center">
@@ -96,7 +99,9 @@ export default function DashboardLayout({
             >
               {active == v.path ? v.iconFill : v.icon}
               <p
-                className={`${active != v.path ? "text-[gray]" : "text-primarymodecolorgray"} text-[10px]`}
+                className={`${
+                  active != v.path ? "text-[gray]" : "text-primarymodecolorgray"
+                } text-[10px]`}
               >
                 {v.title}
               </p>

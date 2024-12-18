@@ -17,6 +17,15 @@ module.exports = {
         bebas: ["Bebas, sans-serif"],
         dancing: ["var(--font-dancing)"],
       },
+      // animation: {
+      //   marquee: "marquee 30s linear infinite",
+      // },
+      // keyframes: {
+      //   marquee: {
+      //     "0%": { transform: "translateX(100%)" },
+      //     "100%": { transform: "translateX(-100%)" },
+      //   },
+      // },
     },
   },
   darkMode: "class",

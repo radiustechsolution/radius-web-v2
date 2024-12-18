@@ -14,6 +14,7 @@ import { siteConfig } from "@/config/site";
 import { useTheme } from "next-themes";
 import GameCard from "@/components/dashboard/GameComp";
 import { sendSMS } from "@/lib/sendSMS";
+import { SlideComponent } from "@/components/dashboard/SlideComponent";
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -67,6 +68,8 @@ const DashboardPage = () => {
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-4 overflow-auto scrollbar-hide">
+         
+
           {/* Dashboard Detail Card */}
           <DashboardAccountCompCard
             balance={formatCurrency(session?.user?.balance)}
