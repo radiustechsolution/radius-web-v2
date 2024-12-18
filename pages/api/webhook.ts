@@ -89,7 +89,7 @@ export default async function webhook(
       try {
         await sendEmail(
           siteConfig.adminEmail2,
-          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}`,
+          `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Phone Number: ${user.phone_number} Amount: ${creditableAmount}, Old Balance: ${user.balance}, New Balance: ${updatedUser.balance} `,
           "New Wallet Funding"
         );
         await sendWhatsappMessage(
