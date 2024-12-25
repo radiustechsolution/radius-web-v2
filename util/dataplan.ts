@@ -895,7 +895,7 @@ const dataPlans: DataPlans = {
         {
           PRODUCT_CODE: "16",
           PRODUCT_ID: "295",
-          PRODUCT_NAME: "5 GB - 14 days (CORPORATE)",
+          PRODUCT_NAME: "5 GB - 14 days (SME)",
           PRODUCT_AMOUNT: 1150,
         },
 
