@@ -643,26 +643,26 @@ const dataPlans: DataPlans = {
         //   PRODUCT_AMOUNT: 2600,
         // },
 
-        // {
-        //   PRODUCT_CODE: "31",
-        //   PRODUCT_ID: "223",
-        //   PRODUCT_NAME: "15.0 GB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 3900,
-        // },
+        {
+          PRODUCT_CODE: "31",
+          PRODUCT_ID: "223",
+          PRODUCT_NAME: "15.0 GB - 30 days (CORPORATE)",
+          PRODUCT_AMOUNT: 3900,
+        },
 
-        // {
-        //   PRODUCT_CODE: "32",
-        //   PRODUCT_ID: "222",
-        //   PRODUCT_NAME: "20.0 GB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 5200,
-        // },
+        {
+          PRODUCT_CODE: "32",
+          PRODUCT_ID: "222",
+          PRODUCT_NAME: "20.0 GB - 30 days (CORPORATE)",
+          PRODUCT_AMOUNT: 5200,
+        },
 
-        // {
-        //   PRODUCT_CODE: "33",
-        //   PRODUCT_ID: "237",
-        //   PRODUCT_NAME: "40.0 GB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 10320,
-        // },
+        {
+          PRODUCT_CODE: "33",
+          PRODUCT_ID: "237",
+          PRODUCT_NAME: "40.0 GB - 30 days (CORPORATE)",
+          PRODUCT_AMOUNT: 10320,
+        },
       ],
     },
   ],
