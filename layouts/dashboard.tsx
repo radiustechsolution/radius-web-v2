@@ -83,7 +83,7 @@ export default function DashboardLayout({
 
       <main className="flex-1 flex flex-col">
         {/* Slide Comp */}
-        <SlideComponent />
+        {/* <SlideComponent /> */}
         {/* Main Navbar */}
         <NavBar openNavBar={() => setIsOpen(!isOpen)} />
         <div className="flex-1 p-2 overflow-auto flex flex-col items-center">
