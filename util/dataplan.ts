@@ -574,10 +574,17 @@ const dataPlans: DataPlans = {
         // },
 
         // {
-        //   PRODUCT_CODE: "17",
+        //   PRODUCT_CODE: "50",
+        //   PRODUCT_ID: "208",
+        //   PRODUCT_NAME: "1 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 272.0,
+        // },
+
+        // {
+        //   PRODUCT_CODE: "51",
         //   PRODUCT_ID: "209",
         //   PRODUCT_NAME: "2 GB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 520,
+        //   PRODUCT_AMOUNT: 544,
         // },
 
         {
