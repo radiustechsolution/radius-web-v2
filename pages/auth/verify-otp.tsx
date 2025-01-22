@@ -46,6 +46,14 @@ const VerifyPage = () => {
       const data = await response.json();
       const ref = `VA-${"acct"}-${Date.now()}`;
 
+      const adminResponse = await fetch("/api/get-admin-user");
+      const adminData = await adminResponse.json();
+      const adminUser = adminData.adminUser;
+
+      if (!adminUser) {
+        throw new Error("Admin user not found");
+      }
+
       if (response.ok) {
         toast("Generating your Bank Account", {
           toastId: "xxsa",
@@ -56,13 +64,14 @@ const VerifyPage = () => {
 
         // Step 2 Create Virtual account
         const response2 = await fetch(
-          "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+          "https://appapi.radiustech.com.ng/api/virtualaccountnewmonnify",
           {
             method: "POST",
             body: JSON.stringify({
               ref: ref,
               first_name: data.data.first_name,
               last_name: data.data.last_name,
+              auth: adminUser?.pin,
               email: email,
               phone_number: data.data.phone_number,
             }),
