@@ -2,7 +2,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import dayjs from "dayjs"; // Import dayjs to handle date comparisons
-
 const prisma = new PrismaClient(); // Initialize Prisma Client
 
 export default async function handler(
