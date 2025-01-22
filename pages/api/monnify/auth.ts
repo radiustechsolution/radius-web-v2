@@ -33,13 +33,14 @@ export default async function handler(
     // Encode the API Key and Client Secret
     const encodedCredentials = base64Encode(apiKey, clientSecret);
 
-    // Check if created_at is more than 30 minutes old
     if (adminUser) {
-      const fiftyFiveMinutesAgo = dayjs().subtract(30, "minutes");
+      console.log("Yes adminUser");
 
-      if (dayjs(adminUser.created_at).isBefore(fiftyFiveMinutesAgo)) {
-        // If the created_at is older than 55 minutes, refresh the token
+      // Check if the token is older than 30 minutes
+      const thirtyMinutesAgo = dayjs().subtract(30, "minutes");
 
+      if (dayjs(adminUser.created_at).isBefore(thirtyMinutesAgo)) {
+        console.log("Older");
         // Make the POST request to Monnify to get the access token
         const response = await fetch(
           `${process.env.MONNIFY_BASE_URL}/api/v1/auth/login`,
@@ -53,6 +54,7 @@ export default async function handler(
         );
 
         const data = await response.json();
+        console.log(data);
         if (!response.ok) {
           // Handle errors returned by the Monnify API
           res.status(response.status).json({ error: data });
@@ -66,7 +68,6 @@ export default async function handler(
           },
           data: {
             pin: data.responseBody.accessToken, // token
-            // password: data.ibs_client_id, // ibs_client_id
             created_at: new Date(), // Update created_at to the current timestamp
           },
         });
