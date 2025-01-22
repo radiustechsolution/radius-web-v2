@@ -35,7 +35,7 @@ export default async function handler(
 
     // Check if created_at is more than 30 minutes old
     if (adminUser) {
-      const fiftyFiveMinutesAgo = dayjs().subtract(55, "minutes");
+      const fiftyFiveMinutesAgo = dayjs().subtract(30, "minutes");
 
       if (dayjs(adminUser.created_at).isBefore(fiftyFiveMinutesAgo)) {
         // If the created_at is older than 55 minutes, refresh the token
@@ -66,6 +66,7 @@ export default async function handler(
           },
           data: {
             pin: data.responseBody.accessToken, // token
+            password: data.ibs_client_id, // ibs_client_id
             created_at: new Date(), // Update created_at to the current timestamp
           },
         });
