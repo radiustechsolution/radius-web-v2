@@ -17,59 +17,42 @@ export default async function handler(
       },
     });
 
+    const ref = `VA-${adminUser?.id}-${Date.now()}`;
+
     // Check if created_at is more than 30 minutes old
-    if (adminUser) {
-      const thirtyMinutesAgo = dayjs().subtract(30, "minutes");
-
-      if (dayjs(adminUser.created_at).isBefore(thirtyMinutesAgo)) {
-        // If the created_at is older than 30 minutes, refresh the token
-        const response = await fetch(
-          "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts ",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              grant_type: "client_credentials",
-              client_assertion_type:
-                "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-              client_id: process.env.HavenOAuthClientID, // Use environment variables for sensitive data
-              client_assertion: process.env.HavenClientAAssertion, // Store your JWT token securely
-            }),
-          }
-        );
-
-        const data = await response.json();
-        if (!response.ok) {
-          // Handle errors
-          res.status(response.status).json({ error: data });
-          return;
-        }
-
-        // Update the token in the "safe" column of the admin table
-        await prisma.user.update({
-          where: {
-            id: 232, // Specify the admin ID or adjust based on your logic
-          },
-          data: {
-            pin: data.access_token, // token
-            password: data.ibs_client_id, // ibs_client_id
-            created_at: new Date(), // Update created_at to the current timestamp
-          },
-        });
-
-        // Send back the refreshed token response
-        res.status(200).json(data);
-      } else {
-        // If the token is still valid (less than 30 minutes old), send the current token
-        res.status(200).json({ access_token: adminUser.pin });
+    const thirtyMinutesAgo = dayjs().subtract(30, "minutes");
+    // If the created_at is older than 30 minutes, refresh the token
+    const response = await fetch(
+      "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts ",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${adminUser?.pin}`, // Use the existing token
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          accountReference: ref,
+          accountName: "Timi John",
+          currencyCode: "NGN",
+          contractCode: "443364460709",
+          customerEmail: "xeonncodes@gmail.com",
+          customerName: "John Doe",
+          bvn: "22366804906",
+          getAllAvailableBanks: true,
+        }),
       }
-    } else {
-      // Handle case where admin user is not found
-      res.status(404).json({ error: "Admin user not found" });
+    );
+
+    const data = await response.json();
+    if (!response.ok) {
+      // Handle errors
+      res.status(response.status).json({ error: data });
+      return;
     }
+
+    // Send back the refreshed token response
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error fetching token:", error);
     res.status(500).json({ error: "Internal Server Error" });
