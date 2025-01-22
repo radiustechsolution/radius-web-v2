@@ -66,7 +66,7 @@ export default async function handler(
           },
           data: {
             pin: data.responseBody.accessToken, // token
-            password: data.ibs_client_id, // ibs_client_id
+            // password: data.ibs_client_id, // ibs_client_id
             created_at: new Date(), // Update created_at to the current timestamp
           },
         });
