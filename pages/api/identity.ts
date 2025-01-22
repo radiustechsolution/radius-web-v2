@@ -57,3 +57,43 @@ export default async function handler(
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+// {
+//   "eventData": {
+//     "product": {
+//       "reference": "VA-3-1737552130536",
+//       "type": "RESERVED_ACCOUNT"
+//     },
+//     "transactionReference": "MNFY|80|20250122142412|591092",
+//     "paymentReference": "MNFY|80|20250122142412|591092",
+//     "paidOn": "2025-01-22 14:24:12.119",
+//     "paymentDescription": "Olu",
+//     "metaData": {},
+//     "paymentSourceInformation": [
+//       {
+//         "bankCode": "011",
+//         "amountPaid": 10,
+//         "accountName": "OLUDOWOLE OLUMIDE JOHN",
+//         "sessionId": "000016250122142407000029230629",
+//         "accountNumber": "3137741361"
+//       }
+//     ],
+//     "destinationAccountInformation": {
+//       "bankCode": "50515",
+//       "bankName": "Moniepoint Microfinance Bank",
+//       "accountNumber": "6935853367"
+//     },
+//     "amountPaid": 10,
+//     "totalPayable": 10,
+//     "cardDetails": {},
+//     "paymentMethod": "ACCOUNT_TRANSFER",
+//     "currency": "NGN",
+//     "settlementAmount": "9.84",
+//     "paymentStatus": "PAID",
+//     "customer": {
+//       "name": "Olumide Mide",
+//       "email": "radiustechsolution@gmail.com"
+//     }
+//   },
+
+// }
