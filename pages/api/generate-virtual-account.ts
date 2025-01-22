@@ -15,38 +15,72 @@ async function createVirtualAccount(
   const ref = `VA-${userId}-${Date.now()}`;
 
   try {
-    const flutterwaveResponse = await axios.post(
-      "https://api.flutterwave.com/v3/virtual-account-numbers",
+    // const flutterwaveResponse = await axios.post(
+    //   "https://api.flutterwave.com/v3/virtual-account-numbers",
+    //   {
+    //     email: email,
+    //     is_permanent: true,
+    //     bvn: "22366804906", // Replace with valid BVN
+    //     tx_ref: ref,
+    //     firstname: first_name,
+    //     lastname: last_name,
+    //     narration: `${first_name} ${last_name}`,
+    //     phonenumber: phone_number,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+    //     },
+    //   }
+    // );
+    // console.log("Flutterwave Response:", flutterwaveResponse.data);
+
+    // Fetch the admin user by ID (adjust based on your logic)
+    const adminUser = await prisma.user.findUnique({
+      where: {
+        id: 232, // Specify the admin ID or adjust based on your logic
+      },
+    });
+
+    const monnifyResponse = await axios.post(
+      "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts",
       {
-        email: email,
-        is_permanent: true,
-        bvn: "22366804906", // Replace with valid BVN
-        tx_ref: ref,
-        firstname: first_name,
-        lastname: last_name,
-        narration: `${first_name} ${last_name}`,
-        phonenumber: phone_number,
+        accountReference: ref,
+        accountName: `${first_name} ${last_name}`,
+        currencyCode: "NGN",
+        contractCode: "443364460709",
+        customerEmail: email,
+        customerName: `${first_name} ${last_name}`,
+        bvn: "22366804906",
+        getAllAvailableBanks: true,
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+          Accept: "application/json",
+          Authorization: `Bearer ${adminUser?.pin}`, // Use the existing token
+          "Content-Type": "application/json",
         },
       }
     );
 
-    console.log("Flutterwave Response:", flutterwaveResponse.data);
+    console.log("Monnify Response:", monnifyResponse.data);
 
-    const { account_number, bank_name } = flutterwaveResponse.data.data;
+    const { accounts } = monnifyResponse.data.data;
+
+    const { bankCode, bankName, accountNumber } = accounts[0];
+
+    const account_number = accountNumber;
+    const bank_name = bankName;
 
     await prisma.virtual_accounts.create({
       data: {
         customer_id: Number(userId),
         account_id: ref,
         account_reference: ref,
-        account_number,
+        account_number: accountNumber,
         account_name: `${first_name} ${last_name}`,
-        bank_name,
-        bank_code: "1234",
+        bank_name: bankName,
+        bank_code: bankCode,
       },
     });
 

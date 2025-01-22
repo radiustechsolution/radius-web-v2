@@ -23,7 +23,7 @@ export default async function handler(
     const thirtyMinutesAgo = dayjs().subtract(30, "minutes");
     // If the created_at is older than 30 minutes, refresh the token
     const response = await fetch(
-      "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts ",
+      "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts",
       {
         method: "POST",
         headers: {
