@@ -5,6 +5,9 @@ import { Button } from "@nextui-org/button";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const AddMoneyPage = () => {
   const { data: session } = useSession();
@@ -13,6 +16,12 @@ const AddMoneyPage = () => {
   const handleGenerateAccount = async () => {
     setLoading(true);
     const ref = `VA-${session?.user.id}-${Date.now()}`;
+
+    const adminUser = await prisma.user.findUnique({
+      where: {
+        id: 232, // Specify the admin ID or adjust based on your logic
+      },
+    });
 
     try {
       //
@@ -24,6 +33,7 @@ const AddMoneyPage = () => {
             ref: ref,
             first_name: session?.user.first_name,
             last_name: session?.user.last_name,
+            auth: adminUser?.pin,
             email: session?.user.email,
             phone_number: session?.user.phone_number,
           }),
