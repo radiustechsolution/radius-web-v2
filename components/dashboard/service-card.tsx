@@ -7,7 +7,11 @@ import { BiSolidGift } from "react-icons/bi";
 import { IoIosWallet } from "react-icons/io";
 import { SiNetflix } from "react-icons/si";
 import { FaNairaSign } from "react-icons/fa6";
+import { CgMoreVerticalO } from "react-icons/cg";
 import Link from "next/link";
+import { RiMovie2Line } from "react-icons/ri";
+import { IoIosAppstore } from "react-icons/io";
+import { FaPlane, FaPlaneArrival, FaSpotify } from "react-icons/fa";
 
 const ServiceObject = [
   {
@@ -42,8 +46,8 @@ const ServiceObject = [
   },
   {
     id: 5,
-    title: "Save",
-    icon: <IoIosWallet size={17} className="text-serviceIconColor" />,
+    title: "Spotify",
+    icon: <FaSpotify size={17} className="text-serviceIconColor" />,
     path: siteConfig.paths.savings,
   },
   {
@@ -54,8 +58,8 @@ const ServiceObject = [
   },
   {
     id: 7,
-    title: "Loan",
-    icon: <FaNairaSign size={17} className="text-serviceIconColor" />,
+    title: "App Request",
+    icon: <IoIosAppstore size={17} className="text-serviceIconColor" />,
     path: siteConfig.paths.loan,
   },
 ];

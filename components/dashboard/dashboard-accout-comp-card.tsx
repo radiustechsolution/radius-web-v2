@@ -23,8 +23,11 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
               Available Balance
             </p>
           </div>
-          <Link href={siteConfig.paths.transfer} className="flex items-center">
-            <p className="text-white text-[12px] font-light">Send Money</p>
+          <Link
+            href={siteConfig.paths.transactions}
+            className="flex items-center"
+          >
+            <p className="text-white text-[12px] font-light">Transactions</p>
             <RxCaretRight size={14} color="white" />
           </Link>
         </div>
