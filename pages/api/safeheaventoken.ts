@@ -21,51 +21,51 @@ export default async function handler(
     if (adminUser) {
       const thirtyMinutesAgo = dayjs().subtract(30, "minutes");
 
-      if (dayjs(adminUser.created_at).isBefore(thirtyMinutesAgo)) {
-        // If the created_at is older than 30 minutes, refresh the token
-        const response = await fetch(
-          "https://api.safehavenmfb.com/oauth2/token",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              grant_type: "client_credentials",
-              client_assertion_type:
-                "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-              client_id: process.env.HavenOAuthClientID, // Use environment variables for sensitive data
-              client_assertion: process.env.HavenClientAAssertion, // Store your JWT token securely
-            }),
-          }
-        );
-
-        const data = await response.json();
-        if (!response.ok) {
-          // Handle errors
-          res.status(response.status).json({ error: data });
-          return;
+      // if (dayjs(adminUser.created_at).isBefore(thirtyMinutesAgo)) {
+      // If the created_at is older than 30 minutes, refresh the token
+      const response = await fetch(
+        "https://api.safehavenmfb.com/oauth2/token",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            grant_type: "client_credentials",
+            client_assertion_type:
+              "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+            client_id: process.env.HavenOAuthClientID, // Use environment variables for sensitive data
+            client_assertion: process.env.HavenClientAAssertion, // Store your JWT token securely
+          }),
         }
+      );
 
-        // Update the token in the "safe" column of the admin table
-        await prisma.user.update({
-          where: {
-            id: 232, // Specify the admin ID or adjust based on your logic
-          },
-          data: {
-            pin: data.access_token, // token
-            password: data.ibs_client_id, // ibs_client_id
-            created_at: new Date(), // Update created_at to the current timestamp
-          },
-        });
-
-        // Send back the refreshed token response
-        res.status(200).json(data);
-      } else {
-        // If the token is still valid (less than 30 minutes old), send the current token
-        res.status(200).json({ access_token: adminUser.pin });
+      const data = await response.json();
+      if (!response.ok) {
+        // Handle errors
+        res.status(response.status).json({ error: data });
+        return;
       }
+
+      // Update the token in the "safe" column of the admin table
+      await prisma.user.update({
+        where: {
+          id: 232, // Specify the admin ID or adjust based on your logic
+        },
+        data: {
+          pin: data.access_token, // token
+          password: data.ibs_client_id, // ibs_client_id
+          created_at: new Date(), // Update created_at to the current timestamp
+        },
+      });
+
+      // Send back the refreshed token response
+      res.status(200).json(data);
+      // } else {
+      //   // If the token is still valid (less than 30 minutes old), send the current token
+      //   res.status(200).json({ access_token: adminUser.pin });
+      // }
     } else {
       // Handle case where admin user is not found
       res.status(404).json({ error: "Admin user not found" });
