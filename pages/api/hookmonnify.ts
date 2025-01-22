@@ -30,7 +30,10 @@ export default async function webhook(
 
     const { email } = customer;
 
-    if (paymentStatus === "PAID") {
+    if (
+      event.eventType === "SUCCESSFUL_TRANSACTION" &&
+      paymentStatus === "PAID"
+    ) {
       // Check if the transactionReference already exists
       const transaction = await prisma.transactions.findFirst({
         where: {
