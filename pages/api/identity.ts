@@ -29,6 +29,7 @@ export default async function handler(
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${adminUser.pin} `,
         ClientID: clientID, // Safely use clientID here
       },
       body: JSON.stringify({
