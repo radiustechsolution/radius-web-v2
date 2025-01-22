@@ -9,6 +9,7 @@ const YourComponent: React.FC = () => {
       const response = await fetch("/api/safeheaventoken");
       const data = await response.json();
       if (response.ok) {
+        console.log(data);
         setToken(data.access_token);
       } else {
         console.error("Error fetching token:", data.error);

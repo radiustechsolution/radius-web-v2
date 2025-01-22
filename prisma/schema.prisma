@@ -36,6 +36,7 @@ model user {
   profile_locked    Boolean   @default(false) // Added this field
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
+  safe              String
   // Relation to virtual_accounts
   virtual_accounts  virtual_accounts[] @relation("UserVirtualAccounts")
 }

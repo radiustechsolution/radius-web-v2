@@ -1,5 +1,8 @@
 // /pages/api/token.ts
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient(); // Initialize Prisma Client
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,6 +30,16 @@ export default async function handler(
       res.status(response.status).json({ error: data });
       return;
     }
+
+    // Store the token in the "safe" column of the admin table
+    await prisma.user.update({
+      where: {
+        id: 232, // Specify the admin ID or adjust based on your logic
+      },
+      data: {
+        pin: data.access_token, // Assuming "safe" is the correct column name
+      },
+    });
 
     // Send back the token response
     res.status(200).json(data);
