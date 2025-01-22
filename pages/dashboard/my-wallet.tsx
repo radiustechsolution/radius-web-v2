@@ -17,7 +17,7 @@ const AddMoneyPage = () => {
     try {
       //
       const response = await fetch(
-        "https://appapi.radiustech.com.ng/api/virtualaccountnew",
+        "https://appapi.radiustech.com.ng/api/CreateVirtualNewRadiusMonnify",
         {
           method: "POST",
           body: JSON.stringify({
