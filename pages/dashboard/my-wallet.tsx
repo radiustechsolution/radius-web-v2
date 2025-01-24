@@ -140,10 +140,15 @@ const AddMoneyPage = () => {
             </div>
           )}
           {session?.user.account_name && (
-            <p className="text-[12px] p-5 opacity-55 text-center">
-              Deposit made to the account above incurs charges of 1.4%. If you
-              sent N100, you will receive N98.6.
-            </p>
+            <>
+              <p className="text-[12px] p-5 opacity-55 text-left">
+                Note: Deposits made to the account above incurs charges of 1.5%.
+                If you sent N100, you will receive N98.5
+              </p>
+              <p className="text-[12px] p-5 opacity-55 text-left">
+                Note: Deposits to this account are currently none refundable.
+              </p>
+            </>
           )}
         </div>
       </section>

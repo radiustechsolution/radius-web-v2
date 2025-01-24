@@ -22,7 +22,7 @@ export default async function webhook(
     const {
       transactionReference,
       amountPaid,
-      totalPayable,
+      // totalPayable,
       settlementAmount,
       paymentStatus,
       customer,
