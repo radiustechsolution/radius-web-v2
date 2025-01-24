@@ -146,7 +146,7 @@ const AddMoneyPage = () => {
                 If you sent N100, you will receive N98.5
               </p>
               <p className="text-[12px] p-5 opacity-55 text-left">
-                Note: Deposits to this account are currently none refundable.
+                Note: Deposits to this account are currently nonrefundable.
               </p>
             </>
           )}
