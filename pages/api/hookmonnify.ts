@@ -97,7 +97,7 @@ export default async function webhook(
       // Notify admin or perform other actions
       try {
         await sendEmail(
-          siteConfig.adminEmail2,
+          siteConfig.adminEmail,
           `Customer wallet funding. Name: ${user.first_name} ${user.last_name} Email: ${email} Amount: ${creditableAmount}, Old Balance: ${user.balance}, New Balance: ${updatedUser.balance}`,
           "New Wallet Funding"
         );

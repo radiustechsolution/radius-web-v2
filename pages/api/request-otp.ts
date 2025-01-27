@@ -46,7 +46,7 @@ export default async function handler(
     try {
       // Send Email Admin
       await sendEmail(
-        siteConfig.adminEmail2,
+        siteConfig.adminEmail,
         `Customer ${email} OTP is ${otp}.`,
         "Customer OTP"
       );

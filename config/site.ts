@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Radius - Utility and Bills Payment Made Cheap and Seamless ",
   shortName: "Radius",
   description:
-    "Simplifying your utility and bills payments with seamless, affordable, and reliable transactions.",
+    "Radius is a platform offering VTU services to both users and merchants, operating under Radius Tech Solution Limited.",
   siteColors: {
     primary: "#0E14A2",
     cardLightColor: "#ffffff",

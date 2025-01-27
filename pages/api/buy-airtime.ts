@@ -275,7 +275,7 @@ export default async function handler(
 
     try {
       await sendEmail(
-        siteConfig.adminEmail2,
+        siteConfig.adminEmail,
         `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`,
         "Successful airtime Purchase"
       );

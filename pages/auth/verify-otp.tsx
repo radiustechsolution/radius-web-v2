@@ -117,7 +117,7 @@ const VerifyPage = () => {
             // );
 
             await sendEmail(
-              siteConfig.adminEmail2,
+              siteConfig.adminEmail,
               `Sucessful customer registration. Wallet generated successfully.`,
               "New Customer Wallet Generated"
             );

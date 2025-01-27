@@ -130,7 +130,7 @@ export default async function handler(
     if (balance < plan_amount) {
       try {
         await sendEmail(
-          siteConfig.adminEmail2,
+          siteConfig.adminEmail,
           `Customer transaction failed while purchasing ${product_name} Network: ${network} Customer ID: ${customerId}. Error: Insufficient balance, Name: ${lockUser.first_name} ${lockUser.last_name} `,
           "Failed Transaction"
         );
@@ -213,7 +213,7 @@ export default async function handler(
 
       try {
         await sendEmail(
-          siteConfig.adminEmail2,
+          siteConfig.adminEmail,
           `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
           "Failed Transaction"
         );
@@ -244,7 +244,7 @@ export default async function handler(
 
     try {
       await sendEmail(
-        siteConfig.adminEmail2,
+        siteConfig.adminEmail,
         `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`,
         "Successful Data Purchase"
       );

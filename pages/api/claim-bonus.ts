@@ -35,7 +35,7 @@ export default async function claimBonus(
     if (user.last_bonus_claim === today) {
       try {
         await sendEmail(
-          siteConfig.adminEmail2,
+          siteConfig.adminEmail,
           `Customer tries to claim bonus twice today. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`,
           "Daily Bonus Issue"
         );
@@ -62,7 +62,7 @@ export default async function claimBonus(
           `Customer tries to claim bonus again without purchasing a product. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`
         );
         await sendEmail(
-          siteConfig.adminEmail2,
+          siteConfig.adminEmail,
           `Customer tries to claim bonus again without purchasing a product. Name: ${user.first_name} ${user.last_name}, Email: ${user.email}, Balance: ${user.balance}, Phone Number: ${user.phone_number}`,
           "Daily Bonus Issue"
         );
@@ -123,7 +123,7 @@ export default async function claimBonus(
     );
 
     await sendEmail(
-      siteConfig.adminEmail2,
+      siteConfig.adminEmail,
       `Daily bonus claim, Email: ${user.email}, Customer Name: ${user.first_name} ${user.last_name}, Balance after ${updatedUser.balance}`,
       "Daily Bonus"
     );
