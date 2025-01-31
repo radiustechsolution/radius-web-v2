@@ -31,7 +31,12 @@ const DashboardPage = () => {
         xagonn: "sampleregex",
       });
     };
+
     session?.user.email && updated();
+
+    const email: any = session?.user?.email;
+
+    localStorage.setItem("email", email);
   }, [session?.user?.email]);
 
   const handleClaimBonus = async () => {
@@ -63,14 +68,11 @@ const DashboardPage = () => {
     }
   };
 
-
   return (
     <DashboardLayout>
       <section className="w-full max-w-[580px] flex flex-col h-full">
         {/* Dashboard area */}
         <div className="flex-1 flex flex-col gap-4 overflow-auto scrollbar-hide">
-         
-
           {/* Dashboard Detail Card */}
           <DashboardAccountCompCard
             balance={formatCurrency(session?.user?.balance)}
