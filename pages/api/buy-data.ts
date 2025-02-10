@@ -245,12 +245,12 @@ export default async function handler(
     try {
       await sendEmail(
         siteConfig.adminEmail,
-        `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`,
+        `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Network: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`,
         "Successful Data Purchase"
       );
-      await sendWhatsappMessage(
-        `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`
-      );
+      // await sendWhatsappMessage(
+      //   `Successful data purchase Data: ${product_name}, Amount: ${plan_amount}, Sent: ${new Decimal(databundleData.plan_amount)}, Email: ${lockUser.email}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance Before: ${transactionUpdated.balance_before}, Balance After: ${transactionUpdated.balance_after}`
+      // );
 
       // await sendEmail(
       //   lockUser.email,

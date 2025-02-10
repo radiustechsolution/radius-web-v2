@@ -280,9 +280,9 @@ export default async function handler(
         "Successful airtime Purchase"
       );
 
-      await sendWhatsappMessage(
-        `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`
-      );
+      // await sendWhatsappMessage(
+      //   `Successful airtime purchase , Email: ${lockUser.email}, Amount: ${amount}, Charged Amount: ${chargeAmount}, Beneficiary: ${phone_number}, Merchant: ${merchant} Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Balance before ${transactionUpdated.balance_before}, Balance after ${transactionUpdated.balance_after}`
+      // );
 
       // await sendEmail(
       //   lockUser.email,
