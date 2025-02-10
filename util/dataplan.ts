@@ -975,7 +975,6 @@ const dataPlans: DataPlans = {
           PRODUCT_NAME: "20.0 GB - 30 days (CORPORATE)",
           PRODUCT_AMOUNT: 13740.0,
         },
-
         {
           PRODUCT_CODE: "19",
           PRODUCT_ID: "298",
@@ -986,5 +985,7 @@ const dataPlans: DataPlans = {
     },
   ],
 };
+
+// ss
 
 export default dataPlans;
