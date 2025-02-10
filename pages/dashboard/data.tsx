@@ -1,7 +1,6 @@
 import SetPin from "@/components/dashboard/modal-setpin";
 import VerifyTransaction from "@/components/dashboard/verify-transaction";
 import { siteConfig } from "@/config/site";
-import { useUser } from "@/context/userContext";
 import ServicesPageLayout from "@/layouts/servicespages";
 import dataPlans, { Product } from "@/util/dataplan";
 import { Button } from "@nextui-org/react";
@@ -23,7 +22,6 @@ const DataPage = () => {
   const router = useRouter();
   const ref = useRef<any>(null);
   const refConfirm = useRef<any>(null);
-  const { user, updateUser, logout } = useUser();
 
   const [loading, setLoading] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(""); // State to hold the selected network

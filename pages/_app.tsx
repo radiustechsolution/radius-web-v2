@@ -8,7 +8,6 @@ import "@/styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import { SessionProvider } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { UserProvider } from "@/context/userContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -71,11 +70,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider defaultTheme="light">
-        <UserProvider>
-          <SessionProvider session={pageProps.session}>
-            <Component {...pageProps} />
-          </SessionProvider>
-        </UserProvider>
+        <SessionProvider session={pageProps.session}>
+          <Component {...pageProps} />
+        </SessionProvider>
         <ToastContainer />
       </NextThemesProvider>
     </NextUIProvider>
