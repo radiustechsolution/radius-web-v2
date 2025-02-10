@@ -700,30 +700,57 @@ const dataPlans: DataPlans = {
 
         {
           PRODUCT_CODE: "4",
+          PRODUCT_ID: "286",
+          PRODUCT_NAME: "1.0 GB - 1 day (SME)",
+          PRODUCT_AMOUNT: 187.0 + 4.1,
+        },
+
+        {
+          PRODUCT_CODE: "5",
           PRODUCT_ID: "195",
           PRODUCT_NAME: "2.0 GB - 30 days (CORPORATE)",
           PRODUCT_AMOUNT: 530,
         },
 
         {
-          PRODUCT_CODE: "5",
+          PRODUCT_CODE: "6",
+          PRODUCT_ID: "288",
+          PRODUCT_NAME: "2.0 GB - 2 days (SME)",
+          PRODUCT_AMOUNT: 280.0,
+        },
+
+        {
+          PRODUCT_CODE: "7",
           PRODUCT_ID: "196",
           PRODUCT_NAME: "3.0 GB - 30 days (CORPORATE)",
           PRODUCT_AMOUNT: 795,
         },
+        {
+          PRODUCT_CODE: "8",
+          PRODUCT_ID: "289",
+          PRODUCT_NAME: "3.5 GB - 2 days (SME)",
+          PRODUCT_AMOUNT: 468.0,
+        },
 
         {
-          PRODUCT_CODE: "6",
+          PRODUCT_CODE: "9",
           PRODUCT_ID: "197",
           PRODUCT_NAME: "5.0 GB - 30 days (CORPORATE)",
           PRODUCT_AMOUNT: 1325,
         },
 
         {
-          PRODUCT_CODE: "7",
+          PRODUCT_CODE: "10",
           PRODUCT_ID: "200",
           PRODUCT_NAME: "10.0 GB - 30 days (CORPORATE)",
           PRODUCT_AMOUNT: 2650,
+        },
+
+        {
+          PRODUCT_CODE: "11",
+          PRODUCT_ID: "290",
+          PRODUCT_NAME: "15.0 GB - 7 days (SME)",
+          PRODUCT_AMOUNT: 1875,
         },
       ],
     },
