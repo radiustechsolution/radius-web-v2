@@ -20,7 +20,7 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
   },
-  output: "export",
+  // output: "export",
 });
 
 // /** @type {import('next').NextConfig} */
