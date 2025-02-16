@@ -531,12 +531,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 128.5 + 13,
         },
 
-        {
-          PRODUCT_CODE: "6",
-          PRODUCT_ID: "259",
-          PRODUCT_NAME: "500 MB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 126 + 13,
-        },
+        // {
+        //   PRODUCT_CODE: "6",
+        //   PRODUCT_ID: "259",
+        //   PRODUCT_NAME: "500 MB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 126 + 13,
+        // },
 
         // {
         //   PRODUCT_CODE: "5",
@@ -566,12 +566,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 514,
         },
 
-        {
-          PRODUCT_CODE: "10",
-          PRODUCT_ID: "233",
-          PRODUCT_NAME: "2.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 556,
-        },
+        // {
+        //   PRODUCT_CODE: "10",
+        //   PRODUCT_ID: "233",
+        //   PRODUCT_NAME: "2.0 GB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 556,
+        // },
 
         // {
         //   PRODUCT_CODE: "8",
@@ -594,12 +594,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 771,
         },
 
-        {
-          PRODUCT_CODE: "12",
-          PRODUCT_ID: "234",
-          PRODUCT_NAME: "3.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 834,
-        },
+        // {
+        //   PRODUCT_CODE: "12",
+        //   PRODUCT_ID: "234",
+        //   PRODUCT_NAME: "3.0 GB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 834,
+        // },
 
         // {
         //   PRODUCT_CODE: "11",
@@ -615,12 +615,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 1285,
         },
 
-        {
-          PRODUCT_CODE: "14",
-          PRODUCT_ID: "235",
-          PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 1390,
-        },
+        // {
+        //   PRODUCT_CODE: "14",
+        //   PRODUCT_ID: "235",
+        //   PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 1390,
+        // },
 
         // {
         //   PRODUCT_CODE: "13",
@@ -636,12 +636,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 2570,
         },
 
-        {
-          PRODUCT_CODE: "16",
-          PRODUCT_ID: "236",
-          PRODUCT_NAME: "10.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 2780,
-        },
+        // {
+        //   PRODUCT_CODE: "16",
+        //   PRODUCT_ID: "236",
+        //   PRODUCT_NAME: "10.0 GB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 2780,
+        // },
 
         // {
         //   PRODUCT_CODE: "15",
