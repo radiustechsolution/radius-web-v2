@@ -53,6 +53,43 @@ export default async function webhook(
       });
 
       if (!user) {
+        // Payload to send to the external endpoint
+        const event = req.body; // Use the request body as the payload
+        const externalUrl = "https://appapi.radiustech.com.ng/v1/hook/monnify";
+
+        try {
+          // Send the payload to the external endpoint using Fetch API
+          const response = await fetch(externalUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(event), // Convert the payload to JSON
+          });
+
+          // Check if the request was successful
+          if (!response.ok) {
+            throw new Error(
+              `External API returned ${response.status}: ${response.statusText}`
+            );
+          }
+
+          // Parse the response from the external API
+          const responseData = await response.json();
+
+          // Log the response from the external API
+          console.log("External API Response:", responseData);
+
+          // Return a 404 response to the client
+          return res.status(404).json({
+            message: "User not found",
+            externalApiResponse: responseData,
+          });
+        } catch (error) {
+          // Log the error if the request fails
+          // console.error('Error sending payload to external API:', error.message);
+        }
         return res.status(404).json({ message: "User not found" });
       }
 
