@@ -64,7 +64,7 @@ const VerifyPage = () => {
 
         // Step 2 Create Virtual account
         const response2 = await fetch(
-          "https://appapi.radiustech.com.ng/api/virtualaccountnewmonnify",
+          "https://appapi.radiustech.com.ng/v1/webapp/virtualaccountnewmonnify",
           {
             method: "POST",
             body: JSON.stringify({
