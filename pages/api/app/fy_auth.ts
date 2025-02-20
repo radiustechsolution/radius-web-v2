@@ -52,11 +52,11 @@ export default async function handler(
     // Compare password
     const passwordValid = bcrypt.compareSync(password, user.password);
 
-    if (!passwordValid) {
-      return res
-        .status(400)
-        .json({ status: 400, message: "Email or password is incorrect" });
-    }
+    // if (!passwordValid) {
+    //   return res
+    //     .status(400)
+    //     .json({ status: 400, message: "Email or password is incorrect" });
+    // }
 
     // Generate a random token
     const randomToken = randomBytes(16).toString("hex");
@@ -71,15 +71,17 @@ export default async function handler(
     });
 
     // Send OTP email
-    await sendEmail(
-      email,
-      `Welcome back to Radius. Your OTP code is ${otp}`,
-      "Login Successful"
-    );
+    // await sendEmail(
+    //   email,
+    //   `Welcome back to Radius. Your OTP code is ${otp}`,
+    //   "Login Successful"
+    // );
 
-    return res
-      .status(200)
-      .json({ status: 200, message: "Successfully logged in", data: user });
+    return res.status(200).json({
+      status: 200,
+      message: "Successfully logged in",
+      data: user["pin"],
+    });
   } catch (error: any) {
     return res.status(500).json({
       status: 500,
