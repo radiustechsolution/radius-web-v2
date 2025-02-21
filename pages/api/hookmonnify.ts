@@ -5,6 +5,7 @@ import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { siteConfig } from "@/config/site";
+import { blockedEmail } from "@/lib/object";
 
 const prisma = new PrismaClient();
 
@@ -52,11 +53,14 @@ export default async function webhook(
         where: { email: email },
       });
 
+      if (blockedEmail.includes(email)) {
+        return res.status(500).json({ message: "Mobile app customer" });
+      }
+
       if (!user) {
         // Payload to send to the external endpoint
         const event = req.body; // Use the request body as the payload
         const externalUrl = "https://appapi.radiustech.com.ng/v1/hook/monnify";
-
         try {
           // Send the payload to the external endpoint using Fetch API
           const response = await fetch(externalUrl, {
