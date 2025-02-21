@@ -6,6 +6,7 @@ import { generateRef } from "@/lib/functions";
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
 import { siteConfig } from "@/config/site";
+import { blockedEmail } from "@/lib/object";
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,10 @@ export default async function webhook(
       event.data;
 
     const { email, id: user_id } = customer;
+
+    if (blockedEmail.includes(email)) {
+      return res.status(500).json({ message: "Mobile app customer" });
+    }
 
     if (status === "successful") {
       // Check if id already exist
