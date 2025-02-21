@@ -608,19 +608,19 @@ const dataPlans: DataPlans = {
         //   PRODUCT_AMOUNT: 846.0,
         // },
 
-        {
-          PRODUCT_CODE: "13",
-          PRODUCT_ID: "291",
-          PRODUCT_NAME: "5.0 GB - 30 days (SME)",
-          PRODUCT_AMOUNT: 1285,
-        },
-
         // {
-        //   PRODUCT_CODE: "14",
-        //   PRODUCT_ID: "235",
-        //   PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
-        //   PRODUCT_AMOUNT: 1390,
+        //   PRODUCT_CODE: "13",
+        //   PRODUCT_ID: "291",
+        //   PRODUCT_NAME: "5.0 GB - 30 days (SME)",
+        //   PRODUCT_AMOUNT: 1285,
         // },
+
+        {
+          PRODUCT_CODE: "14",
+          PRODUCT_ID: "235",
+          PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
+          PRODUCT_AMOUNT: 1390,
+        },
 
         // {
         //   PRODUCT_CODE: "13",
