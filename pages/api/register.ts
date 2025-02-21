@@ -6,6 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "joi"; // Import Joi for validation
 import { sendEmail } from "@/lib/sendmail";
 import { sendWhatsappMessage } from "@/lib/sendWhatsapp";
+import { blockedEmail } from "@/lib/object";
 
 const prisma = new PrismaClient();
 
@@ -46,6 +47,10 @@ export default async function handler(
   const randomPromoCode: string = String(generateSixDigitNumber());
   const hashedToken = bcrypt.hashSync(randomToken, 10);
   const hashedPassword = bcrypt.hashSync(password, 10);
+
+  if (blockedEmail.includes(email)) {
+    return res.status(400).json({ error: "Use the mobile app" });
+  }
 
   try {
     // Check if phone numbern, username, or email already exists

@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { blockedEmail } from "@/lib/object";
 
 const SigninPage = () => {
   // Hooks
@@ -20,8 +21,16 @@ const SigninPage = () => {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
+    const email: any = formData.get("email");
     const password = formData.get("password");
+
+    if (blockedEmail.includes(email)) {
+      // return res.status(403).json({
+      //   error: "Account cannot make purchase. Kindly reach the admin.",
+      // });
+      setLoading(false);
+      toast("Use the mobile app", { toastId: "failedlogsin" });
+    }
 
     const res = await signIn("credentials", {
       redirect: false,

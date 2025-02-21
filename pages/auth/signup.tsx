@@ -8,6 +8,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { signIn } from "next-auth/react";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { blockedEmail } from "@/lib/object";
 
 const SignUpPage = () => {
   // Hook
@@ -25,12 +26,17 @@ const SignUpPage = () => {
     const formData = new FormData(e.currentTarget);
     const first_name = formData.get("first_name");
     const last_name = formData.get("last_name");
-    const email = formData.get("email");
+    const email: any = formData.get("email");
     const phone_number = formData.get("phone_number");
     const password = formData.get("password");
     const username = formData.get("username");
     const p_code = formData.get("promo_code");
     const promo_code = p_code ? p_code : "radius";
+
+    if (blockedEmail.includes(email)) {
+      setLoading(false);
+      toast("Use the mobile app", { toastId: "failedlogsin" });
+    }
 
     const res = await fetch("/api/register", {
       method: "POST",
