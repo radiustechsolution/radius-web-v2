@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { blockedEmail } from "@/lib/object";
 
 const prisma = new PrismaClient();
 
@@ -24,14 +23,6 @@ export default NextAuth({
               virtual_accounts: true, // Fetch related virtual account(s)
             },
           });
-
-          // Step 2: Check if the user's email is in the blockedEmail list
-          if (blockedEmail.includes(customer.email)) {
-            // return res.status(403).json({
-            //   error: "Account cannot make purchase. Kindly reach the admin.",
-            // });
-            throw new Error("Use the mobile app");
-          }
 
           // Throw an error if email is not verified
           if (user && user.email_verified !== 1) {
