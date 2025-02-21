@@ -53,11 +53,7 @@ export default async function webhook(
         where: { email: email },
       });
 
-      if (blockedEmail.includes(email)) {
-        return res.status(500).json({ message: "Mobile app customer" });
-      }
-
-      if (!user) {
+      if (!user || blockedEmail.includes(email)) {
         // Payload to send to the external endpoint
         const event = req.body; // Use the request body as the payload
         const externalUrl = "https://appapi.radiustech.com.ng/v1/hook/monnify";
@@ -95,6 +91,10 @@ export default async function webhook(
           // console.error('Error sending payload to external API:', error.message);
         }
         return res.status(404).json({ message: "User not found" });
+      }
+
+      if (blockedEmail.includes(email)) {
+        return res.status(500).json({ message: "Mobile app customer" });
       }
 
       const creditableAmount = parseFloat(settlementAmount);
