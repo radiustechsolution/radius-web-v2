@@ -1,9 +1,13 @@
+import { siteConfig } from "@/config/site";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { HiDownload } from "react-icons/hi";
 import { MdDownloadForOffline } from "react-icons/md";
 
 export const DownloadAppButton2 = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: any) => {
@@ -41,17 +45,25 @@ export const DownloadAppButton2 = () => {
   };
 
   return (
-    <>
-      {deferredPrompt && (
-        <button
-          className="tracking-widest uppercase flex items-center gap-1 px-3 text-[10px] py-[7px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
-          onClick={handleInstallClick}
-        >
-          Install
-          <HiDownload size={15} color="white" />
-        </button>
-      )}
-    </>
+    // <>
+    //   {deferredPrompt && (
+    <Link
+      href="https://drive.google.com/drive/folders/1bWreKYcOEeWom_JfvgwZsB9WVDIKYz6B?usp=sharing"
+      className="flex items-center"
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+    >
+      <button
+        className="tracking-widest uppercase flex items-center gap-1 px-3 text-[10px] py-[7px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
+        // onClick={() => router.push(siteConfig.paths.download_app)}
+      >
+        Install
+        <HiDownload size={15} color="white" />
+      </button>
+    </Link>
+    //   )}
+    // </>
   );
 };
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HiDownload } from "react-icons/hi";
 
@@ -40,18 +41,19 @@ export const DownloadAppButton = () => {
   };
 
   return (
-    <>
-      {deferredPrompt && (
-        <div className="z-40 absolute bottom-7">
-          <button
-            className="tracking-widest uppercase flex items-center gap-1 px-4 text-[11px] py-[10px] font-semibold rounded-md bg-black text-white animate-grow-shrink"
-            onClick={handleInstallClick}
-          >
-            Install
-            <HiDownload size={16} color="white" />
-          </button>
-        </div>
-      )}
-    </>
+    <Link
+      href="https://drive.google.com/drive/folders/1bWreKYcOEeWom_JfvgwZsB9WVDIKYz6B?usp=sharing"
+      className="flex items-center"
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+    >
+      <div className="z-40 absolute bottom-7">
+        <button className="tracking-widest uppercase flex items-center gap-1 px-4 text-[11px] py-[10px] font-semibold rounded-md bg-black text-white animate-grow-shrink">
+          Install
+          <HiDownload size={16} color="white" />
+        </button>
+      </div>
+    </Link>
   );
 };

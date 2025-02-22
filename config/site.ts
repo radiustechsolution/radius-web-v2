@@ -30,6 +30,7 @@ export const siteConfig = {
     addmoney: "/dashboard/my-wallet",
     transfer: "/dashboard/transfer",
     notification: "/dashboard/notification",
+    download_app: "/dashboard/download-app",
     requestotp: "/auth/request-otp",
     resetpassword: "/auth/reset-password",
     emailVerification: "/auth/verify-otp",
