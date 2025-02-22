@@ -94,7 +94,7 @@ export default async function handler(
     if (balance < chargeAmount) {
       try {
         await sendEmail(
-          "xeonncodes@gmail.com",
+          "radiustechsolution@gmail.com",
           "Customer transaction failed while purchasing N" +
             chargeAmount +
             " airtime. Name: " +
@@ -170,59 +170,24 @@ export default async function handler(
 
     const airtimeData = await airtimeResponse.json();
     if (airtimeData.status != "ORDER_RECEIVED") {
-      if (airtimeData.status == "INSUFFICIENT_BALANCE") {
-        await prisma.user.update({
-          where: { id: customerId },
-          data: {
-            balance: { increment: chargeAmount },
-          },
-        });
-        await prisma.transactions.update({
-          where: { txf: transactionReference },
-          data: {
-            amount_sent: 0,
-            balance_after: balance,
-            status: "failed",
-          },
-        });
+      await prisma.user.update({
+        where: { id: customerId },
+        data: {
+          balance: { increment: chargeAmount },
+        },
+      });
+      await prisma.transactions.update({
+        where: { txf: transactionReference },
+        data: {
+          amount_sent: 0,
+          balance_after: balance,
+          status: "failed",
+        },
+      });
 
-        try {
-          await sendEmail(
-            "xeonncodes@gmail.com",
-            "Customer transaction failed while purchasing N" +
-              chargeAmount +
-              " airtime. Email: " +
-              lockUser.email +
-              " Network: " +
-              merchant +
-              ", Error: " +
-              airtimeData?.status +
-              " Customer Name: " +
-              lockUser.first_name +
-              " " +
-              lockUser.last_name,
-            "Failed Transaction"
-          );
-          await sendWhatsappMessage(
-            "Customer transaction failed while purchasing N" +
-              chargeAmount +
-              " airtime. Email: " +
-              lockUser.email +
-              " Network: " +
-              merchant +
-              ", Error: " +
-              airtimeData?.status +
-              " Customer Name: " +
-              lockUser.first_name +
-              " " +
-              lockUser.last_name
-          );
-        } catch (emailError) {
-          console.error("Email sending failed:", emailError);
-        }
-      } else {
+      try {
         await sendEmail(
-          "xeonncodes@gmail.com",
+          "radiustechsolution@gmail.com",
           "Customer transaction failed while purchasing N" +
             chargeAmount +
             " airtime. Email: " +
@@ -249,11 +214,10 @@ export default async function handler(
             " Customer Name: " +
             lockUser.first_name +
             " " +
-            lockUser.last_name +
-            ", Customer Phone Number" +
-            lockUser.phone_number +
-            ". This customer has not been refunded. Call the user"
+            lockUser.last_name
         );
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
       }
       throw new Error("Airtime purchase failed. Try again!");
     }
