@@ -972,7 +972,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "19",
           PRODUCT_ID: "148",
           PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 6870.0 - 380,
+          PRODUCT_AMOUNT: 6870.0 - 270,
         },
 
         {
