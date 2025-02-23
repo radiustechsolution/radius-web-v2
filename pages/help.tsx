@@ -20,7 +20,7 @@ const HelpPage = () => {
           {/* Email Support Form */}
           <div className="bg-card px-5 py-6 rounded-xl shadow-lg">
             <form
-              action="mailto:radiustechsolution@gmail.com"
+              action="mailto:xeonncodes@gmail.com"
               method="post"
               encType="text/plain"
               className="space-y-4"
