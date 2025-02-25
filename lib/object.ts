@@ -5,4 +5,5 @@ export const blockedEmail = [
   "elitedigitalskill@gmail.com",
   "ebizdavid2@gmail.com",
   "fayowolebenjamin99@gmail.com",
+  "oretutundex@gmail.com"
 ];
