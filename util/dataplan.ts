@@ -504,27 +504,6 @@ const dataPlans: DataPlans = {
         // },
 
         {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "215",
-          PRODUCT_NAME: "1 GB - 1 day (Gifting)",
-          PRODUCT_AMOUNT: 350,
-        },
-
-        {
-          PRODUCT_CODE: "3",
-          PRODUCT_ID: "216",
-          PRODUCT_NAME: "3.2 GB - 2 days (Gifting)",
-          PRODUCT_AMOUNT: 1000,
-        },
-
-        {
-          PRODUCT_CODE: "4",
-          PRODUCT_ID: "217",
-          PRODUCT_NAME: "5 GB - 7 days (Gifting)",
-          PRODUCT_AMOUNT: 1500,
-        },
-
-        {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "214",
           PRODUCT_NAME: "500 MB - 30 days (SME)",
@@ -546,6 +525,13 @@ const dataPlans: DataPlans = {
         // },
 
         {
+          PRODUCT_CODE: "2",
+          PRODUCT_ID: "215",
+          PRODUCT_NAME: "1 GB - 1 day (Gifting)",
+          PRODUCT_AMOUNT: 350,
+        },
+
+        {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "7",
           PRODUCT_NAME: "1.0 GB - 30 days (SME)",
@@ -558,6 +544,13 @@ const dataPlans: DataPlans = {
         //   PRODUCT_NAME: "1.0 GB - 30 days (SME2)",
         //   PRODUCT_AMOUNT: 278 + 5,
         // },
+
+        {
+          PRODUCT_CODE: "3",
+          PRODUCT_ID: "216",
+          PRODUCT_NAME: "3.2 GB - 2 days (Gifting)",
+          PRODUCT_AMOUNT: 1000,
+        },
 
         {
           PRODUCT_CODE: "9",
@@ -594,6 +587,13 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 1950,
         },
 
+        {
+          PRODUCT_CODE: "110",
+          PRODUCT_ID: "305",
+          PRODUCT_NAME: "1.5 GB - 1 day (GIFTING)",
+          PRODUCT_AMOUNT: 400,
+        },
+
         // {
         //   PRODUCT_CODE: "12",
         //   PRODUCT_ID: "234",
@@ -615,12 +615,27 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 3250.0,
         },
 
+        // {
+        //   PRODUCT_CODE: "14",
+        //   PRODUCT_ID: "235",
+        //   PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
+        //   PRODUCT_AMOUNT: 1390,
+        // },
+
         {
-          PRODUCT_CODE: "14",
-          PRODUCT_ID: "235",
-          PRODUCT_NAME: "5.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 1390,
+          PRODUCT_CODE: "4",
+          PRODUCT_ID: "217",
+          PRODUCT_NAME: "5 GB - 7 days (Gifting)",
+          PRODUCT_AMOUNT: 1500,
         },
+
+        {
+          PRODUCT_CODE: "18",
+          PRODUCT_ID: "309",
+          PRODUCT_NAME: "7 GB - 7 days (GIFTING)",
+          PRODUCT_AMOUNT: 3000,
+        },
+        
 
         // {
         //   PRODUCT_CODE: "13",
@@ -634,6 +649,20 @@ const dataPlans: DataPlans = {
           PRODUCT_ID: "213",
           PRODUCT_NAME: "10.0 GB - 30 days (SME)",
           PRODUCT_AMOUNT: 6500,
+        },
+
+        {
+          PRODUCT_CODE: "16",
+          PRODUCT_ID: "306",
+          PRODUCT_NAME: "75 GB - 30 days (GIFTING)",
+          PRODUCT_AMOUNT: 20000,
+        },
+
+        {
+          PRODUCT_CODE: "17",
+          PRODUCT_ID: "307",
+          PRODUCT_NAME: "200 GB - 60 days (GIFTING)",
+          PRODUCT_AMOUNT: 49600,
         },
 
         // {
