@@ -14,7 +14,6 @@ const HelpPage = () => {
             Get assistance with any questions or issues.
           </p>
         </div>
-
         {/* Help Sections */}
         <div className="space-y-6">
           {/* Email Support Form */}
