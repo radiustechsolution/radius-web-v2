@@ -25,21 +25,21 @@ export const dataplans_object = {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "260",
           PRODUCT_NAME: "150 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 50 + 17,
+          PRODUCT_AMOUNT: 50,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "49",
           PRODUCT_NAME: "250 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 72.5 + 17,
+          PRODUCT_AMOUNT: 72.5,
         },
 
         {
           PRODUCT_CODE: "40",
           PRODUCT_ID: "215",
           PRODUCT_NAME: "1 GB - 1 day (Gifting)",
-          PRODUCT_AMOUNT: 220 + 7,
+          PRODUCT_AMOUNT: 220,
         },
 
         {
@@ -60,35 +60,35 @@ export const dataplans_object = {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "214",
           PRODUCT_NAME: "500 MB - 30 days (SME)",
-          PRODUCT_AMOUNT: 128.5 + 13,
+          PRODUCT_AMOUNT: 128.5,
         },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "259",
           PRODUCT_NAME: "500 MB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 126 + 13,
+          PRODUCT_AMOUNT: 126,
         },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "212",
           PRODUCT_NAME: "500 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 130 + 13,
+          PRODUCT_AMOUNT: 130,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "7",
           PRODUCT_NAME: "1.0 GB - 30 days (SME)",
-          PRODUCT_AMOUNT: 257 + 4.6,
+          PRODUCT_AMOUNT: 257,
         },
 
         {
           PRODUCT_CODE: "43",
           PRODUCT_ID: "231",
           PRODUCT_NAME: "1.0 GB - 30 days (SME2)",
-          PRODUCT_AMOUNT: 252 + 5,
+          PRODUCT_AMOUNT: 252,
         },
 
         {
@@ -206,21 +206,21 @@ export const dataplans_object = {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "225",
           PRODUCT_NAME: "200 MB - 14 days (CORPORATE)",
-          PRODUCT_AMOUNT: 55 + 17,
+          PRODUCT_AMOUNT: 55,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "203",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 132.5 + 13,
+          PRODUCT_AMOUNT: 132.5,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "194",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 265 + 4.1,
+          PRODUCT_AMOUNT: 265,
         },
 
         {
@@ -261,56 +261,56 @@ export const dataplans_object = {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "221",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 80 + 30,
+          PRODUCT_AMOUNT: 80,
         },
 
         {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "183",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 150 + 30,
+          PRODUCT_AMOUNT: 150,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "184",
           PRODUCT_NAME: "1.5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 227 + 30,
+          PRODUCT_AMOUNT: 227,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "185",
           PRODUCT_NAME: "2 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 300 + 50,
+          PRODUCT_AMOUNT: 300,
         },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "186",
           PRODUCT_NAME: "3 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 450 + 30,
+          PRODUCT_AMOUNT: 450,
         },
 
         {
           PRODUCT_CODE: "6",
           PRODUCT_ID: "188",
           PRODUCT_NAME: "5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 750 + 50,
+          PRODUCT_AMOUNT: 750,
         },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "189",
           PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 1500 + 50,
+          PRODUCT_AMOUNT: 1500,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "229",
           PRODUCT_NAME: "20.0 GB - Monthly (CORPORATE)",
-          PRODUCT_AMOUNT: 3000 + 50,
+          PRODUCT_AMOUNT: 3000,
         },
       ],
     },
@@ -323,56 +323,56 @@ export const dataplans_object = {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "149",
           PRODUCT_NAME: "100.0 MB - 14 days (CORPORATE)",
-          PRODUCT_AMOUNT: 55 + 17,
+          PRODUCT_AMOUNT: 55,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "277",
           PRODUCT_NAME: "100 MB - Daily (SME)",
-          PRODUCT_AMOUNT: 55 + 17,
+          PRODUCT_AMOUNT: 55,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "193",
           PRODUCT_NAME: "300.0 MB - 14 days (CORPORATE)",
-          PRODUCT_AMOUNT: 105 + 14,
+          PRODUCT_AMOUNT: 105,
         },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "278",
           PRODUCT_NAME: "300.0 MB - 2 days (SME)",
-          PRODUCT_AMOUNT: 115 + 14,
+          PRODUCT_AMOUNT: 115,
         },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "165",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 136 + 12,
+          PRODUCT_AMOUNT: 136,
         },
 
         {
           PRODUCT_CODE: "6",
           PRODUCT_ID: "145",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 272 + 6,
+          PRODUCT_AMOUNT: 272,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "279",
           PRODUCT_NAME: "1.0 GB - 2 days (SME)",
-          PRODUCT_AMOUNT: 215 + 8,
+          PRODUCT_AMOUNT: 215,
         },
 
         {
           PRODUCT_CODE: "8",
           PRODUCT_ID: "293",
           PRODUCT_NAME: "1.0 GB - 7 days (SME)",
-          PRODUCT_AMOUNT: 245 + 6,
+          PRODUCT_AMOUNT: 245,
         },
 
         {
@@ -400,7 +400,7 @@ export const dataplans_object = {
           PRODUCT_CODE: "12",
           PRODUCT_ID: "280",
           PRODUCT_NAME: "2.0 GB - 2 days (SME)",
-          PRODUCT_AMOUNT: 315 + 2,
+          PRODUCT_AMOUNT: 315,
         },
 
         {
@@ -493,14 +493,14 @@ const dataPlans: DataPlans = {
         //   PRODUCT_CODE: "1",
         //   PRODUCT_ID: "260",
         //   PRODUCT_NAME: "150 MB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 50 + 17,
+        //   PRODUCT_AMOUNT: 50 ,
         // },
 
         // {
         //   PRODUCT_CODE: "1",
         //   PRODUCT_ID: "49",
         //   PRODUCT_NAME: "250 MB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 72.5 + 17,
+        //   PRODUCT_AMOUNT: 72.5 ,
         // },
 
         // {
@@ -514,14 +514,14 @@ const dataPlans: DataPlans = {
         //   PRODUCT_CODE: "6",
         //   PRODUCT_ID: "259",
         //   PRODUCT_NAME: "500 MB - 30 days (SME2)",
-        //   PRODUCT_AMOUNT: 126 + 13,
+        //   PRODUCT_AMOUNT: 126 ,
         // },
 
         // {
         //   PRODUCT_CODE: "5",
         //   PRODUCT_ID: "212",
         //   PRODUCT_NAME: "500 MB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 130 + 13,
+        //   PRODUCT_AMOUNT: 130 ,
         // },
 
         {
@@ -542,7 +542,7 @@ const dataPlans: DataPlans = {
         //   PRODUCT_CODE: "8",
         //   PRODUCT_ID: "231",
         //   PRODUCT_NAME: "1.0 GB - 30 days (SME2)",
-        //   PRODUCT_AMOUNT: 278 + 5,
+        //   PRODUCT_AMOUNT: 278 ,
         // },
 
         {
@@ -584,7 +584,7 @@ const dataPlans: DataPlans = {
         //   PRODUCT_CODE: "8",
         //   PRODUCT_ID: "208",
         //   PRODUCT_NAME: "1 GB - 30 days (CORPORATE)",
-        //   PRODUCT_AMOUNT: 282.0 + 4,
+        //   PRODUCT_AMOUNT: 282.0 ,
         // },
 
         // {
@@ -709,14 +709,14 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "225",
           PRODUCT_NAME: "200 MB - 14 days (CORPORATE)",
-          PRODUCT_AMOUNT: 84.0 + 5,
+          PRODUCT_AMOUNT: 84.0,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "203",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 210 + 8,
+          PRODUCT_AMOUNT: 210,
         },
 
         {
@@ -730,7 +730,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "286",
           PRODUCT_NAME: "750 MB - 1 day (SME)",
-          PRODUCT_AMOUNT: 187.0 + 4.1,
+          PRODUCT_AMOUNT: 187.0,
         },
 
         {
@@ -744,7 +744,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "6",
           PRODUCT_ID: "288",
           PRODUCT_NAME: "1.5 GB - 2 days (SME)",
-          PRODUCT_AMOUNT: 280.0 + 4,
+          PRODUCT_AMOUNT: 280.0,
         },
 
         {
@@ -791,56 +791,56 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "221",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 80 + 30,
+          PRODUCT_AMOUNT: 80,
         },
 
         {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "183",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 150 + 30,
+          PRODUCT_AMOUNT: 150,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "184",
           PRODUCT_NAME: "1.5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 227 + 30,
+          PRODUCT_AMOUNT: 227,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "185",
           PRODUCT_NAME: "2 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 300 + 50,
+          PRODUCT_AMOUNT: 300,
         },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "186",
           PRODUCT_NAME: "3 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 450 + 30,
+          PRODUCT_AMOUNT: 450,
         },
 
         {
           PRODUCT_CODE: "6",
           PRODUCT_ID: "188",
           PRODUCT_NAME: "5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 750 + 50,
+          PRODUCT_AMOUNT: 750,
         },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "189",
           PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 1500 + 50,
+          PRODUCT_AMOUNT: 1500,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "229",
           PRODUCT_NAME: "20.0 GB - Monthly (CORPORATE)",
-          PRODUCT_AMOUNT: 3000 + 50,
+          PRODUCT_AMOUNT: 3000,
         },
       ],
     },
@@ -853,105 +853,105 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "310",
           PRODUCT_NAME: "150 MB - 1 day (AWOOF)",
-          PRODUCT_AMOUNT: 58 + 24,
+          PRODUCT_AMOUNT: 58,
         },
 
         {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "308",
           PRODUCT_NAME: "100.0 MB - days days (CORPORATE)",
-          PRODUCT_AMOUNT: 70 + 19,
+          PRODUCT_AMOUNT: 60,
         },
 
         // {
         //   PRODUCT_CODE: "2",
         //   PRODUCT_ID: "277",
         //   PRODUCT_NAME: "100 MB - Daily (SME)",
-        //   PRODUCT_AMOUNT: 55 + 17,
+        //   PRODUCT_AMOUNT: 55 ,
         // },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "311",
           PRODUCT_NAME: "300 MB - 2 days (AWOOF)",
-          PRODUCT_AMOUNT: 115 + 14,
+          PRODUCT_AMOUNT: 115,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "193",
           PRODUCT_NAME: "300.0 MB - 14 days (CORPORATE)",
-          PRODUCT_AMOUNT: 220 + 7,
+          PRODUCT_AMOUNT: 180,
         },
 
         // {
         //   PRODUCT_CODE: "4",
         //   PRODUCT_ID: "278",
         //   PRODUCT_NAME: "300.0 MB - 2 days (SME)",
-        //   PRODUCT_AMOUNT: 115 + 13,
+        //   PRODUCT_AMOUNT: 115 ,
         // },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "165",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 343.5,
+          PRODUCT_AMOUNT: 295,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "312",
           PRODUCT_NAME: "600 MB - 1 day (AWOOF)",
-          PRODUCT_AMOUNT: 245 + 6,
+          PRODUCT_AMOUNT: 245,
         },
 
         // {
         //   PRODUCT_CODE: "7",
         //   PRODUCT_ID: "279",
         //   PRODUCT_NAME: "1.0 GB - 2 days (SME)",
-        //   PRODUCT_AMOUNT: 215 + 8,
+        //   PRODUCT_AMOUNT: 215 ,
         // },
 
         // {
         //   PRODUCT_CODE: "6",
         //   PRODUCT_ID: "299",
         //   PRODUCT_NAME: "75MB - 7 days (SME)",
-        //   PRODUCT_AMOUNT: 25 + 19,
+        //   PRODUCT_AMOUNT: 25 ,
         // },
 
         // {
         //   PRODUCT_CODE: "7",
         //   PRODUCT_ID: "300",
         //   PRODUCT_NAME: "250MB - 14 days (SME)",
-        //   PRODUCT_AMOUNT: 60 + 17,
+        //   PRODUCT_AMOUNT: 60 ,
         // },
 
         // {
         //   PRODUCT_CODE: "8",
         //   PRODUCT_ID: "301",
         //   PRODUCT_NAME: "500MB - 7 days (SME)",
-        //   PRODUCT_AMOUNT: 122.5 + 13,
+        //   PRODUCT_AMOUNT: 122.5 ,
         // },
 
         {
           PRODUCT_CODE: "9",
           PRODUCT_ID: "145",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 687.0 - 20,
+          PRODUCT_AMOUNT: 590,
         },
 
         // {
         //   PRODUCT_CODE: "10",
         //   PRODUCT_ID: "302",
         //   PRODUCT_NAME: "1.0 GB - 2 days (SME)",
-        //   PRODUCT_AMOUNT: 215 + 8,
+        //   PRODUCT_AMOUNT: 215 ,
         // },
 
         // {
         //   PRODUCT_CODE: "11",
         //   PRODUCT_ID: "293",
         //   PRODUCT_NAME: "1.0 GB - 7 days (SME)",
-        //   PRODUCT_AMOUNT: 245 + 6,
+        //   PRODUCT_AMOUNT: 245 ,
         // },
 
         // {
@@ -972,7 +972,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "13",
           PRODUCT_ID: "314",
           PRODUCT_NAME: "2.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 1374.0 - 60,
+          PRODUCT_AMOUNT: 1180,
         },
 
         {
@@ -986,7 +986,7 @@ const dataPlans: DataPlans = {
         //   PRODUCT_CODE: "14",
         //   PRODUCT_ID: "280",
         //   PRODUCT_NAME: "2.0 GB - 2 days (SME)",
-        //   PRODUCT_AMOUNT: 315 + 2,
+        //   PRODUCT_AMOUNT: 315 ,
         // },
 
         // {
@@ -1007,7 +1007,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "17",
           PRODUCT_ID: "147",
           PRODUCT_NAME: "5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 3435.0 - 180,
+          PRODUCT_AMOUNT: 2950,
         },
 
         // {
@@ -1035,7 +1035,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "19",
           PRODUCT_ID: "148",
           PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 6870.0 - 270,
+          PRODUCT_AMOUNT: 5900,
         },
 
         {
@@ -1063,14 +1063,14 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "23",
           PRODUCT_ID: "226",
           PRODUCT_NAME: "15.0 GB - 30 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 10305.0 - 580,
+          PRODUCT_AMOUNT: 8850,
         },
 
         {
           PRODUCT_CODE: "24",
           PRODUCT_ID: "227",
           PRODUCT_NAME: "20.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 13740.0 - 800,
+          PRODUCT_AMOUNT: 11800,
         },
 
         // {

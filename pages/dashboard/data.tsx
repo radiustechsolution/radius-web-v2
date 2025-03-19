@@ -49,7 +49,11 @@ const DataPage = () => {
 
       // Adding 0.06% to the PRODUCT_AMOUNT
       if (plan) {
-        const updatedAmount = plan.PRODUCT_AMOUNT + plan.PRODUCT_AMOUNT * 0.06;
+        let updatedAmount = plan.PRODUCT_AMOUNT + plan.PRODUCT_AMOUNT * 0.06;
+
+        // Clamp the amount between 20 and 70
+        updatedAmount = Math.max(20, Math.min(70, updatedAmount));
+
         setAmount(Math.ceil(updatedAmount));
       }
     }
