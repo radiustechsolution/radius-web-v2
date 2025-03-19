@@ -135,7 +135,7 @@ export default async function handler(
 
     // Step 3: Resolve plan amount
     const plan_amount_resolved = resolvePlanAmount(network, planId);
-    const plan_amount: any = Math.ceil(plan_amount_resolved * 1.06);
+    const plan_amount: any = Math.ceil(plan_amount_resolved);
     const product_name = resolvePlanName(network, planId);
 
     // Step 4: Check customer's balance
