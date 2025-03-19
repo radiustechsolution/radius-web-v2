@@ -47,13 +47,17 @@ const DataPage = () => {
         selected.PRODUCT.find((p: any) => p.PRODUCT_ID === planId) || null;
       setSelectedPlan(plan);
 
-      // Adding 0.06% to the PRODUCT_AMOUNT
       if (plan) {
-        let updatedAmount = plan.PRODUCT_AMOUNT + plan.PRODUCT_AMOUNT * 0.06;
+        // Calculate the profit (0.06% of PRODUCT_AMOUNT)
+        let profit = plan.PRODUCT_AMOUNT * 0.06;
 
-        // Clamp the amount between 20 and 70
-        updatedAmount = Math.max(20, Math.min(70, updatedAmount));
+        // Clamp the profit between 20 and 70
+        profit = Math.max(20, Math.min(70, profit));
 
+        // Add the clamped profit to the PRODUCT_AMOUNT
+        const updatedAmount = plan.PRODUCT_AMOUNT + profit;
+
+        // Set the updated amount
         setAmount(Math.ceil(updatedAmount));
       }
     }
@@ -205,16 +209,31 @@ const DataPage = () => {
                   <option value="" disabled>
                     Select Plan
                   </option>
-                  {dataPlans[selectedNetwork][0].PRODUCT.map((product) => (
-                    <option key={product.PRODUCT_ID} value={product.PRODUCT_ID}>
-                      {product.PRODUCT_NAME} - ₦
-                      {Math.ceil(
-                        typeof product.PRODUCT_AMOUNT === "string"
-                          ? parseFloat(product.PRODUCT_AMOUNT) * 1.06
-                          : product.PRODUCT_AMOUNT * 1.06
-                      )}
-                    </option>
-                  ))}
+                  {dataPlans[selectedNetwork][0].PRODUCT.map((product) => {
+                    // Parse the amount if it's a string, otherwise use the number directly
+                    const amount =
+                      typeof product.PRODUCT_AMOUNT === "string"
+                        ? parseFloat(product.PRODUCT_AMOUNT)
+                        : product.PRODUCT_AMOUNT;
+
+                    // Calculate the profit (0.06% of the amount)
+                    let profit = amount * 0.06;
+
+                    // Clamp the profit between 20 and 70
+                    profit = Math.max(20, Math.min(70, profit));
+
+                    // Add the clamped profit to the amount
+                    const updatedAmount = amount + profit;
+
+                    return (
+                      <option
+                        key={product.PRODUCT_ID}
+                        value={product.PRODUCT_ID}
+                      >
+                        {product.PRODUCT_NAME} - ₦{Math.ceil(updatedAmount)}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             )}

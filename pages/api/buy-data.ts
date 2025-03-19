@@ -35,12 +35,25 @@ const resolvePlanAmount = (network: string, planId: string): number => {
   const selectedPlan = dataPlan?.PRODUCT.find((p) => p.PRODUCT_ID === planId);
 
   if (!selectedPlan) {
-    throw new Error(planId);
+    throw new Error(`Plan with ID ${planId} not found for network ${network}`);
   }
 
-  return typeof selectedPlan.PRODUCT_AMOUNT === "string"
-    ? parseFloat(selectedPlan.PRODUCT_AMOUNT)
-    : selectedPlan.PRODUCT_AMOUNT;
+  // Parse the amount if it's a string, otherwise use the number directly
+  const amount =
+    typeof selectedPlan.PRODUCT_AMOUNT === "string"
+      ? parseFloat(selectedPlan.PRODUCT_AMOUNT)
+      : selectedPlan.PRODUCT_AMOUNT;
+
+  // Calculate the profit (0.06% of the amount)
+  let profit = amount * 0.06;
+
+  // Clamp the profit between 20 and 70
+  profit = Math.max(20, Math.min(70, profit));
+
+  // Add the clamped profit to the amount
+  const updatedAmount = amount + profit;
+
+  return updatedAmount;
 };
 
 const resolvePlanName = (network: string, planId: string): string => {
