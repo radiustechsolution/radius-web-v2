@@ -527,8 +527,8 @@ const dataPlans: DataPlans = {
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "215",
-          PRODUCT_NAME: "1 GB - 1 day (Gifting)",
-          PRODUCT_AMOUNT: 343,
+          PRODUCT_NAME: "1GB - 1 day (Gifting)",
+          PRODUCT_AMOUNT: 485,
         },
 
         // {
@@ -625,8 +625,8 @@ const dataPlans: DataPlans = {
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "217",
-          PRODUCT_NAME: "5 GB - 7 days (Gifting)",
-          PRODUCT_AMOUNT: 1470,
+          PRODUCT_NAME: "6GB - 7 days (Gifting)",
+          PRODUCT_AMOUNT: 2425,
         },
 
         {
