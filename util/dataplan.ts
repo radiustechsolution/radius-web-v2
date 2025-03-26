@@ -812,56 +812,56 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "221",
           PRODUCT_NAME: "500.0 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 80,
+          PRODUCT_AMOUNT: 140,
         },
 
         {
           PRODUCT_CODE: "1",
           PRODUCT_ID: "183",
           PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 150,
+          PRODUCT_AMOUNT: 280,
         },
 
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "184",
           PRODUCT_NAME: "1.5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 227,
+          PRODUCT_AMOUNT: 420,
         },
 
         {
           PRODUCT_CODE: "3",
           PRODUCT_ID: "185",
           PRODUCT_NAME: "2 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 300,
+          PRODUCT_AMOUNT: 560,
         },
 
         {
           PRODUCT_CODE: "4",
           PRODUCT_ID: "186",
           PRODUCT_NAME: "3 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 450,
+          PRODUCT_AMOUNT: 840,
         },
 
         {
           PRODUCT_CODE: "6",
           PRODUCT_ID: "188",
           PRODUCT_NAME: "5 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 750,
+          PRODUCT_AMOUNT: 1400,
         },
 
         {
           PRODUCT_CODE: "5",
           PRODUCT_ID: "189",
           PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 1500,
+          PRODUCT_AMOUNT: 2800,
         },
 
         {
           PRODUCT_CODE: "7",
           PRODUCT_ID: "229",
           PRODUCT_NAME: "20.0 GB - Monthly (CORPORATE)",
-          PRODUCT_AMOUNT: 3000,
+          PRODUCT_AMOUNT: 5600,
         },
       ],
     },
