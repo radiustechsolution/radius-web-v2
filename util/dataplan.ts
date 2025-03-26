@@ -548,8 +548,8 @@ const dataPlans: DataPlans = {
         {
           PRODUCT_CODE: "110",
           PRODUCT_ID: "305",
-          PRODUCT_NAME: "1.5 GB - 1 day (GIFTING)",
-          PRODUCT_AMOUNT: 392,
+          PRODUCT_NAME: "1.5 GB - 2 day (GIFTING)",
+          PRODUCT_AMOUNT: 582,
         },
 
         // {
