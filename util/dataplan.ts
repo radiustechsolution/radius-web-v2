@@ -870,12 +870,12 @@ const dataPlans: DataPlans = {
     {
       ID: "04",
       PRODUCT: [
-        {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "310",
-          PRODUCT_NAME: "150 MB - 1 day (AWOOF)",
-          PRODUCT_AMOUNT: 58,
-        },
+        // {
+        //   PRODUCT_CODE: "2",
+        //   PRODUCT_ID: "310",
+        //   PRODUCT_NAME: "150 MB - 1 day (AWOOF)",
+        //   PRODUCT_AMOUNT: 58,
+        // },
 
         {
           PRODUCT_CODE: "1",
@@ -891,12 +891,12 @@ const dataPlans: DataPlans = {
         //   PRODUCT_AMOUNT: 55 ,
         // },
 
-        {
-          PRODUCT_CODE: "4",
-          PRODUCT_ID: "311",
-          PRODUCT_NAME: "300 MB - 2 days (AWOOF)",
-          PRODUCT_AMOUNT: 115,
-        },
+        // {
+        //   PRODUCT_CODE: "4",
+        //   PRODUCT_ID: "311",
+        //   PRODUCT_NAME: "300 MB - 2 days (AWOOF)",
+        //   PRODUCT_AMOUNT: 115,
+        // },
 
         {
           PRODUCT_CODE: "3",
@@ -919,12 +919,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 377,
         },
 
-        {
-          PRODUCT_CODE: "7",
-          PRODUCT_ID: "312",
-          PRODUCT_NAME: "600 MB - 1 day (AWOOF)",
-          PRODUCT_AMOUNT: 245,
-        },
+        // {
+        //   PRODUCT_CODE: "7",
+        //   PRODUCT_ID: "312",
+        //   PRODUCT_NAME: "600 MB - 1 day (AWOOF)",
+        //   PRODUCT_AMOUNT: 245,
+        // },
 
         // {
         //   PRODUCT_CODE: "7",
@@ -996,12 +996,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 1510,
         },
 
-        {
-          PRODUCT_CODE: "14",
-          PRODUCT_ID: "313",
-          PRODUCT_NAME: "3GB - 7 days (AWOOF)",
-          PRODUCT_AMOUNT: 1045,
-        },
+        // {
+        //   PRODUCT_CODE: "14",
+        //   PRODUCT_ID: "313",
+        //   PRODUCT_NAME: "3GB - 7 days (AWOOF)",
+        //   PRODUCT_AMOUNT: 1045,
+        // },
 
         // {
         //   PRODUCT_CODE: "14",
@@ -1045,12 +1045,12 @@ const dataPlans: DataPlans = {
         //   PRODUCT_AMOUNT: 2050.0,
         // },
 
-        {
-          PRODUCT_CODE: "21",
-          PRODUCT_ID: "304",
-          PRODUCT_NAME: "7GB - 7 days (AWOOF)",
-          PRODUCT_AMOUNT: 2045,
-        },
+        // {
+        //   PRODUCT_CODE: "21",
+        //   PRODUCT_ID: "304",
+        //   PRODUCT_NAME: "7GB - 7 days (AWOOF)",
+        //   PRODUCT_AMOUNT: 2045,
+        // },
 
         {
           PRODUCT_CODE: "19",
@@ -1059,12 +1059,12 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 7550,
         },
 
-        {
-          PRODUCT_CODE: "20",
-          PRODUCT_ID: "283",
-          PRODUCT_NAME: "10 GB - 30 Days (AWOOF)",
-          PRODUCT_AMOUNT: 3045,
-        },
+        // {
+        //   PRODUCT_CODE: "20",
+        //   PRODUCT_ID: "283",
+        //   PRODUCT_NAME: "10 GB - 30 Days (AWOOF)",
+        //   PRODUCT_AMOUNT: 3045,
+        // },
 
         // {
         //   PRODUCT_CODE: "21",
