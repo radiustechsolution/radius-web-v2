@@ -660,15 +660,15 @@ const dataPlans: DataPlans = {
         {
           PRODUCT_CODE: "17",
           PRODUCT_ID: "351",
-          PRODUCT_NAME: "8GB + 25 minutes + 2GB YouTube - 30 days (Gifting)",
-          PRODUCT_AMOUNT: 4850,
+          PRODUCT_NAME: "10GB + 10 minutes + 2GB YouTube - 30 days (Gifting)",
+          PRODUCT_AMOUNT: 4365,
         },
 
         {
           PRODUCT_CODE: "18",
           PRODUCT_ID: "349",
-          PRODUCT_NAME: "11GB + 25 minutes + 2GB YouTube - 30 days (Gifting)",
-          PRODUCT_AMOUNT: 4850,
+          PRODUCT_NAME: "12.5GB - 30 days (Gifting)",
+          PRODUCT_AMOUNT: 5335,
         },
 
         {
