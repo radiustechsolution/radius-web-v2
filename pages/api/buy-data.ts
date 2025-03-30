@@ -209,10 +209,12 @@ export default async function handler(
       source_id == "1"
         ? "https://datastationapi.com/api/data/"
         : "https://mostcheapestdata.com/api/data/";
+    const tokenUsed =
+      source_id == "1" ? process.env.DATA_STATION_KEY : process.env.MOST_KEY;
     const apiResponse = await fetch(api, {
       method: "POST",
       headers: {
-        Authorization: `Token ${process.env.DATA_STATION_KEY}`,
+        Authorization: `Token ${tokenUsed}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
