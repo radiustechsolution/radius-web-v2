@@ -33,7 +33,7 @@ const DataPage = () => {
     const network = event.target.value;
     setSelectedNetwork(network);
     setSelectedPlan(null); // Reset selected plan when network changes
-    setAmount(""); // Reset amount when network changes
+    setAmount(""); // Reset amount when network change
   };
 
   const handlePlanChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
