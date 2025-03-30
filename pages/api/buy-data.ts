@@ -128,7 +128,7 @@ export default async function handler(
       return res.status(404).json({ error: "Customer not found" });
     }
 
-    // Step 2: Check if the user's email is in the blockedEmail list
+    // Step 2: Check if the user's email is in the blockedEmail lists
     if (blockedEmail.includes(customer.email)) {
       return res.status(403).json({
         error: "Account cannot make purchase. Reach out to the admin.",
