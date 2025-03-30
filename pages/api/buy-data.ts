@@ -69,6 +69,19 @@ const resolvePlanName = (network: string, planId: string): string => {
   return selectedPlan.PRODUCT_NAME;
 };
 
+const resolvePlanSource = (network: string, planId: string): string => {
+  const dataPlan = dataPlans[network]?.find((plan) =>
+    plan.PRODUCT.some((p) => p.PRODUCT_ID === planId)
+  );
+  const selectedPlan = dataPlan?.PRODUCT.find((p) => p.PRODUCT_ID === planId);
+
+  if (!selectedPlan) {
+    throw new Error("Invalid plan selected");
+  }
+
+  return selectedPlan.SOURCE_ID;
+};
+
 // Map network to API expected values
 const mapNetworkToApiValue = (network: string): string => {
   return (
@@ -137,6 +150,7 @@ export default async function handler(
     const plan_amount_resolved = resolvePlanAmount(network, planId);
     const plan_amount: any = Math.ceil(plan_amount_resolved);
     const product_name = resolvePlanName(network, planId);
+    const source_id = resolvePlanSource(network, planId);
 
     // Step 4: Check customer's balance
     const balance = await getCustomerBalance(customerId);
@@ -192,7 +206,11 @@ export default async function handler(
 
     // Step 6: Proceed with Data Purchase API request
     const networkMapped = mapNetworkToApiValue(network);
-    const apiResponse = await fetch("https://datastationapi.com/api/data/", {
+    const api =
+      source_id == "1"
+        ? "https://datastationapi.com/api/data/"
+        : "https://mostcheapestdata.com/api/data/";
+    const apiResponse = await fetch(api, {
       method: "POST",
       headers: {
         Authorization: `Token ${process.env.DATA_STATION_KEY}`,
