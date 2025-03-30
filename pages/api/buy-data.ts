@@ -244,12 +244,12 @@ export default async function handler(
       try {
         await sendEmail(
           siteConfig.adminEmail,
-          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`,
+          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Error: ${databundleData}`,
           "Failed Transaction"
         );
-        await sendWhatsappMessage(
-          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
-        );
+        // await sendWhatsappMessage(
+        //   `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}`
+        // );
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
       }
