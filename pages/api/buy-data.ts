@@ -244,7 +244,7 @@ export default async function handler(
       try {
         await sendEmail(
           siteConfig.adminEmail,
-          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Error: ${databundleData}`,
+          `Customer transaction failed while purchasing Data: ${product_name} Error: This might insufficient balance issue from partners, Email: ${lockUser.email}, Customer Name: ${lockUser.first_name} ${lockUser.last_name}, Error: ${apiResponse}`,
           "Failed Transaction"
         );
         // await sendWhatsappMessage(
