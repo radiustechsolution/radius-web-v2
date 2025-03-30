@@ -497,7 +497,6 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 580,
           SOURCE_ID: 2,
         },
-
         {
           PRODUCT_CODE: "2",
           PRODUCT_ID: "462",
