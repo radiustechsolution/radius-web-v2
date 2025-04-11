@@ -52,7 +52,7 @@ const DataPage = () => {
         let profit = plan.PRODUCT_AMOUNT * 0.06;
 
         // Clamp the profit between 20 and 70
-        profit = Math.max(20, Math.min(100, profit));
+        profit = Math.max(20, Math.min(200, profit));
 
         // Add the clamped profit to the PRODUCT_AMOUNT
         const updatedAmount = plan.PRODUCT_AMOUNT + profit;
@@ -220,7 +220,7 @@ const DataPage = () => {
                     let profit = amount * 0.06;
 
                     // Clamp the profit between 20 and 70
-                    profit = Math.max(20, Math.min(100, profit));
+                    profit = Math.max(20, Math.min(200, profit));
 
                     // Add the clamped profit to the amount
                     const updatedAmount = amount + profit;
