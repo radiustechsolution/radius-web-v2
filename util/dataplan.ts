@@ -777,106 +777,137 @@ const dataPlans: DataPlans = {
       ID: "04",
       PRODUCT: [
         {
-          PRODUCT_CODE: "0",
+          PRODUCT_CODE: "1",
+          PRODUCT_ID: "310",
+          PRODUCT_NAME: "150MB - 1 day (SME)",
+          PRODUCT_AMOUNT: 55,
+          SOURCE_ID: 1,
+        },
+
+        {
+          PRODUCT_CODE: "2",
+          PRODUCT_ID: "311",
+          PRODUCT_NAME: "300MB - 2 days (SME)",
+          PRODUCT_AMOUNT: 114,
+          SOURCE_ID: 1,
+        },
+
+        {
+          PRODUCT_CODE: "3",
+          PRODUCT_ID: "312",
+          PRODUCT_NAME: "600MB - 2 days (SME)",
+          PRODUCT_AMOUNT: 214,
+          SOURCE_ID: 1,
+        },
+        {
+          PRODUCT_CODE: "4",
           PRODUCT_ID: "360",
           PRODUCT_NAME: "1GB - 2 days (SME)",
-          PRODUCT_AMOUNT: 347,
+          PRODUCT_AMOUNT: 340,
           SOURCE_ID: 1,
         },
 
         {
-          PRODUCT_CODE: "0",
+          PRODUCT_CODE: "5",
           PRODUCT_ID: "361",
           PRODUCT_NAME: "2GB - 5 days (SME)",
-          PRODUCT_AMOUNT: 649,
+          PRODUCT_AMOUNT: 640,
           SOURCE_ID: 1,
         },
 
         {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "308",
-          PRODUCT_NAME: "100.0 MB - 7 days (CORPORATE)",
-          PRODUCT_AMOUNT: 96,
+          PRODUCT_CODE: "6",
+          PRODUCT_ID: "313",
+          PRODUCT_NAME: "3GB - 7 days (SME)",
+          PRODUCT_AMOUNT: 1014,
           SOURCE_ID: 1,
         },
 
-        {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "193",
-          PRODUCT_NAME: "300.0 MB - 7 days (CORPORATE)",
-          PRODUCT_AMOUNT: 287,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "2",
+        //   PRODUCT_ID: "308",
+        //   PRODUCT_NAME: "100.0 MB - 7 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 96,
+        //   SOURCE_ID: 1,
+        // },
 
-        {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "165",
-          PRODUCT_NAME: "500 MB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 478.5,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "2",
+        //   PRODUCT_ID: "193",
+        //   PRODUCT_NAME: "300.0 MB - 7 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 287,
+        //   SOURCE_ID: 1,
+        // },
+
+        // {
+        //   PRODUCT_CODE: "2",
+        //   PRODUCT_ID: "165",
+        //   PRODUCT_NAME: "500 MB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 478.5,
+        //   SOURCE_ID: 1,
+        // },
+
+        // {
+        //   PRODUCT_CODE: "7",
+        //   PRODUCT_ID: "145",
+        //   PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 957,
+        //   SOURCE_ID: 1,
+        // },
+        // {
+        //   PRODUCT_CODE: "9",
+        //   PRODUCT_ID: "314",
+        //   PRODUCT_NAME: "2.0 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 1914,
+        //   SOURCE_ID: 1,
+        // },
+        // {
+        //   PRODUCT_CODE: "11",
+        //   PRODUCT_ID: "147",
+        //   PRODUCT_NAME: "5GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 4785,
+        //   SOURCE_ID: 1,
+        // },
 
         {
           PRODUCT_CODE: "7",
-          PRODUCT_ID: "145",
-          PRODUCT_NAME: "1.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 957,
-          SOURCE_ID: 1,
-        },
-        {
-          PRODUCT_CODE: "9",
-          PRODUCT_ID: "314",
-          PRODUCT_NAME: "2.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 1914,
-          SOURCE_ID: 1,
-        },
-        {
-          PRODUCT_CODE: "11",
-          PRODUCT_ID: "147",
-          PRODUCT_NAME: "5GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 4785,
-          SOURCE_ID: 1,
-        },
-
-        {
-          PRODUCT_CODE: "12",
           PRODUCT_ID: "304",
           PRODUCT_NAME: "7GB - 7 days (SME)",
-          PRODUCT_AMOUNT: 2045,
+          PRODUCT_AMOUNT: 2014,
           SOURCE_ID: 1,
         },
 
-        {
-          PRODUCT_CODE: "13",
-          PRODUCT_ID: "148",
-          PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 9570,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "13",
+        //   PRODUCT_ID: "148",
+        //   PRODUCT_NAME: "10 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 9570,
+        //   SOURCE_ID: 1,
+        // },
 
         {
-          PRODUCT_CODE: "14",
+          PRODUCT_CODE: "8",
           PRODUCT_ID: "283",
-          PRODUCT_NAME: "10GB - 30 Days (SME)",
-          PRODUCT_AMOUNT: 3045,
+          PRODUCT_NAME: "10GB - Monthly (SME)",
+          PRODUCT_AMOUNT: 3014,
           SOURCE_ID: 1,
         },
 
-        {
-          PRODUCT_CODE: "15",
-          PRODUCT_ID: "226",
-          PRODUCT_NAME: "15.0 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 14355,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "15",
+        //   PRODUCT_ID: "226",
+        //   PRODUCT_NAME: "15.0 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 14355,
+        //   SOURCE_ID: 1,
+        // },
 
-        {
-          PRODUCT_CODE: "18",
-          PRODUCT_ID: "227",
-          PRODUCT_NAME: "20 GB - 30 days (CORPORATE)",
-          PRODUCT_AMOUNT: 19140,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "18",
+        //   PRODUCT_ID: "227",
+        //   PRODUCT_NAME: "20 GB - 30 days (CORPORATE)",
+        //   PRODUCT_AMOUNT: 19140,
+        //   SOURCE_ID: 1,
+        // },
       ],
     },
   ],
