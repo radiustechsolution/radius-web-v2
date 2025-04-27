@@ -799,13 +799,13 @@ const dataPlans: DataPlans = {
           PRODUCT_AMOUNT: 214,
           SOURCE_ID: 1,
         },
-        {
-          PRODUCT_CODE: "4",
-          PRODUCT_ID: "360",
-          PRODUCT_NAME: "1GB - 2 days (SME)",
-          PRODUCT_AMOUNT: 340,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "4",
+        //   PRODUCT_ID: "360",
+        //   PRODUCT_NAME: "1GB - 2 days (SME)",
+        //   PRODUCT_AMOUNT: 340,
+        //   SOURCE_ID: 1,
+        // },
 
         {
           PRODUCT_CODE: "5",
