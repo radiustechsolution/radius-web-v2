@@ -784,13 +784,13 @@ const dataPlans: DataPlans = {
           SOURCE_ID: 1,
         },
 
-        {
-          PRODUCT_CODE: "2",
-          PRODUCT_ID: "311",
-          PRODUCT_NAME: "300MB - 2 days (SME)",
-          PRODUCT_AMOUNT: 114,
-          SOURCE_ID: 1,
-        },
+        // {
+        //   PRODUCT_CODE: "2",
+        //   PRODUCT_ID: "311",
+        //   PRODUCT_NAME: "300MB - 2 days (SME)",
+        //   PRODUCT_AMOUNT: 114,
+        //   SOURCE_ID: 1,
+        // },
 
         {
           PRODUCT_CODE: "3",
