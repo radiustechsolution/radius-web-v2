@@ -794,9 +794,9 @@ const dataPlans: DataPlans = {
 
         {
           PRODUCT_CODE: "3",
-          PRODUCT_ID: "312",
-          PRODUCT_NAME: "600MB - 2 days (SME)",
-          PRODUCT_AMOUNT: 214,
+          PRODUCT_ID: "372",
+          PRODUCT_NAME: "500MB - 7 days (CORPORATE GIFTING)",
+          PRODUCT_AMOUNT: 514,
           SOURCE_ID: 1,
         },
         // {
@@ -809,9 +809,9 @@ const dataPlans: DataPlans = {
 
         {
           PRODUCT_CODE: "5",
-          PRODUCT_ID: "361",
-          PRODUCT_NAME: "2GB - 5 days (SME)",
-          PRODUCT_AMOUNT: 640,
+          PRODUCT_ID: "375",
+          PRODUCT_NAME: "2GB - 30 days (CORPORATE GIFTING)",
+          PRODUCT_AMOUNT: 1514,
           SOURCE_ID: 1,
         },
 
