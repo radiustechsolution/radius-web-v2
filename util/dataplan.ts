@@ -920,6 +920,4 @@ const dataPlans: DataPlans = {
   ],
 };
 
-// ssss
-
 export default dataPlans;
