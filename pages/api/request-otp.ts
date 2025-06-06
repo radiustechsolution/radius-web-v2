@@ -52,12 +52,12 @@ export default async function handler(
       );
 
       // Send sms alert
-      await sendSMS(
-        "Your Radius OTP is " +
-          otp +
-          " Do not share this with anyone. We will never ask you for your OTP.",
-        formatPhoneNumber(phone_number)
-      );
+      // await sendSMS(
+      //   "Your Radius OTP is " +
+      //     otp +
+      //     " Do not share this with anyone. We will never ask you for your OTP.",
+      //   formatPhoneNumber(phone_number)
+      // );
 
       // user Email
       await sendEmail(
