@@ -51,7 +51,8 @@ const resolvePlanAmount = (network: string, planId: string): number => {
   profit = Math.max(20, Math.min(200, profit));
 
   // Add the clamped profit to the amount
-  const updatedAmount = amount + profit;
+  const updatedAmount = amount; // updated this
+  // const updatedAmount = amount + profit;
   return updatedAmount;
 };
 

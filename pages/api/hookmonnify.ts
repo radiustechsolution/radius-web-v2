@@ -97,7 +97,7 @@ export default async function webhook(
         return res.status(500).json({ message: "Mobile app customer" });
       }
 
-      const creditableAmount = parseFloat(settlementAmount);
+      const creditableAmount = parseFloat(amountPaid);
 
       // Check if this is the user's first time funding the wallet
       const checkUserTransaction = await prisma.transactions.findFirst({

@@ -55,7 +55,8 @@ const DataPage = () => {
         profit = Math.max(20, Math.min(200, profit));
 
         // Add the clamped profit to the PRODUCT_AMOUNT
-        const updatedAmount = plan.PRODUCT_AMOUNT + profit;
+        const updatedAmount = plan.PRODUCT_AMOUNT;
+        // const updatedAmount = plan.PRODUCT_AMOUNT + profit;
 
         // Set the updated amount
         setAmount(Math.ceil(updatedAmount));
@@ -223,7 +224,8 @@ const DataPage = () => {
                     profit = Math.max(20, Math.min(200, profit));
 
                     // Add the clamped profit to the amount
-                    const updatedAmount = amount + profit;
+                    const updatedAmount = amount;
+                    // const updatedAmount = amount + profit;
 
                     return (
                       <option
