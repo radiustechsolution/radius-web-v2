@@ -501,7 +501,7 @@ const dataPlans: DataPlans = {
           PRODUCT_CODE: "200",
           PRODUCT_ID: "459",
           PRODUCT_NAME: "1GB - 7 Days (DATA SHARE)",
-          PRODUCT_AMOUNT: 750,
+          PRODUCT_AMOUNT: 640,
           SOURCE_ID: "2",
         },
         {
