@@ -490,26 +490,26 @@ const dataPlans: DataPlans = {
     {
       ID: "01",
       PRODUCT: [
-        // {
-        //   PRODUCT_CODE: "2",
-        //   PRODUCT_ID: "460",
-        //   PRODUCT_NAME: "500MB - 30 Days (DATA SHARE)",
-        //   PRODUCT_AMOUNT: 450,
-        //   SOURCE_ID: "2",
-        // },
-        {
-          PRODUCT_CODE: "200",
-          PRODUCT_ID: "459",
-          PRODUCT_NAME: "1GB - 7 Days (DATA SHARE)",
-          PRODUCT_AMOUNT: 640,
-          SOURCE_ID: "2",
-        },
         {
           PRODUCT_CODE: "2",
-          PRODUCT_ID: "462",
-          PRODUCT_NAME: "2GB - 30 Days (DATA SHARE)",
-          PRODUCT_AMOUNT: 1200,
-          SOURCE_ID: "2",
+          PRODUCT_ID: "411",
+          PRODUCT_NAME: "500MB - 7 Days (SME)",
+          PRODUCT_AMOUNT: 420,
+          SOURCE_ID: "1",
+        },
+        {
+          PRODUCT_CODE: "200",
+          PRODUCT_ID: "412",
+          PRODUCT_NAME: "1GB - 7 Days (SME)",
+          PRODUCT_AMOUNT: 580,
+          SOURCE_ID: "1",
+        },
+        {
+          PRODUCT_CODE: "3",
+          PRODUCT_ID: "413",
+          PRODUCT_NAME: "2GB - 7 Days (SME)",
+          PRODUCT_AMOUNT: 1160,
+          SOURCE_ID: "1",
         },
         {
           PRODUCT_CODE: "3",
