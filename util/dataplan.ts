@@ -576,9 +576,9 @@ const dataPlans: DataPlans = {
 
         {
           PRODUCT_CODE: "11",
-          PRODUCT_ID: "363",
-          PRODUCT_NAME: "10GB +N3000 for call+100 SMS - 30 days (Gifting)",
-          PRODUCT_AMOUNT: 2910,
+          PRODUCT_ID: "402",
+          PRODUCT_NAME: "11GB 7days (Gifting)",
+          PRODUCT_AMOUNT: 3395,
           SOURCE_ID: "1",
         },
 
