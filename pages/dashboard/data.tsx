@@ -50,13 +50,15 @@ const DataPage = () => {
       if (plan) {
         // Calculate the profit (0.06% of PRODUCT_AMOUNT)
         let profit = plan.PRODUCT_AMOUNT * 0.06;
+        let fixedProfit = 50;
 
         // Clamp the profit between 20 and 70
         profit = Math.max(20, Math.min(200, profit));
 
         // Add the clamped profit to the PRODUCT_AMOUNT
-        const updatedAmount = plan.PRODUCT_AMOUNT;
+        // const updatedAmount = plan.PRODUCT_AMOUNT;
         // const updatedAmount = plan.PRODUCT_AMOUNT + profit;
+        const updatedAmount = plan.PRODUCT_AMOUNT + fixedProfit;
 
         // Set the updated amount
         setAmount(Math.ceil(updatedAmount));
@@ -220,12 +222,16 @@ const DataPage = () => {
                     // Calculate the profit (0.06% of the amount)
                     let profit = amount * 0.06;
 
+                    let fixedProfit = 50;
+
                     // Clamp the profit between 20 and 70
                     profit = Math.max(20, Math.min(200, profit));
 
                     // Add the clamped profit to the amount
-                    const updatedAmount = amount;
+                    // const updatedAmount = amount;
                     // const updatedAmount = amount + profit;
+
+                    const updatedAmount = amount + fixedProfit;
 
                     return (
                       <option

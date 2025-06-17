@@ -46,13 +46,15 @@ const resolvePlanAmount = (network: string, planId: string): number => {
 
   // Calculate the profit (0.06% of the amount)
   let profit = amount * 0.06;
+  let fixedProfit = 50;
 
   // Clamp the profit between 20 and 70
   profit = Math.max(20, Math.min(200, profit));
 
   // Add the clamped profit to the amount
-  const updatedAmount = amount; // updated this
+  // const updatedAmount = amount;
   // const updatedAmount = amount + profit;
+  const updatedAmount = amount + fixedProfit;
   return updatedAmount;
 };
 
