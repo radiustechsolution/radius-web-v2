@@ -1,5 +1,5 @@
 import { Spinner } from "@nextui-org/spinner";
-// import { Avatar } from "@nextui-org/avatar";
+// import { Avatar } from "@nextui-org/avastar";
 import DashboardLayout from "@/layouts/dashboard";
 import {
   ComingSoonComp,
