@@ -149,14 +149,15 @@ export default function PrivacyPolicyPage() {
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-600 leading-relaxed mb-4">
                 Welcome to <strong>Radius</strong>, operated by{" "}
-                <strong>Radius Tech Solutions Limited</strong> ("we," "us," or
-                "our"). This Privacy Policy explains how we collect, use,
-                disclose, and protect your personal information when you use our
-                services, including airtime, data, and VTU purchases.
+                <strong>Radius Tech Solutions Limited</strong> (&quot;we,&quot;
+                &quot;us,&quot; or &quot;our&quot;). This Privacy Policy
+                explains how we collect, use, disclose, and protect your
+                personal information when you use our services, including
+                airtime, data, and VTU purchases.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                By accessing or using <strong>radius.com.ng</strong> ("the
-                Platform"), you consent to the practices described in this
+                By accessing or using <strong>radius.com.ng</strong> (&quot;the
+                Platform&quot;), you consent to the practices described in this
                 policy. If you do not agree, please refrain from using our
                 services.
               </p>

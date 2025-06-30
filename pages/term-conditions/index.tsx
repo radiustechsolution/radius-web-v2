@@ -125,17 +125,19 @@ export default function TermsConditionsPage() {
             </h2>
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-600 leading-relaxed mb-4">
-                Welcome to <strong>Radius</strong> ("the Platform"), a digital
-                service operated by{" "}
-                <strong>Radius Tech Solutions Limited</strong> ("we," "us," or
-                "our"). These Terms and Conditions ("Terms") govern your use of
-                our services, including the purchase of airtime, data, and other
-                VTU (Virtual Top-Up) services.
+                Welcome to <strong>Radius</strong> (&quot;the Platform&quot;), a
+                digital service operated by{" "}
+                <strong>Radius Tech Solutions Limited</strong> (&quot;we,&quot;
+                &quot;us,&quot; or &quot;our&quot;). These Terms and Conditions
+                (&quot;Terms&quot;) govern your use of our services, including
+                the purchase of airtime, data, and other VTU (Virtual Top-Up)
+                services.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                By accessing or using the Platform, you ("Customer," "User," or
-                "you") agree to comply with these Terms. If you do not agree,
-                please refrain from using our services.
+                By accessing or using the Platform, you (&quot;Customer,&quot;
+                &quot;User,&quot; or &quot;you&quot;) agree to comply with these
+                Terms. If you do not agree, please refrain from using our
+                services.
               </p>
             </div>
           </div>
