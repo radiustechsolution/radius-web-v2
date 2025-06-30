@@ -57,7 +57,47 @@ export default function IndexPage() {
             </Button>
           </div>
 
-          <DownloadAppButton />
+          <div className="hidden px-10 text-center md:flex flex-col justify-center items-center w-full absolute bottom-10">
+            <ul className="flex items-center md:gap-4 opacity-75 cursor-pointer text-[14px]">
+              <Link href={"/contact-us"} className="">
+                Contact Us
+              </Link>
+              <Link href="/term-conditions">Terms and Condition</Link>
+              <Link href="/term-conditions">Privary and Policy</Link>
+              <Link
+                href="https://drive.google.com/drive/folders/1bWreKYcOEeWom_JfvgwZsB9WVDIKYz6B?usp=sharing"
+                className="flex items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                Download
+              </Link>
+            </ul>
+          </div>
+
+          <div className="text-left  px-10 md:text-center md:hidden flex-col justify-center items-start md:items-center w-full absolute bottom-10">
+            <div className="flex flex-col md:flex-row md:items-center md:gap-4 opacity-75 cursor-pointer text-[14px] w-full">
+              <ul className="flex items-center gap-8 justify-between w-full">
+                <Link href={"/contact-us"} className="">
+                  Contact Us
+                </Link>
+                <Link
+                  href="https://drive.google.com/drive/folders/1bWreKYcOEeWom_JfvgwZsB9WVDIKYz6B?usp=sharing"
+                  className="flex items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  Download
+                </Link>
+              </ul>
+              <ul className="flex items-center gap-8 justify-between w-full text-left">
+                <Link href="/term-conditions">Privary and Policy</Link>
+                <Link href="/term-conditions">Terms and Condition</Link>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </DefaultLayout>

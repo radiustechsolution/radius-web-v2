@@ -13,6 +13,9 @@ export const siteConfig = {
     bgDarkColor: "#212121",
   },
   paths: {
+    contact: "/contact-us",
+    terms: "term-condition",
+    privacy: "privacy-policy",
     signin: "/auth/signin",
     signup: "/auth/signup",
     dashboard: "/dashboard",

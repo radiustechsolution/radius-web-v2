@@ -36,6 +36,7 @@
     "joi": "^17.13.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.525.0",
     "next": "14.2.4",
     "next-auth": "^4.24.8",
     "next-pwa": "^5.6.0",
