@@ -52,8 +52,8 @@ export default function ContactPage() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Contact us using the information provided below. We're here to help
-            and will respond within 24 hours.
+            Contact us using the information provided below. We&apos;re here to
+            help and will respond within 24 hours.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                Let's Connect
+                Let&apos;s Connect
               </h2>
 
               <div className="space-y-6">
@@ -258,7 +258,8 @@ export default function ContactPage() {
 
             {isSubmitted && (
               <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center animate-fadeIn">
-                Thanks for reaching out! We'll get back to you within 24 hours.
+                Thanks for reaching out! We&apos;ll get back to you within 24
+                hours.
               </div>
             )}
           </div>

@@ -300,13 +300,13 @@ export default function PrivacyPolicyPage() {
                 <Users className="w-5 h-5 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900">
-                8. Children's Privacy
+                8. Children&apos;s Privacy
               </h3>
             </div>
             <p className="text-gray-600 leading-relaxed">
               Our services are <strong>not</strong> intended for users under{" "}
-              <strong>13</strong>. If we discover a child's data was collected,
-              we will delete it.
+              <strong>13</strong>. If we discover a child&apos;s data was
+              collected, we will delete it.
             </p>
           </div>
 
