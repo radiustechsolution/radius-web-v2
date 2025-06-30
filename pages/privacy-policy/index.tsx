@@ -398,7 +398,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -413,7 +413,7 @@ export default function PrivacyPolicyPage() {
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out;
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 }

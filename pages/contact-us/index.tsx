@@ -266,7 +266,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -286,7 +286,7 @@ export default function ContactPage() {
         textarea:focus {
           border-color: #0e14a2 !important;
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 }
