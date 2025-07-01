@@ -76,7 +76,7 @@ export default function IndexPage() {
             </ul>
           </div>
 
-          <div className="text-left  px-10 md:text-center md:hidden flex-col justify-center items-start md:items-center w-full absolute bottom-10">
+          <div className="text-left  px-3 md:text-center md:hidden flex-col justify-center items-start md:items-center w-full absolute bottom-10">
             <div className="flex flex-col md:flex-row md:items-center md:gap-4 opacity-75 cursor-pointer text-[14px] w-full">
               <ul className="flex items-center gap-8 justify-between w-full">
                 <Link href={"/contact-us"} className="">
