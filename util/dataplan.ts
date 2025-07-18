@@ -513,17 +513,17 @@ const dataPlans: DataPlans = {
         },
         {
           PRODUCT_CODE: "3",
-          PRODUCT_ID: "463",
-          PRODUCT_NAME: "3GB - 1 Month (DATA SHARE)",
-          PRODUCT_AMOUNT: 1740,
-          SOURCE_ID: "2",
+          PRODUCT_ID: "414",
+          PRODUCT_NAME: "3GB - 30 Days (SME)",
+          PRODUCT_AMOUNT: 1830,
+          SOURCE_ID: "1",
         },
         {
           PRODUCT_CODE: "4",
-          PRODUCT_ID: "461",
-          PRODUCT_NAME: "5GB - 30 Days (DATA SHARE)",
-          PRODUCT_AMOUNT: 2900,
-          SOURCE_ID: "2",
+          PRODUCT_ID: "415",
+          PRODUCT_NAME: "5GB - 30 Days (SME)",
+          PRODUCT_AMOUNT: 3050,
+          SOURCE_ID: "1",
         },
 
         {
