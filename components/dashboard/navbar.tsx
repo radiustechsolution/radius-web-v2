@@ -17,7 +17,7 @@ export const NavBar = ({ openNavBar }: Types) => {
         {/* <p className="font-medium text-[18px]">Chat</p> */}
       </div>
       <div className="flex items-center gap-3">
-        <DownloadAppButton2 />
+        {/* <DownloadAppButton2 /> */}
         <Link
           href={siteConfig.paths.notification}
           className="h-[32px] w-[32px] relative shrink-0 flex items-center justify-center rounded-full bg-background"
