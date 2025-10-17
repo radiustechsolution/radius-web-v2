@@ -51,7 +51,7 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
           <div className="flex items-center gap-1">
             <BiDialpadAlt size={16} className="text-primarymodecolor" />
             <p className="text-[12px]">
-              Promo code -{" "}
+              Unique ID -{" "}
               <span className="text-primarymodecolor font-semibold">
                 {session?.user.username}
               </span>{" "}
