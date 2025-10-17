@@ -114,9 +114,9 @@ const SignUpPage = () => {
               required
               disabled={loading}
             />
-            <p className=" text-[13px] px-[10px] text-warning">
+            {/* <p className=" text-[13px] px-[10px] text-warning">
               We will send a verification code to this number.
-            </p>
+            </p> */}
           </div>
           <div className="flex justify-between items-center">
             <input
