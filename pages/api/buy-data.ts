@@ -54,7 +54,7 @@ const resolvePlanAmount = (network: string, planId: string): number => {
   // Add the clamped profit to the amount
   // const updatedAmount = amount;
   // const updatedAmount = amount + profit;
-  const updatedAmount = amount + fixedProfit;
+  const updatedAmount = amount + profit;
   return updatedAmount;
 };
 
