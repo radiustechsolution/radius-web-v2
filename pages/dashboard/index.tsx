@@ -12,7 +12,7 @@ import WhatsAppCard from "@/components/dashboard/whatsapp-group";
 import CheckProfitCard from "@/components/dashboard/CheckProfit";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "next-themes";
-import GameCard from "@/components/dashboard/GameComp";
+// import GameCard from "@/components/dashboard/GameComp";
 import { sendSMS } from "@/lib/sendSMS";
 import { SlideComponent } from "@/components/dashboard/SlideComponent";
 
@@ -109,7 +109,7 @@ const DashboardPage = () => {
 
           {/* Chat on whatsapp */}
           <WhatsAppCard />
-          <GameCard />
+          {/* <GameCard /> */}
 
           {/* Check Profit card */}
           {session?.user.email === siteConfig.adminEmail && <CheckProfitCard />}
