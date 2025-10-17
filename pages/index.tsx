@@ -1,13 +1,10 @@
 import DefaultLayout from "@/layouts/default";
-import { Landingsubtitle, subtitle } from "@/components/primitives";
+import { Landingsubtitle } from "@/components/primitives";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import Image from "next/legacy/image";
-import { BsFillRSquareFill } from "react-icons/bs";
 import { Button } from "@nextui-org/button";
 import { useState, useEffect } from "react";
-import { HiDownload } from "react-icons/hi";
-import { DownloadAppButton } from "@/components/download-app";
 import { useRouter } from "next/router";
 
 export default function IndexPage() {
@@ -33,7 +30,7 @@ export default function IndexPage() {
             priority
           />
 
-          {/* Overlay */}
+          {/* Overlayy */}
           <div className="absolute inset-0 bg-black opacity-65 z-0"></div>
 
           {/* Content */}
