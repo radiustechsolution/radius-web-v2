@@ -58,7 +58,7 @@ const ServiceObject = [
   },
   {
     id: 7,
-    title: "App Request",
+    title: "App",
     icon: <IoIosAppstore size={17} className="text-serviceIconColor" />,
     path: siteConfig.paths.loan,
   },
