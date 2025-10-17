@@ -5,6 +5,7 @@ import { RxCaretRight } from "react-icons/rx";
 import { BiDialpadAlt, BiSolidCopy } from "react-icons/bi";
 import { useSession } from "next-auth/react";
 import { copyText } from "@/lib/functions";
+import type { IconType } from "react-icons";
 
 type Types = {
   balance: any;
@@ -12,13 +13,20 @@ type Types = {
 
 export const DashboardAccountCompCard = ({ balance }: Types) => {
   const { data: session } = useSession();
+
+  // Type assertion
+  const ShieldIcon = RiShieldCheckFill as IconType;
+  const CaretIcon = RxCaretRight as IconType;
+  const DialpadIcon = BiDialpadAlt as IconType;
+  const CopyIcon = BiSolidCopy as IconType;
+
   return (
     <div className="rounded-xl bg-promoCodeDisplayBg">
       <div className="rounded-xl flex flex-col gap-[10px] bg-primary p-4">
         {/* Card Top */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <RiShieldCheckFill size={14} color="white" />
+            <ShieldIcon size={14} color="white" />
             <p className="text-white text-[12px] font-light">
               Available Balance
             </p>
@@ -28,7 +36,7 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
             className="flex items-center"
           >
             <p className="text-white text-[12px] font-light">Transactions</p>
-            <RxCaretRight size={14} color="white" />
+            <CaretIcon size={14} color="white" />
           </Link>
         </div>
 
@@ -49,7 +57,7 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
       <div>
         <div className="px-4 flex gap-2 items-center py-1">
           <div className="flex items-center gap-1">
-            <BiDialpadAlt size={16} className="text-primarymodecolor" />
+            <DialpadIcon size={16} className="text-primarymodecolor" />
             <p className="text-[12px]">
               Promo code -{" "}
               <span className="text-primarymodecolor font-semibold">
@@ -57,7 +65,7 @@ export const DashboardAccountCompCard = ({ balance }: Types) => {
               </span>{" "}
             </p>
           </div>
-          <BiSolidCopy
+          <CopyIcon
             role="presentation"
             onClick={() => copyText(session?.user.username)}
             className=" text-warning"
