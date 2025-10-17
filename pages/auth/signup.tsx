@@ -166,13 +166,13 @@ const SignUpPage = () => {
           </div>
 
           {/* Promo Code */}
-          <input
+          {/* <input
             type="text"
             className="bg-transparent border text-black px-5 outline-none h-[53px] placeholder-gray-500 rounded-md border-gray-300 w-full"
             placeholder="Promo Code"
             name="promo_code"
             disabled={loading}
-          />
+          /> */}
 
           <Button
             type="submit"
