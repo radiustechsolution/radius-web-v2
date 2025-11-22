@@ -498,6 +498,13 @@ const dataPlans: DataPlans = {
           SOURCE_ID: "2",
         },
         {
+          PRODUCT_CODE: "201",
+          PRODUCT_ID: "556",
+          PRODUCT_NAME: "1000MB - 7 Days (SME)",
+          PRODUCT_AMOUNT: 460,
+          SOURCE_ID: "2",
+        },
+        {
           PRODUCT_CODE: "200",
           PRODUCT_ID: "459",
           PRODUCT_NAME: "1GB - 30 Days (SME)",
