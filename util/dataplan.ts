@@ -4,7 +4,7 @@ export interface Product {
   PRODUCT_CODE: string;
   PRODUCT_ID: string;
   PRODUCT_NAME: string;
-  PRODUCT_AMOUNT: number; // Assuming amounts can be either number or string
+  PRODUCT_AMOUNT: number; // Assuming amsounts can be either number or string
   SOURCE_ID: any;
 }
 
